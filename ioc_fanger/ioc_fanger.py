@@ -7,7 +7,7 @@ import re
 
 import requests
 
-FANG_API = "https://ioc-fang.github.io/fanging-dataset/refang.json"
+FANG_API = "https://ioc-fang.github.io/fanging-dataset/fang.json"
 DEFANG_API = "https://ioc-fang.github.io/defanging-dataset/defang.json"
 
 
