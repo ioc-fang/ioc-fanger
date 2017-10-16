@@ -36,6 +36,6 @@ def test_defanging(fanged_text):
     """Test defanging."""
     defanged_text = ioc_fanger.defang(fanged_text)
 
-    assert "hXXp://test[.]com" in defanged_text
+    assert "hXXp://example[.]com" in defanged_text
     assert "1[.]2.3[.]4" in defanged_text
     assert "bob@example[.]com" in defanged_text

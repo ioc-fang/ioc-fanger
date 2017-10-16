@@ -21,7 +21,7 @@ def _get_data(api_url):
 
 # get the mappings to fang/defang indicators of compromise
 fanging_mappings = _get_data(FANG_API)
-defaning_mappings = _get_data(DEFANG_API)
+defanging_mappings = _get_data(DEFANG_API)
 
 
 def fang(text):
@@ -39,18 +39,16 @@ def defang(text):
     """Defang the indicators in the given text."""
     defanged_text = text
 
-    for mapping in defaning_mappings:
-        matches = re.findall(mapping['find'], defanged_text)
-        if len(matches) > 1:
-            def _replace(matches):
-                """Replace matches.groups(1) with mapping['replace']."""
+    for mapping in defanging_mappings:
+        def _replace(matches):
+            """Replace matches.groups(1) with mapping['replace']."""
+            try:
                 return matches.group(0).replace(matches.group(1),
                                                 mapping['replace'])
+            except IndexError as e:
+                return matches.group(0).replace(mapping['find'], mapping['replace'])
 
-            defanged_text = re.sub(mapping['find'], _replace,
-                                   defanged_text)
-        else:
-            defanged_text = re.sub(mapping['find'], mapping['replace'],
-                                   defanged_text)
+        defanged_text = re.sub(mapping['find'], _replace,
+                               defanged_text)
 
     return defanged_text
