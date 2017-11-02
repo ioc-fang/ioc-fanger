@@ -16,13 +16,13 @@ from ioc_fanger import ioc_fanger
 @pytest.fixture
 def defanged_text():
     """Function to simulate command line arguments using docopt."""
-    return "example[.]com hxxp://example[.]com hXXp://example[.]com example.com http://example.com hxxp://example[.]com 1[.]2[.]3[.]4 bob[@]example[.]com mary[@]example.com"
+    return "example[.]com hxxp://example[.]com hXXp://example[.]com example.com http://example.com hxxp://example[.]com 1[.]2[.]3[.]4 bob[@]example[.]com mary[@]example.com carlos[at]example.com juanita(at)example.com http[:]//example.org https[:]//example.org hXxps[:]//example.org/test?target=bad[@]test.com"
 
 
 @pytest.fixture
 def fanged_text():
     """Function to simulate command line arguments using docopt."""
-    return "example.com http://example.com http://example.com example.com http://example.com http://example.com 1.2.3.4 bob@example.com mary@example.com"
+    return "example.com http://example.com http://example.com example.com http://example.com http://example.com 1.2.3.4 bob@example.com mary@example.com carlos@example.com juanita@example.com http://example.org https://example.org https://example.org/test?target=bad@test.com"
 
 
 def test_fanging(defanged_text, fanged_text):
