@@ -8,9 +8,8 @@ test_ioc_fanger
 Tests for `ioc_fanger` module.
 """
 
+import ioc_fanger
 import pytest
-
-from ioc_fanger import ioc_fanger
 
 
 @pytest.fixture
