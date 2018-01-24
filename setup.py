@@ -31,6 +31,7 @@ setup(
         ]
     },
     include_package_data=True,
+    package_data={'ioc_fanger': ['fang.json', 'defang.json']},
     install_requires=requirements,
     license=license,
     zip_safe=True,
