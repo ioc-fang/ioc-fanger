@@ -8,6 +8,9 @@ test_ioc_fanger
 Tests for `ioc_fanger` module.
 """
 
+import json
+import os
+
 import ioc_fanger
 import pytest
 
@@ -38,3 +41,19 @@ def test_defanging(fanged_text):
     assert "hXXp://example[.]com" in defanged_text
     assert "1[.]2.3[.]4" in defanged_text
     assert "bob@example[.]com" in defanged_text
+
+
+def _read_file(file_path):
+    """."""
+    with open(os.path.abspath(os.path.join(os.path.dirname(__file__), "../ioc_fanger/{}".format(file_path))), 'r') as f:
+        json.loads(f.read())
+
+
+def test_fanging_dataset():
+    """Make sure fang.json is in proper json."""
+    _read_file('fang.json')
+
+
+def test_defanging_dataset():
+    """Make sure defang.json is in proper json."""
+    _read_file('defang.json')
