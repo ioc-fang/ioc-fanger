@@ -6,9 +6,6 @@ from setuptools import setup, find_packages
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
 with open('LICENSE') as license_file:
     license = license_file.read()
 
@@ -23,7 +20,7 @@ setup(
     name='ioc_fanger',
     version='2.0.0',
     description="Python package to defang and refang indicators of compromise from text.",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author="Floyd Hightower",
     author_email='',
     url='https://github.com/ioc-fang/ioc_fanger',
