@@ -1,0 +1,74 @@
+[
+    {
+        "find": "[.]",
+        "replace": "."
+    },
+    {
+        "find": "[:]",
+        "replace": ":"
+    },
+    {
+        "find": "[@]",
+        "replace": "@"
+    },
+    {
+        "find": "hxxp",
+        "replace": "http"
+    },
+    {
+        "find": "xxxx://",
+        "replace": "http://"
+    },
+    {
+        "find": "xxxxx://",
+        "replace": "https://"
+    },
+    {
+        "find": "http ://",
+        "replace": "http://"
+    },
+    {
+        "find": "https ://",
+        "replace": "https://"
+    },
+    {
+        "find": "(dot)",
+        "replace": "."
+    },
+    {
+        "find": "(punkt)",
+        "replace": "."
+    },
+    {
+        "find": " @ ",
+        "replace": "@"
+    },
+    {
+        "find": "[https]",
+        "replace": "https"
+    },
+    {
+        "find": "[http]",
+        "replace": "http"
+    },
+    {
+        "find": "[www]",
+        "replace": "www"
+    },
+    {
+        "find": "[at]",
+        "replace": "@"
+    },
+    {
+        "find": "(at)",
+        "replace": "@"
+    },
+    {
+        "find": "http//",
+        "replace": "http://"
+    },
+    {
+        "find": "https//",
+        "replace": "https://"
+    }
+]

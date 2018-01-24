@@ -1,0 +1,10 @@
+[
+    {
+        "find": "\\S(\\.)\\S",
+        "replace": "[.]"
+    },
+    {
+        "find": "http",
+        "replace": "hXXp"
+    }
+]
