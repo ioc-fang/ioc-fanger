@@ -70,5 +70,13 @@
     {
         "find": "https//",
         "replace": "https://"
+    },
+    {
+        "find": "https:///",
+        "replace": "https://"
+    },
+    {
+        "find": "http:///",
+        "replace": "http://"
     }
 ]
