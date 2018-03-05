@@ -24,12 +24,12 @@ def fanged_text():
 
 @pytest.fixture
 def defanged_email_address_text():
-    return "bob[@]example.com bob(@)example.com bob[at]example.com bob(at)example.com bob@example[dot]com bob@example(dot)com"
+    return "bob[@]example.com bob(@)example.com bob[at]example.com bob(at)example.com bob AT example.com bob@example[dot]com bob@example(dot)com bob@example DOT com"
 
 
 @pytest.fixture
 def fanged_email_address_text():
-    return "bob@example.com bob@example.com bob@example.com bob@example.com bob@example.com bob@example.com"
+    return ("bob@example.com "*8).strip()
 
 
 def test_fanging(defanged_text, fanged_text):

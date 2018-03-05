@@ -24,6 +24,16 @@
         "replace": "."
     },
     {
+        "find": " DOT ",
+        "replace": ".",
+        "case_sensitive": true
+    },
+    {
+        "find": "DOT",
+        "replace": ".",
+        "case_sensitive": true
+    },
+    {
         "find": " @ ",
         "replace": "@"
     },
@@ -34,6 +44,16 @@
     {
         "find": "(@)",
         "replace": "@"
+    },
+    {
+        "find": " AT ",
+        "replace": "@",
+        "case_sensitive": true
+    },
+    {
+        "find": "AT",
+        "replace": "@",
+        "case_sensitive": true
     },
     {
         "find": "[at]",
