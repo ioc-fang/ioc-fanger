@@ -4,35 +4,19 @@
         "replace": "."
     },
     {
-        "find": "[:]",
-        "replace": ":"
+        "find": "(.)",
+        "replace": "."
     },
     {
-        "find": "[@]",
-        "replace": "@"
-    },
-    {
-        "find": "hxxp",
-        "replace": "http"
-    },
-    {
-        "find": "xxxx://",
-        "replace": "http://"
-    },
-    {
-        "find": "xxxxx://",
-        "replace": "https://"
-    },
-    {
-        "find": "http ://",
-        "replace": "http://"
-    },
-    {
-        "find": "https ://",
-        "replace": "https://"
+        "find": "[dot]",
+        "replace": "."
     },
     {
         "find": "(dot)",
+        "replace": "."
+    },
+    {
+        "find": "[punkt]",
         "replace": "."
     },
     {
@@ -44,16 +28,12 @@
         "replace": "@"
     },
     {
-        "find": "[https]",
-        "replace": "https"
+        "find": "[@]",
+        "replace": "@"
     },
     {
-        "find": "[http]",
-        "replace": "http"
-    },
-    {
-        "find": "[www]",
-        "replace": "www"
+        "find": "(@)",
+        "replace": "@"
     },
     {
         "find": "[at]",
@@ -62,6 +42,46 @@
     {
         "find": "(at)",
         "replace": "@"
+    },
+    {
+        "find": "[:]",
+        "replace": ":"
+    },
+    {
+        "find": "[www]",
+        "replace": "www"
+    },
+    {
+        "find": "(www)",
+        "replace": "www"
+    },
+    {
+        "find": "xxxx://",
+        "replace": "http://"
+    },
+    {
+        "find": "xxxxx://",
+        "replace": "https://"
+    },
+    {
+        "find": "hxxp",
+        "replace": "http"
+    },
+    {
+        "find": "http ://",
+        "replace": "http://"
+    },
+    {
+        "find": "https ://",
+        "replace": "https://"
+    },
+    {
+        "find": "[https]",
+        "replace": "https"
+    },
+    {
+        "find": "[http]",
+        "replace": "http"
     },
     {
         "find": "http//",
