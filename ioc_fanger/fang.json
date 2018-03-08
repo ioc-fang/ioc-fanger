@@ -118,5 +118,13 @@
     {
         "find": "http:///",
         "replace": "http://"
+    },
+    {
+        "find": "http:// ",
+        "replace": "http://"
+    },
+    {
+        "find": "https:// ",
+        "replace": "https://"
     }
 ]
