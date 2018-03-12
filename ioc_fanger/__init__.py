@@ -4,4 +4,4 @@
 from .ioc_fanger import fang, defang
 
 __author__ = """Floyd Hightower"""
-__version__ = '2.0.3'
+__version__ = '2.0.4'
