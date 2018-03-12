@@ -14,14 +14,6 @@ IOC Fanger
 .. image:: https://api.codacy.com/project/badge/Grade/d1762339ba454fba87c02a1b7ea69052
         :target: https://www.codacy.com/app/fhightower/ioc_fanger
 
-.. image:: https://readthedocs.org/projects/ioc-fanger/badge/?version=latest
-        :target: https://ioc-fanger.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
-.. image:: https://pyup.io/repos/github/ioc-fang/ioc_fanger/shield.svg
-     :target: https://pyup.io/repos/github/ioc-fang/ioc_fanger/
-     :alt: Updates
-
 Python package to defang and refang indicators of compromise from text.
 
 

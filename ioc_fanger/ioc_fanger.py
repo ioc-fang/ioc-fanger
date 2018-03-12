@@ -43,7 +43,7 @@ def defang(text):
             """Replace matches.groups(1) with mapping['replace']."""
             try:
                 return matches.group(0).replace(matches.group(1), mapping['replace'])
-            except IndexError as e:
+            except IndexError:
                 return matches.group(0).replace(mapping['find'], mapping['replace'])
 
         defanged_text = re.sub(mapping['find'], _replace, defanged_text)

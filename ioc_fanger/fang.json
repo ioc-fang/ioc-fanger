@@ -96,12 +96,12 @@
         "replace": "https://"
     },
     {
-        "find": "[https]",
-        "replace": "https"
-    },
-    {
         "find": "[http]",
         "replace": "http"
+    },
+    {
+        "find": "[https]",
+        "replace": "https"
     },
     {
         "find": "http//",
@@ -112,12 +112,12 @@
         "replace": "https://"
     },
     {
-        "find": "https:///",
-        "replace": "https://"
-    },
-    {
         "find": "http:///",
         "replace": "http://"
+    },
+    {
+        "find": "https:///",
+        "replace": "https://"
     },
     {
         "find": "http:// ",
