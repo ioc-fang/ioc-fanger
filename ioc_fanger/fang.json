@@ -120,11 +120,11 @@
         "replace": "https://"
     },
     {
-        "find": "http:// ",
-        "replace": "http://"
+        "find": ":// ",
+        "replace": "://"
     },
     {
-        "find": "https:// ",
-        "replace": "https://"
+        "find": "\/\/",
+        "replace": "//"
     }
 ]
