@@ -64,6 +64,10 @@
         "replace": "@"
     },
     {
+        "find": "(et)",
+        "replace": "@"
+    },
+    {
         "find": "[:]",
         "replace": ":"
     },
@@ -124,7 +128,7 @@
         "replace": "://"
     },
     {
-        "find": "\/\/",
-        "replace": "//"
+        "find": "\/",
+        "replace": "/"
     }
 ]
