@@ -8,6 +8,10 @@
         "replace": "."
     },
     {
+        "find": "[.[",
+        "replace": "."
+    },
+    {
         "find": "[dot]",
         "replace": "."
     },
