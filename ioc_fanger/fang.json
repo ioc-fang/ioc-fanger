@@ -12,6 +12,10 @@
         "replace": "."
     },
     {
+        "find": "].]",
+        "replace": "."
+    },
+    {
         "find": "[dot]",
         "replace": "."
     },
@@ -35,6 +39,11 @@
     {
         "find": "DOT",
         "replace": ".",
+        "case_sensitive": true
+    },
+    {
+        "find": " .com",
+        "replace": ".com",
         "case_sensitive": true
     },
     {
