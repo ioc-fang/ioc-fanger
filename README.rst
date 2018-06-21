@@ -54,6 +54,17 @@ Via Command Line
 
 Command-line functionality coming soon (see `#1 <https://github.com/ioc-fang/ioc_fanger/issues/1>`_)!
 
+Adding More Fanging/Defanging Options
+=====================================
+
+You can view the current fanging patterns [here](https://github.com/ioc-fang/ioc_fanger/blob/master/ioc_fanger/fang.json) and the defanging patterns [here](https://github.com/ioc-fang/ioc_fanger/blob/master/ioc_fanger/defang.json).
+
+To add more fanging options, edit [fang.json](https://github.com/ioc-fang/ioc_fanger/blob/master/ioc_fanger/fang.json) and add an entry for the new pattern you would like to fang. The available keys for each entry are:
+
+- ``find`` (required): This is the string pattern you would like to find
+- ``replace`` (required): This is the string used to replace all instances to pattern specified by the ``find`` key
+- ``case_sensitive`` (optional): If this is ``true``, the pattern specified by the ``find`` key will be treated as case sensitive (it will only be replaced if the case is an exact match)
+
 Credits
 =======
 
