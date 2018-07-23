@@ -10,8 +10,7 @@ with open('LICENSE') as license_file:
     license = license_file.read()
 
 requirements = [
-    'docopt>=0.6',
-    'requests'
+    'docopt>=0.6'
 ]
 
 test_requirements = []
