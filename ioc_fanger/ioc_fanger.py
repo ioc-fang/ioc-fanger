@@ -6,6 +6,8 @@ import json
 import os
 import re
 
+import click
+
 FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
 DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
 
@@ -34,6 +36,14 @@ def fang(text):
     return fanged_text
 
 
+@click.command()
+@click.argument('text')
+def cli_fang(text):
+    """CLI interface for fanging indicators."""
+    fanged_text = fang(text)
+    print(fanged_text)
+
+
 def defang(text):
     """Defang the indicators in the given text."""
     defanged_text = text
@@ -49,3 +59,11 @@ def defang(text):
         defanged_text = re.sub(mapping['find'], _replace, defanged_text)
 
     return defanged_text
+
+
+@click.command()
+@click.argument('text')
+def cli_defang(text):
+    """CLI interface for defanging indicators."""
+    defanged_text = defang(text)
+    print(defanged_text)

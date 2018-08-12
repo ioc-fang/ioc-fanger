@@ -10,7 +10,7 @@ with open('LICENSE') as license_file:
     license = license_file.read()
 
 requirements = [
-    'docopt>=0.6'
+    'Click'
 ]
 
 test_requirements = []
@@ -26,7 +26,8 @@ setup(
     packages=find_packages(exclude=('tests', 'docs')),
     entry_points={
         'console_scripts': [
-            'ioc_fanger=ioc_fanger.cli:main'
+            'fang=ioc_fanger.ioc_fanger:cli_fang',
+            'defang=ioc_fanger.ioc_fanger:cli_defang'
         ]
     },
     include_package_data=True,
