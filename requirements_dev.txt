@@ -11,3 +11,4 @@ PyYAML==3.11
 pytest==2.9.2
 pytest-cov==2.4.0
 codecov==2.0.5
+click
