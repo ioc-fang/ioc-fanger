@@ -24,6 +24,10 @@
         "replace": "."
     },
     {
+        "find": "-dot-",
+        "replace": "."
+    },
+    {
         "find": "[punkt]",
         "replace": "."
     },
