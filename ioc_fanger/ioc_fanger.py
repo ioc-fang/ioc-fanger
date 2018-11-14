@@ -28,10 +28,15 @@ def fang(text):
     fanged_text = text
 
     for mapping in fanging_mappings:
-        if mapping.get('case_sensitive'):
-            fanged_text = re.sub(re.escape(mapping['find']), mapping['replace'], fanged_text)
+        if mapping.get('regex'):
+            find_value = mapping['find']
         else:
-            fanged_text = re.sub(re.escape(mapping['find']), mapping['replace'], fanged_text, flags=re.IGNORECASE)
+            find_value = re.escape(mapping['find'])
+
+        if mapping.get('case_sensitive'):
+            fanged_text = re.sub(find_value, mapping['replace'], fanged_text)
+        else:
+            fanged_text = re.sub(find_value, mapping['replace'], fanged_text, flags=re.IGNORECASE)
 
     return fanged_text
 
