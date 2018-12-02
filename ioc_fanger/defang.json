@@ -6,5 +6,9 @@
     {
         "find": "http",
         "replace": "hXXp"
+    },
+    {
+        "find": "\\S(@)\\S",
+        "replace": "(at)"
     }
 ]

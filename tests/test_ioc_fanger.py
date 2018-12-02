@@ -44,7 +44,7 @@ def test_defanging(fanged_text):
 
     assert "hXXp://example[.]com" in defanged_text
     assert "1[.]2.3[.]4" in defanged_text
-    assert "bob@example[.]com" in defanged_text
+    assert "bob(at)example[.]com" in defanged_text
     assert "5[.]6.7[.]8" in defanged_text
     print("defanged_text {}".format(defanged_text))
     assert "9[.]10[.]11[.]12" in defanged_text
