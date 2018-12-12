@@ -11,7 +11,7 @@ deploy:
   skip_upload_docs: true
   user: cartiergoldfinch
 env:
-- TOXENV=py37
+- TOXENV=py36
 - TOXENV=py35
 - TOXENV=py27
 install: pip install -U tox
