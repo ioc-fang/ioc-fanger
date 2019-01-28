@@ -54,3 +54,8 @@ def test_email_addresses(defanged_email_address_text, fanged_email_address_text)
     """Make sure email addresses are properly fanged."""
     fanged_addresses = ioc_fanger.fang(defanged_email_address_text)
     assert fanged_addresses == fanged_email_address_text
+
+
+def test_urls_with_spaces():
+    s = 'hxxp: // bit [.] ly / abc123'
+    assert ioc_fanger.fang(s) == 'http://bit.ly/abc123'

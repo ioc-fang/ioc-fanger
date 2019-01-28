@@ -13,8 +13,9 @@
         "regex": true
     },
     {
-        "find": "[.]",
-        "replace": "."
+        "find": "\\s*\\[\\.\\]\\s*",
+        "replace": ".",
+        "regex": true
     },
     {
         "find": "(.)",
@@ -168,5 +169,15 @@
     {
         "find": "\/",
         "replace": "/"
+    },
+    {
+        "find": "p:\\s+\\/\\/\\s+",
+        "replace": "p://",
+        "regex": true
+    },
+    {
+        "find": "\\s\\/\\s",
+        "replace": "/",
+        "regex": true
     }
 ]
