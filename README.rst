@@ -83,6 +83,12 @@ To add more fanging options, edit `fang.json <https://github.com/ioc-fang/ioc_fa
 - ``case_sensitive`` (optional - boolean): If this is ``true``, the pattern specified by the ``find`` key will be treated as case sensitive (it will only be replaced if the case is an exact match)
 - ``regex`` (optional - boolean): If this is ``true``, the pattern specified by the ``find`` key will be treated as a regex (it will not be escaped before use)
 
+
+Feedback? Ideas? Thoughts?
+==========================
+
+If you have any feedback, ideas, or thoughts on this project, please [raise an issue](https://github.com/ioc-fang/ioc_fanger/issues) (or [contact me](https://hightower.space/contact/) with private requests).
+
 Credits
 =======
 
