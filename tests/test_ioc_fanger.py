@@ -59,3 +59,17 @@ def test_email_addresses(defanged_email_address_text, fanged_email_address_text)
 def test_urls_with_spaces():
     s = 'hxxp: // bit [.] ly / abc123'
     assert ioc_fanger.fang(s) == 'http://bit.ly/abc123'
+
+
+def test_spanish_defanging():
+    s = 'me (arroba) example (punto) com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+    s = 'me(arroba)example(punto)com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+    s = 'me [arroba] example [punto] com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+    s = 'me[arroba]example[punto]com'
+    assert ioc_fanger.fang(s) == 'me@example.com'

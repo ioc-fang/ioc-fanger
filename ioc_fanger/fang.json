@@ -58,6 +58,11 @@
         "replace": "."
     },
     {
+        "find": "\\s*[\\[\\(]punto[\\]\\)]\\s*",
+        "replace": ".",
+        "regex": true
+    },
+    {
         "find": " DOT ",
         "replace": ".",
         "case_sensitive": true
@@ -105,6 +110,11 @@
     {
         "find": "(et)",
         "replace": "@"
+    },
+    {
+        "find": "\\s*[\\[\\(]arroba[\\]\\)]\\s*",
+        "replace": "@",
+        "regex": true
     },
     {
         "find": "[:]",
