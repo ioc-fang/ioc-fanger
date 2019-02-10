@@ -13,8 +13,9 @@
         "regex": true
     },
     {
-        "find": "[.]",
-        "replace": "."
+        "find": "\\s*\\[\\.\\]\\s*",
+        "replace": ".",
+        "regex": true
     },
     {
         "find": "(.)",
@@ -27,6 +28,14 @@
     {
         "find": "].]",
         "replace": "."
+    },
+    {
+        "find": "\\.",
+        "replace": "."
+    },
+    {
+        "find": "[-]",
+        "replace": "-"
     },
     {
         "find": "[dot]",
@@ -47,6 +56,11 @@
     {
         "find": "(punkt)",
         "replace": "."
+    },
+    {
+        "find": "\\s*[\\[\\(]punto[\\]\\)]\\s*",
+        "replace": ".",
+        "regex": true
     },
     {
         "find": " DOT ",
@@ -96,6 +110,11 @@
     {
         "find": "(et)",
         "replace": "@"
+    },
+    {
+        "find": "\\s*[\\[\\(]arroba[\\]\\)]\\s*",
+        "replace": "@",
+        "regex": true
     },
     {
         "find": "[:]",
@@ -160,5 +179,15 @@
     {
         "find": "\/",
         "replace": "/"
+    },
+    {
+        "find": "p:\\s+\\/\\/\\s+",
+        "replace": "p://",
+        "regex": true
+    },
+    {
+        "find": "\\s\\/\\s",
+        "replace": "/",
+        "regex": true
     }
 ]
