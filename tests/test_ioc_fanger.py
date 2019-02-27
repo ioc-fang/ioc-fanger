@@ -73,3 +73,8 @@ def test_spanish_defanging():
 
     s = 'me[arroba]example[punto]com'
     assert ioc_fanger.fang(s) == 'me@example.com'
+
+
+def test_issue_16():
+    s = "www[.example.com"
+    assert ioc_fanger.fang(s) == 'www.example.com'

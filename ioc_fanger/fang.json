@@ -189,5 +189,9 @@
         "find": "\\s\\/\\s",
         "replace": "/",
         "regex": true
+    },
+    {
+        "find": "[.",
+        "replace": "."
     }
 ]
