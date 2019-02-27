@@ -5,7 +5,7 @@
 [![Codecov](https://codecov.io/gh/ioc-fang/ioc_fanger/branch/master/graph/badge.svg)](https://codecov.io/gh/ioc-fang/ioc_fanger)
 [![Codacy](https://api.codacy.com/project/badge/Grade/d1762339ba454fba87c02a1b7ea69052)](https://www.codacy.com/app/fhightower/ioc_fanger)
 
-Python package to fang and defang [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text.
+Python package to fang and defang [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text. You can test out this project here: [http://ioc-fanger.hightower.space](http://ioc-fanger.hightower.space).
 
 **Defanging** - converting indicators of compromise from the normal form (which can become links) to a form which cannot accidentally become a link:
 
