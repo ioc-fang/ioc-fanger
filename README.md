@@ -58,7 +58,7 @@ fang "example[.]com"  # example.com
 defang "example.com"  # example[.]com
 ```
 
-# Adding More Fanging/Defanging Options
+## Adding More Fanging/Defanging Options
 
 You can view the current fanging patterns [here](https://github.com/ioc-fang/ioc_fanger/blob/master/ioc_fanger/fang.json) and the defanging patterns [here](https://github.com/ioc-fang/ioc_fanger/blob/master/ioc_fanger/defang.json).
 
@@ -68,6 +68,10 @@ To add more fanging options, edit [fang.json](https://github.com/ioc-fang/ioc_fa
 -   `replace` (required): This is the string used to replace all instances to pattern specified by the `find` key
 -   `case_sensitive` (optional - boolean): If this is `true`, the pattern specified by the `find` key will be treated as case sensitive (it will only be replaced if the case is an exact match)
 -   `regex` (optional - boolean): If this is `true`, the pattern specified by the `find` key will be treated as a regex (it will not be escaped before use)
+
+## Other Helpful Projects
+
+If you are working with IOCs, you may find the [https://github.com/fhightower/ioc-finder](https://github.com/fhightower/ioc-finder) project helpful. It is a project designed to parse indicators of compromise from text (it uses grammars rather than regexes).
 
 ## Credits
 
