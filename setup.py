@@ -17,7 +17,7 @@ test_requirements = []
 
 setup(
     name='ioc_fanger',
-    version='3.0.5',
+    version='3.0.6',
     description="Python package to defang and refang indicators of compromise from text.",
     long_description=readme,
     author="Floyd Hightower",
