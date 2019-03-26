@@ -149,5 +149,10 @@
     {
         "find": "\\/",
         "replace": "/"
+    },
+    {
+        "find": "(https?)(?!s)\\S+?:",
+        "replace": "\\1:",
+        "regex": true
     }
 ]

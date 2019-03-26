@@ -212,6 +212,15 @@ def test_odd_schemes():
     s = '(https)://example.com/test.php'
     assert ioc_fanger.fang(s) == 'https://example.com/test.php'
 
+    s = 'http!://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'https@://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+    s = 'httpA://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'https&://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
 
 def test_odd_email_address_spacing():
     s = "foo@barDOTcom"
