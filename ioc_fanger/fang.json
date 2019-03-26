@@ -1,11 +1,130 @@
 [
     {
-        "find": "[,]",
-        "replace": "."
+        "find": "(\\s*[\\[\\]\\(\\)\\\\]+\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": ".",
+        "regex": true
     },
     {
-        "find": "(,)",
-        "replace": "."
+        "find": "(\\s*[\\[\\]\\(\\)\\\\]*\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]+\\s*)",
+        "replace": ".",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]+\\s*):(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": ":",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]*\\s*):(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "replace": ":",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)DOT(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": ".",
+        "regex": true,
+        "case_sensitive": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)-]+\\s*)(?:dot|punto|punkt)(\\s*[\\[\\]\\(\\)-]*\\s*)",
+        "replace": ".",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)-]*\\s*)(?:dot|punto|punkt)(\\s*[\\[\\]\\(\\)-]+\\s*)",
+        "replace": ".",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]+\\s*)www(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": "www",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)www(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "replace": "www",
+        "regex": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]+\\s*)(?:@|(?:at)|(?:et)|(?:arroba))(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": "@",
+        "regex": true,
+        "case_sensitive": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)(?:@|(?:at)|(?:et)|(?:arroba))(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "replace": "@",
+        "regex": true,
+        "case_sensitive": true
+    },
+    {
+        "find": "\\s+@\\s+",
+        "replace": "@",
+        "regex": true,
+        "case_sensitive": true
+    },
+    {
+        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)(?:(?:AT)|(?:ET)|(?:ARROBA))(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": "@",
+        "regex": true,
+        "case_sensitive": true
+    },
+    {
+        "find": "(?:\\s*[\\[\\]\\(\\)]+\\s*)htt(ps?)(?:\\s*[\\[\\]\\(\\)]*\\s*)",
+        "replace": "htt\\1",
+        "regex": true
+    },
+    {
+        "find": "(?:\\s*[\\[\\]\\(\\)]*\\s*)htt(ps?)(?:\\s*[\\[\\]\\(\\)]+\\s*)",
+        "replace": "htt\\1",
+        "regex": true
+    },
+    {
+        "find": ":\\/\\/\\/+",
+        "replace": "://",
+        "regex": true
+    },
+    {
+        "find": ":\\/\\/\\s*",
+        "replace": "://",
+        "regex": true
+    },
+    {
+        "find": ":\\s+\\/\\/",
+        "replace": "://",
+        "regex": true
+    },
+    {
+        "find": "(https?)\\s*:",
+        "replace": "\\1:",
+        "regex": true
+    },
+    {
+        "find": "h\\S\\S(ps?)",
+        "replace": "htt\\1",
+        "regex": true
+    },
+    {
+        "find": "htt(ps?)\\/",
+        "replace": "htt\\1:/",
+        "regex": true
+    },
+    {
+        "find": "(https?:\\/\\/)\\s*",
+        "replace": "\\1",
+        "regex": true
+    },
+    {
+        "find": "xxxxx://",
+        "replace": "https://"
+    },
+    {
+        "find": "xxxx://",
+        "replace": "http://"
+    },
+    {
+        "find": "[-]",
+        "replace": "-"
     },
     {
         "find": "([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})",
@@ -13,185 +132,22 @@
         "regex": true
     },
     {
-        "find": "\\s*\\[\\.\\]\\s*",
-        "replace": ".",
+        "find": "\\s+.(com|org|edu|info|io|net|us|gov|mil|co|biz|jp|de|tk|ml|ga)",
+        "replace": ".\\1",
+        "regex": true,
+        "case_sensitive": true
+    },
+    {
+        "find": "\\s*/\\s*",
+        "replace": "/",
         "regex": true
-    },
-    {
-        "find": "(.)",
-        "replace": "."
-    },
-    {
-        "find": "[.[",
-        "replace": "."
-    },
-    {
-        "find": "].]",
-        "replace": "."
     },
     {
         "find": "\\.",
         "replace": "."
     },
     {
-        "find": "[-]",
-        "replace": "-"
-    },
-    {
-        "find": "[dot]",
-        "replace": "."
-    },
-    {
-        "find": "(dot)",
-        "replace": "."
-    },
-    {
-        "find": "-dot-",
-        "replace": "."
-    },
-    {
-        "find": "[punkt]",
-        "replace": "."
-    },
-    {
-        "find": "(punkt)",
-        "replace": "."
-    },
-    {
-        "find": "\\s*[\\[\\(]punto[\\]\\)]\\s*",
-        "replace": ".",
-        "regex": true
-    },
-    {
-        "find": " DOT ",
-        "replace": ".",
-        "case_sensitive": true
-    },
-    {
-        "find": "DOT",
-        "replace": ".",
-        "case_sensitive": true
-    },
-    {
-        "find": " .com",
-        "replace": ".com",
-        "case_sensitive": true
-    },
-    {
-        "find": " @ ",
-        "replace": "@"
-    },
-    {
-        "find": "[@]",
-        "replace": "@"
-    },
-    {
-        "find": "(@)",
-        "replace": "@"
-    },
-    {
-        "find": " AT ",
-        "replace": "@",
-        "case_sensitive": true
-    },
-    {
-        "find": "AT",
-        "replace": "@",
-        "case_sensitive": true
-    },
-    {
-        "find": "[at]",
-        "replace": "@"
-    },
-    {
-        "find": "(at)",
-        "replace": "@"
-    },
-    {
-        "find": "(et)",
-        "replace": "@"
-    },
-    {
-        "find": "\\s*[\\[\\(]arroba[\\]\\)]\\s*",
-        "replace": "@",
-        "regex": true
-    },
-    {
-        "find": "[:]",
-        "replace": ":"
-    },
-    {
-        "find": "[www]",
-        "replace": "www"
-    },
-    {
-        "find": "(www)",
-        "replace": "www"
-    },
-    {
-        "find": "xxxx://",
-        "replace": "http://"
-    },
-    {
-        "find": "xxxxx://",
-        "replace": "https://"
-    },
-    {
-        "find": "hxxp",
-        "replace": "http"
-    },
-    {
-        "find": "http ://",
-        "replace": "http://"
-    },
-    {
-        "find": "https ://",
-        "replace": "https://"
-    },
-    {
-        "find": "[http]",
-        "replace": "http"
-    },
-    {
-        "find": "[https]",
-        "replace": "https"
-    },
-    {
-        "find": "http//",
-        "replace": "http://"
-    },
-    {
-        "find": "https//",
-        "replace": "https://"
-    },
-    {
-        "find": "http:///",
-        "replace": "http://"
-    },
-    {
-        "find": "https:///",
-        "replace": "https://"
-    },
-    {
-        "find": ":// ",
-        "replace": "://"
-    },
-    {
-        "find": "\/",
+        "find": "\\/",
         "replace": "/"
-    },
-    {
-        "find": "p:\\s+\\/\\/\\s+",
-        "replace": "p://",
-        "regex": true
-    },
-    {
-        "find": "\\s\\/\\s",
-        "replace": "/",
-        "regex": true
-    },
-    {
-        "find": "[.",
-        "replace": "."
     }
 ]

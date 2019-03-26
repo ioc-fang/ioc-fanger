@@ -14,7 +14,7 @@ import pytest
 
 @pytest.fixture
 def defanged_text():
-    return "example[.]com hxxp://example[.]com hXXp://example[.]com example\.com example.com http://example.com hxxp://example[.]com 1[.]2[.]3[.]4 bob[@]example[.]com mary[@]example.com carlos[at]example.com juanita(at)example.com http[:]//example.org https[:]//example.org hXxps[:]//example.org/test?target=bad[@]test.com bad-dot-com example-dot-ru 5[,]6[,]7[,]8 9,10,11,12"
+    return "example[.]com hxxp://example[.]com hXXp://example[.]com example\.com example.com http://example.com hxxp://example[.]com 1[.]2[.]3[.]4 bob[@]example[.]com mary[@]example.com carlos[at]example.com juanita(at)example.com http[:]//example.org https[:]//example.org hXxps[:]//example.org/test?target=bad[@]test.com bad-dot-com example-dot-ru 5[,]6[,]7(,)8 9,10,11,12"
 
 
 @pytest.fixture
@@ -75,6 +75,225 @@ def test_spanish_defanging():
     assert ioc_fanger.fang(s) == 'me@example.com'
 
 
+def test_german_defanging():
+    s = 'me@example (punkt) com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+    s = 'me@example(punkt)com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+    s = 'me@example [punkt] com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+    s = 'me@example[punkt]com'
+    assert ioc_fanger.fang(s) == 'me@example.com'
+
+
 def test_issue_16():
     s = "www[.example.com"
     assert ioc_fanger.fang(s) == 'www.example.com'
+
+
+def test_parenthetical_period():
+    s = "www(.)example(.)com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+
+def test_odd_spacing():
+    s = "example .com"
+    assert ioc_fanger.fang(s) == 'example.com'
+
+    s = "example  .com"
+    assert ioc_fanger.fang(s) == 'example.com'
+
+    s = "example .org"
+    assert ioc_fanger.fang(s) == 'example.org'
+
+    s = "example  .org"
+    assert ioc_fanger.fang(s) == 'example.org'
+
+
+def test_odd_brackets():
+    s = "www[.[example[.[com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "www].]example].]com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "www].[example].[com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "www.[example.[com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "www.]example.]com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "www[.example[.com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "www].example].com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+
+def test_odd_misc():
+    s = "www\.example\.com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "foo[-]bar.com"
+    assert ioc_fanger.fang(s) == 'foo-bar.com'
+
+    s = "[www].example.com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = "(www).example.com"
+    assert ioc_fanger.fang(s) == 'www.example.com'
+
+    s = 'https://example.com\/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+
+def test_odd_schemes():
+    s = 'xxxx://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'xxxxx://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'hxxp://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'hXXp://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'hxxps://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+    s = 'hXXps://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'http ://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'https ://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'http:// example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'https:// example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'http//example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'https//example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'http// example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'https// example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'http:///example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'http:/// example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = 'http :///example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+
+    s = 'https:///example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+    s = 'https:/// example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+    s = 'https :///example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = '[http]://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = '[https]://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = '(http)://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    s = '(https)://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+
+def test_odd_email_address_spacing():
+    s = "foo@barDOTcom"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo@bar DOT com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo@bar  DOT  com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo @ bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo  @ bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo @  bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo  @  bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "fooATbar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo AT bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo  AT bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo AT  bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo  AT  bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo[AT]bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo(AT)bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo[at]bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo(at)bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo[ET]bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo(ET)bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo[et]bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo(et)bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo [AT] bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo (AT) bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo [at] bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo (at) bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo [ET] bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo (ET) bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo [et] bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+    s = "foo (et) bar.com"
+    assert ioc_fanger.fang(s) == 'foo@bar.com'

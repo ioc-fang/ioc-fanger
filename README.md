@@ -15,6 +15,10 @@ Python package to fang and defang [indicators of compromise](https://digitalguar
 
 `example[.]com => example.com`
 
+**What can it fang?**
+
+Just about everything. Check out the [tests](https://github.com/ioc-fang/ioc_fanger/blob/master/tests/test_ioc_fanger.py) to see some examples of what this package can handle.
+
 ## Installation
 
 The recommended means of installation is using [pip](https://pypi.python.org/pypi/pip/):
