@@ -132,12 +132,6 @@
         "regex": true
     },
     {
-        "find": "\\s+.(com|org|edu|info|io|net|us|gov|mil|co|biz|jp|de|tk|ml|ga)",
-        "replace": ".\\1",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
         "find": "\\s*/\\s*",
         "replace": "/",
         "regex": true

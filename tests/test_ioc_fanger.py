@@ -99,20 +99,6 @@ def test_parenthetical_period():
     assert ioc_fanger.fang(s) == 'www.example.com'
 
 
-def test_odd_spacing():
-    s = "example .com"
-    assert ioc_fanger.fang(s) == 'example.com'
-
-    s = "example  .com"
-    assert ioc_fanger.fang(s) == 'example.com'
-
-    s = "example .org"
-    assert ioc_fanger.fang(s) == 'example.org'
-
-    s = "example  .org"
-    assert ioc_fanger.fang(s) == 'example.org'
-
-
 def test_odd_brackets():
     s = "www[.[example[.[com"
     assert ioc_fanger.fang(s) == 'www.example.com'
@@ -151,6 +137,11 @@ def test_odd_misc():
 
     s = 'https://example.com\/test.php'
     assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = """diota[-]ar.com:80/.well-known/acme-challenge/mxr.pdf
+diota[-]ar.com/.well-known/acme-challenge/mxr.pdf"""
+    assert ioc_fanger.fang(s, debug=True) == """diota-ar.com:80/.well-known/acme-challenge/mxr.pdf
+diota-ar.com/.well-known/acme-challenge/mxr.pdf"""
 
 
 def test_odd_schemes():
