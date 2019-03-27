@@ -23,11 +23,18 @@ fanging_mappings = _get_data_from_file(FANG_DATA_PATH)
 defanging_mappings = _get_data_from_file(DEFANG_DATA_PATH)
 
 
-def fang(text):
+def fang(text, debug=False):
     """Fang the indicators in the given text."""
     fanged_text = text
 
+    if debug:
+        print('Starting text: {}'.format(fanged_text))
+        print('-----')
+
     for mapping in fanging_mappings:
+        if debug:
+            print('Mapping: {}'.format(mapping))
+
         if mapping.get('regex'):
             find_value = mapping['find']
         else:
@@ -37,6 +44,10 @@ def fang(text):
             fanged_text = re.sub(find_value, mapping['replace'], fanged_text)
         else:
             fanged_text = re.sub(find_value, mapping['replace'], fanged_text, flags=re.IGNORECASE)
+
+        if debug:
+            print('Text after mapping: {}'.format(fanged_text))
+            print('-----')
 
     return fanged_text
 
