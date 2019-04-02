@@ -56,11 +56,6 @@ def test_email_addresses(defanged_email_address_text, fanged_email_address_text)
     assert fanged_addresses == fanged_email_address_text
 
 
-def test_urls_with_spaces():
-    s = 'hxxp: // bit [.] ly / abc123'
-    assert ioc_fanger.fang(s) == 'http://bit.ly/abc123'
-
-
 def test_spanish_defanging():
     s = 'me (arroba) example (punto) com'
     assert ioc_fanger.fang(s) == 'me@example.com'
@@ -143,12 +138,19 @@ diota[-]ar.com/.well-known/acme-challenge/mxr.pdf"""
     assert ioc_fanger.fang(s, debug=True) == """diota-ar.com:80/.well-known/acme-challenge/mxr.pdf
 diota-ar.com/.well-known/acme-challenge/mxr.pdf"""
 
+    s = """xxxxs://proverka[.]host/ Email: silena[.]berillo(at)gmail[.]com, hto2018(at)yandex[.]ru"""
+    assert ioc_fanger.fang(s, debug=True) == """https://proverka.host/ Email: silena.berillo@gmail.com, hto2018@yandex.ru"""
+
 
 def test_odd_schemes():
     s = 'xxxx://example.com/test.php'
-    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    assert ioc_fanger.fang(s, debug=True) == 'http://example.com/test.php'
     s = 'xxxxx://example.com/test.php'
-    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+    assert ioc_fanger.fang(s, debug=True) == 'https://example.com/test.php'
+    s = 'xXxX://example.com/test.php'
+    assert ioc_fanger.fang(s, debug=True) == 'http://example.com/test.php'
+    s = 'xXxXx://example.com/test.php'
+    assert ioc_fanger.fang(s, debug=True) == 'https://example.com/test.php'
 
     s = 'hxxp://example.com/test.php'
     assert ioc_fanger.fang(s) == 'http://example.com/test.php'
@@ -204,13 +206,18 @@ def test_odd_schemes():
     assert ioc_fanger.fang(s) == 'https://example.com/test.php'
 
     s = 'http!://example.com/test.php'
-    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+    s = 'https!://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
     s = 'https@://example.com/test.php'
     assert ioc_fanger.fang(s) == 'https://example.com/test.php'
     s = 'httpA://example.com/test.php'
-    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
     s = 'https&://example.com/test.php'
     assert ioc_fanger.fang(s) == 'https://example.com/test.php'
+
+    s = 'https&://example.com/test.php https://example.com/test.php http&://example.com/test.php xxXpA://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php https://example.com/test.php https://example.com/test.php https://example.com/test.php'
 
 
 def test_odd_email_address_spacing():

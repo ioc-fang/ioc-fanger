@@ -115,12 +115,14 @@
         "regex": true
     },
     {
-        "find": "xxxxx://",
-        "replace": "https://"
+        "find": "(\\b)\\S{5}:\\/\\/",
+        "replace": "\\1https://",
+        "regex": true
     },
     {
-        "find": "xxxx://",
-        "replace": "http://"
+        "find": "(\\b)\\S{4}:\\/\\/",
+        "replace": "\\1http://",
+        "regex": true
     },
     {
         "find": "[-]",
@@ -129,11 +131,6 @@
     {
         "find": "([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})",
         "replace": "\\1.\\2.\\3.\\4",
-        "regex": true
-    },
-    {
-        "find": "\\s*/\\s*",
-        "replace": "/",
         "regex": true
     },
     {
