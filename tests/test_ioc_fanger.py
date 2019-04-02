@@ -135,22 +135,26 @@ def test_odd_misc():
 
     s = """diota[-]ar.com:80/.well-known/acme-challenge/mxr.pdf
 diota[-]ar.com/.well-known/acme-challenge/mxr.pdf"""
-    assert ioc_fanger.fang(s, debug=True) == """diota-ar.com:80/.well-known/acme-challenge/mxr.pdf
+    assert ioc_fanger.fang(s) == """diota-ar.com:80/.well-known/acme-challenge/mxr.pdf
 diota-ar.com/.well-known/acme-challenge/mxr.pdf"""
 
     s = """xxxxs://proverka[.]host/ Email: silena[.]berillo(at)gmail[.]com, hto2018(at)yandex[.]ru"""
-    assert ioc_fanger.fang(s, debug=True) == """https://proverka.host/ Email: silena.berillo@gmail.com, hto2018@yandex.ru"""
+    assert ioc_fanger.fang(s) == """https://proverka.host/ Email: silena.berillo@gmail.com, hto2018@yandex.ru"""
+
+    s = """code to (https://www.linkedin.com/feed/hashtag/?keywords=%23IOCs)<https://example.in/foo>"""
+    data = ioc_fanger.fang(s)
+    assert data == """code to https://www.linkedin.com/feed/hashtag/?keywords=%23IOCs)<https://example.in/foo>"""
 
 
 def test_odd_schemes():
     s = 'xxxx://example.com/test.php'
-    assert ioc_fanger.fang(s, debug=True) == 'http://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
     s = 'xxxxx://example.com/test.php'
-    assert ioc_fanger.fang(s, debug=True) == 'https://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
     s = 'xXxX://example.com/test.php'
-    assert ioc_fanger.fang(s, debug=True) == 'http://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'http://example.com/test.php'
     s = 'xXxXx://example.com/test.php'
-    assert ioc_fanger.fang(s, debug=True) == 'https://example.com/test.php'
+    assert ioc_fanger.fang(s) == 'https://example.com/test.php'
 
     s = 'hxxp://example.com/test.php'
     assert ioc_fanger.fang(s) == 'http://example.com/test.php'
