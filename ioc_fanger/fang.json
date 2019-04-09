@@ -1,23 +1,27 @@
 [
     {
-        "find": "(\\s*[\\[\\]\\(\\)\\\\]+\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "(\\s*[\\[\\]\\(\\\\]+\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]*\\s*)",
         "replace": ".",
-        "regex": true
+        "regex": true,
+        "comment": "Fang a period or comma preceded by parenthesis or square brackets (and possibly postceded by the same). A period or comma preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
     },
     {
         "find": "(\\s*[\\[\\]\\(\\)\\\\]*\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]+\\s*)",
         "replace": ".",
-        "regex": true
+        "regex": true,
+        "comment": "Fang a period or comma postceded by parenthesis or square brackets (and possibly preceded by the same)."
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]+\\s*):(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "(\\s*[\\[\\]\\(]+\\s*):(\\s*[\\[\\]\\(\\)]*\\s*)",
         "replace": ":",
-        "regex": true
+        "regex": true,
+        "comment": "Fang a colon preceded by parenthesis or square brackets (and possibly postceded by the same). A colon preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
     },
     {
         "find": "(\\s*[\\[\\]\\(\\)]*\\s*):(\\s*[\\[\\]\\(\\)]+\\s*)",
         "replace": ":",
-        "regex": true
+        "regex": true,
+        "comment": "Fang a colon postceded by parenthesis or square brackets (and possibly preceded by the same)."
     },
     {
         "find": "(\\s*[\\[\\]\\(\\)]*\\s*)DOT(\\s*[\\[\\]\\(\\)]*\\s*)",

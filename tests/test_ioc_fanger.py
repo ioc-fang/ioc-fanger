@@ -145,6 +145,10 @@ diota-ar.com/.well-known/acme-challenge/mxr.pdf"""
     data = ioc_fanger.fang(s)
     assert data == """code to https://www.linkedin.com/feed/hashtag/?keywords=%23IOCs)<https://example.in/foo>"""
 
+    s = 'analysis), yo'
+    data = ioc_fanger.fang(s)
+    assert data == s
+
 
 def test_odd_schemes():
     s = 'xxxx://example.com/test.php'
