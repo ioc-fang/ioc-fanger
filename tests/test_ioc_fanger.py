@@ -253,6 +253,14 @@ def test_odd_email_address_spacing():
     s = "fooATbar.com"
     assert ioc_fanger.fang(s) == 'foo@bar.com'
 
+    # make sure that the `AT` parsing isn't too broad... it shouldn't replace 'AT' with '@' if the 'AT' is preceded by a capital letter
+    s = "fooMATbar.com"
+    assert ioc_fanger.fang(s) == 'fooMATbar.com'
+
+    # see the previous comment, except this makes sure that 'AT' isn't postceded by a capital letter
+    s = "fooATAbar.com"
+    assert ioc_fanger.fang(s) == 'fooATAbar.com'
+
     s = "foo AT bar.com"
     assert ioc_fanger.fang(s) == 'foo@bar.com'
 
