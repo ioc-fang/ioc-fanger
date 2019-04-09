@@ -1,81 +1,81 @@
 [
     {
-        "find": "(\\s*[\\[\\]\\(\\\\]+\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "( *[\\[\\]\\(\\\\]+ *)[\\.\\,]( *[\\[\\]\\(\\)]* *)",
         "replace": ".",
         "regex": true,
         "comment": "Fang a period or comma preceded by parenthesis or square brackets (and possibly postceded by the same). A period or comma preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)\\\\]*\\s*)[\\.\\,](\\s*[\\[\\]\\(\\)]+\\s*)",
+        "find": "( *[\\[\\]\\(\\)\\\\]* *)[\\.\\,]( *[\\[\\]\\(\\)]+ *)",
         "replace": ".",
         "regex": true,
         "comment": "Fang a period or comma postceded by parenthesis or square brackets (and possibly preceded by the same)."
     },
     {
-        "find": "(\\s*[\\[\\]\\(]+\\s*):(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "( *[\\[\\]\\(]+ *):( *[\\[\\]\\(\\)]* *)",
         "replace": ":",
         "regex": true,
         "comment": "Fang a colon preceded by parenthesis or square brackets (and possibly postceded by the same). A colon preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]*\\s*):(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "find": "( *[\\[\\]\\(\\)]* *):( *[\\[\\]\\(\\)]+ *)",
         "replace": ":",
         "regex": true,
         "comment": "Fang a colon postceded by parenthesis or square brackets (and possibly preceded by the same)."
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)DOT(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "( *[\\[\\]\\(\\)]* *)DOT( *[\\[\\]\\(\\)]* *)",
         "replace": ".",
         "regex": true,
         "case_sensitive": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)-]+\\s*)(?:dot|punto|punkt)(\\s*[\\[\\]\\(\\)-]*\\s*)",
+        "find": "( *[\\[\\]\\(\\)-]+ *)(?:dot|punto|punkt)( *[\\[\\]\\(\\)-]* *)",
         "replace": ".",
         "regex": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)-]*\\s*)(?:dot|punto|punkt)(\\s*[\\[\\]\\(\\)-]+\\s*)",
+        "find": "( *[\\[\\]\\(\\)-]* *)(?:dot|punto|punkt)( *[\\[\\]\\(\\)-]+ *)",
         "replace": ".",
         "regex": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]+\\s*)www(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "( *[\\[\\]\\(\\)]+ *)www( *[\\[\\]\\(\\)]* *)",
         "replace": "www",
         "regex": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)www(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "find": "( *[\\[\\]\\(\\)]* *)www( *[\\[\\]\\(\\)]+ *)",
         "replace": "www",
         "regex": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]+\\s*)(?:@|(?:at)|(?:et)|(?:arroba))(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "( *[\\[\\]\\(\\)]+ *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\[\\]\\(\\)]* *)",
         "replace": "@",
         "regex": true,
         "case_sensitive": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)(?:@|(?:at)|(?:et)|(?:arroba))(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "find": "( *[\\[\\]\\(\\)]* *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\[\\]\\(\\)]+ *)",
         "replace": "@",
         "regex": true,
         "case_sensitive": true
     },
     {
-        "find": "\\s+@\\s+",
+        "find": " +@ +",
         "replace": "@",
         "regex": true,
         "case_sensitive": true
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]+\\s*)(?:(?:AT)|(?:ET)|(?:ARROBA))(\\s*[\\[\\]\\(\\)]*\\s*)",
+        "find": "( *[\\[\\]\\(\\)]+ *)(?:(?:AT)|(?:ET)|(?:ARROBA))( *[\\[\\]\\(\\)]* *)",
         "replace": "@",
         "regex": true,
         "case_sensitive": true,
         "comment": "Fang 'AT', 'ET', or 'ARROBA' preceded by a parenthesis/square brackets and possibly postceded by the same."
     },
     {
-        "find": "(\\s*[\\[\\]\\(\\)]*\\s*)(?:(?:AT)|(?:ET)|(?:ARROBA))(\\s*[\\[\\]\\(\\)]+\\s*)",
+        "find": "( *[\\[\\]\\(\\)]* *)(?:(?:AT)|(?:ET)|(?:ARROBA))( *[\\[\\]\\(\\)]+ *)",
         "replace": "@",
         "regex": true,
         "case_sensitive": true,
@@ -104,17 +104,17 @@
         "regex": true
     },
     {
-        "find": ":\\/\\/\\s*",
+        "find": ":\\/\\/ *",
         "replace": "://",
         "regex": true
     },
     {
-        "find": ":\\s+\\/\\/",
+        "find": ": +\\/\\/",
         "replace": "://",
         "regex": true
     },
     {
-        "find": "(https?)\\s*:",
+        "find": "(https?) *:",
         "replace": "\\1:",
         "regex": true
     },
@@ -129,7 +129,7 @@
         "regex": true
     },
     {
-        "find": "(https?:\\/\\/)\\s*",
+        "find": "(https?:\\/\\/) *",
         "replace": "\\1",
         "regex": true
     },
