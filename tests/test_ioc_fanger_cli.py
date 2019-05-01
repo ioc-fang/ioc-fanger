@@ -27,5 +27,5 @@ def test_defang_cli(defanged_text, fanged_text):
     result = runner.invoke(ioc_fanger.cli_defang, [fanged_text])
     assert result.exit_code == 0
     assert "hXXp://example[.]com" in result.output
-    assert "1[.]2.3[.]4" in result.output
+    assert "1[.]2[.]3[.]4" in result.output
     assert "bob(at)example[.]com" in result.output

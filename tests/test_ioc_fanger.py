@@ -43,9 +43,9 @@ def test_defanging(fanged_text):
     defanged_text = ioc_fanger.defang(fanged_text)
 
     assert "hXXp://example[.]com" in defanged_text
-    assert "1[.]2.3[.]4" in defanged_text
+    assert "1[.]2[.]3[.]4" in defanged_text
     assert "bob(at)example[.]com" in defanged_text
-    assert "5[.]6.7[.]8" in defanged_text
+    assert "5[.]6[.]7[.]8" in defanged_text
     print("defanged_text {}".format(defanged_text))
     assert "9[.]10[.]11[.]12" in defanged_text
 
@@ -320,3 +320,12 @@ def test_odd_email_address_spacing():
 
     s = "foo (et) bar.com"
     assert ioc_fanger.fang(s) == 'foo@bar.com'
+
+
+def test_ip_address_defang():
+    """Make sure ip addresses are defanged sensibly."""
+    s = '192.168.4.2'
+    assert ioc_fanger.defang(s) == '192[.]168[.]4[.]2'
+
+    s = '8.8.8.8'
+    assert ioc_fanger.defang(s) == '8[.]8[.]8[.]8'
