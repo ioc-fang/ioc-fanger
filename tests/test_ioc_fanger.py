@@ -329,3 +329,8 @@ def test_ip_address_defang():
 
     s = '8.8.8.8'
     assert ioc_fanger.defang(s) == '8[.]8[.]8[.]8'
+
+
+def test_odd_hXXp_replacement():
+    s = 'In the UI: https://help.passivetotal.org/tags_&_classifications.html (https://help.passivetotal.org/tags_&_classifications.html)'
+    assert ioc_fanger.fang(s, debug=True) == 'In the UI: https://help.passivetotal.org/tags_&_classifications.html https://help.passivetotal.org/tags_&_classifications.html)'
