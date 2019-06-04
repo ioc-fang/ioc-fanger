@@ -20,6 +20,7 @@ setup(
     version='3.0.14',
     description="Python package to defang and refang indicators of compromise from text.",
     long_description=readme,
+    long_description_content_type="text/markdown",
     author="Floyd Hightower",
     author_email='',
     url='https://github.com/ioc-fang/ioc_fanger',
