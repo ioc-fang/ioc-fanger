@@ -6,9 +6,6 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-with open('LICENSE') as license_file:
-    license = license_file.read()
-
 requirements = [
     'Click'
 ]
@@ -34,7 +31,7 @@ setup(
     include_package_data=True,
     package_data={'ioc_fanger': ['fang.json', 'defang.json']},
     install_requires=requirements,
-    license=license,
+    license='MIT',
     zip_safe=True,
     keywords='ioc_fanger',
     classifiers=[
