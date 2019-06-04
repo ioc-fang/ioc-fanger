@@ -49,8 +49,8 @@ ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")  # example.com 
 
 Once the package is installed, there will be two commands available in the command line:
 
--   `fang`
--   `defang`
+- `fang`
+- `defang`
 
 After each command, provide the text you would like to fang/defang:
 
