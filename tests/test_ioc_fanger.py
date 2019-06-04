@@ -89,6 +89,11 @@ def test_issue_16():
     assert ioc_fanger.fang(s) == 'www.example.com'
 
 
+def test_issue_24():
+    s = 'seasharpee'
+    assert ioc_fanger.fang(s) == 'seasharpee'
+
+
 def test_parenthetical_period():
     s = "www(.)example(.)com"
     assert ioc_fanger.fang(s) == 'www.example.com'

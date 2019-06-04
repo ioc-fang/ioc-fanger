@@ -119,10 +119,11 @@
         "regex": true
     },
     {
-        "find": "h\\S\\S(ps?[^.])",
+        "find": "h[xA-Z]{2}(ps?[^.])",
         "replace": "htt\\1",
         "regex": true,
-        "comment": "The [^.] bit at the end of this regex makes sure that we are only replacing h\\S\\Sps? that are followed by something other than a period (so as not to change part of a domain name (see the `test_odd_hXXp_replacement` function in `test_ioc_fanger.py`))"
+        "comment": "The [^.] bit at the end of this regex makes sure that we are only replacing h\\S\\Sps? that are followed by something other than a period (so as not to change part of a domain name (see the `test_odd_hXXp_replacement` function in `test_ioc_fanger.py`))",
+        "case_sensitive": true
     },
     {
         "find": "htt(ps?)\\/",
