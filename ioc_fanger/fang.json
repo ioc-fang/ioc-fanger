@@ -6,6 +6,10 @@
         "comment": "Fang a period or comma preceded by parenthesis or square brackets (and possibly postceded by the same). A period or comma preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
     },
     {
+        "find": "[://]",
+        "replace": "://"
+    },
+    {
         "find": "( *[\\[\\]\\(\\)\\\\]* *)[\\.\\,]( *[\\[\\]\\(\\)]+ *)",
         "replace": ".",
         "regex": true,
