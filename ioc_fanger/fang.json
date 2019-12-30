@@ -54,13 +54,13 @@
         "regex": true
     },
     {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]+ *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\[\\]\\(\\)\\{\\}]* *)",
+        "find": "( *[\\[\\]\\(\\)\\{\\}]+ *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]* *)",
         "replace": "@",
         "regex": true,
         "case_sensitive": true
     },
     {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]* *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\[\\]\\(\\)\\{\\}]+ *)",
+        "find": "( *[\\[\\]\\(\\)\\{\\}]* *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]+ *)",
         "replace": "@",
         "regex": true,
         "case_sensitive": true
@@ -93,7 +93,7 @@
         "comment": "Fang 'AT', 'ET', or 'ARROBA' preceded by a lower-cased character (and possibly spaces)."
     },
     {
-        "find": "(?:[\\[\\]\\(\\)]+ ?)htt(ps?)(?: ?[\\[\\]\\(\\)]* ?)",
+        "find": "(?:[\\[\\(]+ ?)htt(ps?)(?: ?[\\[\\]\\(\\)]* ?)",
         "replace": "htt\\1",
         "regex": true
     },

@@ -55,6 +55,10 @@ def test_email_addresses(defanged_email_address_text, fanged_email_address_text)
     fanged_addresses = ioc_fanger.fang(defanged_email_address_text)
     assert fanged_addresses == fanged_email_address_text
 
+    s = 'test@[192.168.0.1]'
+    fanged_data = ioc_fanger.fang(s)
+    assert fanged_data == 'test@[192.168.0.1]'
+
 
 def test_spanish_defanging():
     s = 'me (arroba) example (punto) com'
@@ -345,3 +349,8 @@ def test_ip_address_defang():
 def test_odd_hXXp_replacement():
     s = 'In the UI: https://help.passivetotal.org/tags_&_classifications.html (https://help.passivetotal.org/tags_&_classifications.html)'
     assert ioc_fanger.fang(s, debug=True) == 'In the UI: https://help.passivetotal.org/tags_&_classifications.html https://help.passivetotal.org/tags_&_classifications.html)'
+
+
+def test_markdown_fanging():
+    s = '[https://i.imgur.com/abc.png](https://i.imgur.com/abc.png)'
+    assert ioc_fanger.fang(s) == 'https://i.imgur.com/abc.png]https://i.imgur.com/abc.png)'
