@@ -170,5 +170,9 @@
         "find": "(https?)(?!s)\\S*?:",
         "replace": "\\1:",
         "regex": true
+    },
+    {
+        "find": "^.",
+        "replace": "."
     }
 ]
