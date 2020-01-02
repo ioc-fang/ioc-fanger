@@ -354,3 +354,6 @@ def test_odd_hXXp_replacement():
 def test_markdown_fanging():
     s = '[https://i.imgur.com/abc.png](https://i.imgur.com/abc.png)'
     assert ioc_fanger.fang(s) == 'https://i.imgur.com/abc.png]https://i.imgur.com/abc.png)'
+
+    s = '_o_o.lgms.nl_'
+    assert ioc_fanger.fang(s) == '_o_o.lgms.nl_'
