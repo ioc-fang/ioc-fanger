@@ -15,7 +15,7 @@ test_requirements = []
 setup(
     name='ioc_fanger',
     version='3.0.18',
-    description="Python package to defang and refang indicators of compromise from text.",
+    description="Python package to defang and fang indicators of compromise from text.",
     long_description=readme,
     long_description_content_type="text/markdown",
     author="Floyd Hightower",
@@ -33,7 +33,7 @@ setup(
     install_requires=requirements,
     license='MIT',
     zip_safe=True,
-    keywords='ioc_fanger',
+    keywords='iocs,indicators of compromise,threat intelligence,malware,threat hunting,observables,fanging,defanging,fang,defang,refang',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
