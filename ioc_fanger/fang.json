@@ -1,162 +1,41 @@
 [
     {
-        "find": "( *[\\[\\]\\(\\\\]+ *)[\\.\\,]( *[\\[\\]\\(\\)]* *)",
-        "replace": ".",
-        "regex": true,
-        "comment": "Fang a period or comma preceded by parenthesis or square brackets (and possibly postceded by the same). A period or comma preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
-    },
-    {
         "find": "[://]",
         "replace": "://"
     },
     {
-        "find": "( *[\\[\\]\\(\\)\\\\]* *)[\\.\\,]( *[\\[\\]\\(\\)]+ *)",
-        "replace": ".",
-        "regex": true,
-        "comment": "Fang a period or comma postceded by parenthesis or square brackets (and possibly preceded by the same)."
-    },
-    {
-        "find": "( *[\\[\\]\\(]+ *):( *[\\[\\]\\(\\)]* *)",
-        "replace": ":",
-        "regex": true,
-        "comment": "Fang a colon preceded by parenthesis or square brackets (and possibly postceded by the same). A colon preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)]* *):( *[\\[\\]\\(\\)]+ *)",
-        "replace": ":",
-        "regex": true,
-        "comment": "Fang a colon postceded by parenthesis or square brackets (and possibly preceded by the same)."
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)]* *)DOT( *[\\[\\]\\(\\)]* *)",
-        "replace": ".",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)-]+ *)(?:dot|punto|punkt)( *[\\[\\]\\(\\)-]* *)",
-        "replace": ".",
-        "regex": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)-]* *)(?:dot|punto|punkt)( *[\\[\\]\\(\\)-]+ *)",
-        "replace": ".",
-        "regex": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)]+ *)www( *[\\[\\]\\(\\)]* *)",
-        "replace": "www",
-        "regex": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)]* *)www( *[\\[\\]\\(\\)]+ *)",
-        "replace": "www",
-        "regex": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]+ *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]* *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]* *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]+ *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": " +@ +",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)]+ *)(?:(?:AT)|(?:ET)|(?:ARROBA))( *[\\[\\]\\(\\)]* *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true,
-        "comment": "Fang 'AT', 'ET', or 'ARROBA' preceded by a parenthesis/square brackets and possibly postceded by the same."
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)]* *)(?:(?:AT)|(?:ET)|(?:ARROBA))( *[\\[\\]\\(\\)]+ *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true,
-        "comment": "Fang 'AT', 'ET', or 'ARROBA' postceded by a parenthesis/square brackets and possibly preceded by the same."
-    },
-    {
-        "find": "([a-z]) *(?:AT|ET|ARROBA) *([a-z])",
-        "replace": "\\1@\\2",
-        "regex": true,
-        "case_sensitive": true,
-        "comment": "Fang 'AT', 'ET', or 'ARROBA' preceded by a lower-cased character (and possibly spaces)."
-    },
-    {
-        "find": "(?:[\\[\\(]+ ?)htt(ps?)(?: ?[\\[\\]\\(\\)]* ?)",
-        "replace": "htt\\1",
-        "regex": true
-    },
-    {
-        "find": "(?:[\\[\\]\\(\\)]* ?)htt(ps?)(?: ?[\\[\\]\\(\\)]+ ?)",
-        "replace": "htt\\1",
-        "regex": true
-    },
-    {
-        "find": ":\\/\\/\\/+",
+        "find": ":///+",
         "replace": "://",
         "regex": true
     },
     {
-        "find": ":\\/\\/ *",
-        "replace": "://",
+        "find": "(https?)//",
+        "replace": "\\1://",
         "regex": true
     },
     {
-        "find": ": +\\/\\/",
-        "replace": "://",
+        "find": "(ps?) +://",
+        "replace": "\\1://",
         "regex": true
     },
     {
-        "find": "(https?) *:",
-        "replace": "\\1:",
+        "find": "(https?):// +",
+        "replace": "\\1://",
         "regex": true
     },
     {
-        "find": "h[xA-Z]{2}(ps?[^.])",
-        "replace": "htt\\1",
-        "regex": true,
-        "comment": "The [^.] bit at the end of this regex makes sure that we are only replacing h\\S\\Sps? that are followed by something other than a period (so as not to change part of a domain name (see the `test_odd_hXXp_replacement` function in `test_ioc_fanger.py`))",
-        "case_sensitive": true
-    },
-    {
-        "find": "htt(ps?)\\/",
-        "replace": "htt\\1:/",
+        "find": "http[^s]://",
+        "replace": "https://",
         "regex": true
     },
     {
-        "find": "(https?:\\/\\/) *",
-        "replace": "\\1",
-        "regex": true
-    },
-    {
-        "find": "(\\b)\\S{5}:\\/\\/",
-        "replace": "\\1https://",
-        "regex": true
-    },
-    {
-        "find": "(\\b)\\S{4}:\\/\\/",
-        "replace": "\\1http://",
+        "find": "https\\S://",
+        "replace": "https://",
         "regex": true
     },
     {
         "find": "[-]",
         "replace": "-"
-    },
-    {
-        "find": "([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})",
-        "replace": "\\1.\\2.\\3.\\4",
-        "regex": true
     },
     {
         "find": "\\.",
@@ -167,12 +46,17 @@
         "replace": "/"
     },
     {
-        "find": "(https?)(?!s)\\S*?:",
-        "replace": "\\1:",
+        "find": "^.",
+        "replace": "."
+    },
+    {
+        "find": " +@ +",
+        "replace": "@",
         "regex": true
     },
     {
-        "find": "^.",
-        "replace": "."
+        "find": "([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})",
+        "replace": "\\1.\\2.\\3.\\4",
+        "regex": true
     }
 ]

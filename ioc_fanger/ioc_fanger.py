@@ -5,11 +5,17 @@
 import json
 import os
 import re
+import sys
 
 import click
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), ".")))
+import grammars
+
 FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
-DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
+DEFANG_DATA_PATH = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "./defang.json")
+)
 
 
 def _get_data_from_file(file_path):
@@ -31,6 +37,17 @@ def fang(text, debug=False):
         print('Starting text: {}'.format(fanged_text))
         print('-----')
 
+    fanged_text = grammars.dot_fanging_patterns.transformString(fanged_text)
+    fanged_text = grammars.at_fanging_patterns.transformString(fanged_text)
+    fanged_text = grammars.more_at_fanging_patterns.transformString(fanged_text)
+    fanged_text = grammars.colon_slash_slash_fanging_patterns.transformString(
+        fanged_text
+    )
+    fanged_text = grammars.colon_fanging_patterns.transformString(fanged_text)
+    fanged_text = grammars.odd_url_scheme_form.transformString(fanged_text)
+    fanged_text = grammars.http_fanging_patterns.transformString(fanged_text)
+    fanged_text = grammars.comma_fanging_patterns.transformString(fanged_text)
+
     for mapping in fanging_mappings:
         if debug:
             print('Mapping: {}'.format(mapping))
@@ -43,7 +60,9 @@ def fang(text, debug=False):
         if mapping.get('case_sensitive'):
             fanged_text = re.sub(find_value, mapping['replace'], fanged_text)
         else:
-            fanged_text = re.sub(find_value, mapping['replace'], fanged_text, flags=re.IGNORECASE)
+            fanged_text = re.sub(
+                find_value, mapping['replace'], fanged_text, flags=re.IGNORECASE
+            )
 
         if debug:
             print('Text after mapping: {}'.format(fanged_text))
@@ -75,6 +94,7 @@ def defang(text):
     defanged_text = text
 
     for mapping in defanging_mappings:
+
         def _replace(matches):
             """Replace matches.groups(1) with mapping['replace']."""
             try:

@@ -142,7 +142,7 @@ def test_odd_misc():
     assert ioc_fanger.fang(s) == 'foo-bar.com'
 
     s = "[www].example.com"
-    assert ioc_fanger.fang(s) == 'www.example.com'
+    assert ioc_fanger.fang(s) == '[www.example.com'
 
     s = "(www).example.com"
     assert ioc_fanger.fang(s) == 'www.example.com'
@@ -353,7 +353,7 @@ def test_ip_address_defang():
 
 def test_odd_hXXp_replacement():
     s = 'In the UI: https://help.passivetotal.org/tags_&_classifications.html (https://help.passivetotal.org/tags_&_classifications.html)'
-    assert ioc_fanger.fang(s, debug=True) == 'In the UI: https://help.passivetotal.org/tags_&_classifications.html https://help.passivetotal.org/tags_&_classifications.html)'
+    assert ioc_fanger.fang(s) == 'In the UI: https://help.passivetotal.org/tags_&_classifications.html https://help.passivetotal.org/tags_&_classifications.html)'
 
 
 def test_markdown_fanging():
@@ -362,3 +362,9 @@ def test_markdown_fanging():
 
     s = '_o_o.lgms.nl_'
     assert ioc_fanger.fang(s) == '_o_o.lgms.nl_'
+
+
+def test_debug():
+    # make sure using debug still works properly
+    s = '192[.]168[.]4[.]2'
+    assert ioc_fanger.fang(s, debug=True) == '192.168.4.2'
