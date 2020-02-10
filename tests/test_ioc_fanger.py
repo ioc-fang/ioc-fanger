@@ -355,6 +355,10 @@ def test_odd_hXXp_replacement():
     s = 'In the UI: https://help.passivetotal.org/tags_&_classifications.html (https://help.passivetotal.org/tags_&_classifications.html)'
     assert ioc_fanger.fang(s) == 'In the UI: https://help.passivetotal.org/tags_&_classifications.html https://help.passivetotal.org/tags_&_classifications.html)'
 
+    # this is based on the text of an incident found here: https://app.threatconnect.com/auth/incident/incident.xhtml?incident=2952580883&owner=Technical%20Blogs%20and%20Reports#/
+    s = 'domain (www.example.com).'
+    assert ioc_fanger.fang(s) == 'domain (www.example.com).'
+
 
 def test_markdown_fanging():
     s = '[https://i.imgur.com/abc.png](https://i.imgur.com/abc.png)'
