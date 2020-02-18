@@ -4,8 +4,12 @@
         "replace": "[.]"
     },
     {
-        "find": "http",
-        "replace": "hXXp"
+        "find": "http:",
+        "replace": "hXXp:"
+    },
+    {
+        "find": "https:",
+        "replace": "hXXps:"
     },
     {
         "find": "\\S(@)\\S",

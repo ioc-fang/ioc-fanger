@@ -103,6 +103,12 @@ def test_issue_25():
     assert ioc_fanger.fang(s) == '123howp'
 
 
+def test_issue_32():
+    # see https://github.com/ioc-fang/ioc_fanger/issues/32
+    s = 'httptest@test.com'
+    assert ioc_fanger.defang(s) == 'httptest(at)test[.]com'
+
+
 def test_parenthetical_period():
     s = "www(.)example(.)com"
     assert ioc_fanger.fang(s) == 'www.example.com'
