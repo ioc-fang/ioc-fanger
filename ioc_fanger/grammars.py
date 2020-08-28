@@ -388,6 +388,40 @@ http_fanging_patterns = Combine(
     # + Optional(White())
 ).addParseAction(replaceWith("http"))
 
+www_fanging_patterns = Combine(
+    Or(
+        [
+            # 'www' - enclosed with ( and )
+            CaselessLiteral("(www("),
+            CaselessLiteral("(www)"),
+            CaselessLiteral(")www("),
+            CaselessLiteral(")www)"),
+            CaselessLiteral("(www"),
+            CaselessLiteral("www("),
+            CaselessLiteral(")www"),
+            CaselessLiteral("www)"),
+            # 'www' - enclosed with [ and ]
+            CaselessLiteral("[www["),
+            CaselessLiteral("[www]"),
+            CaselessLiteral("]www["),
+            CaselessLiteral("]www]"),
+            CaselessLiteral("[www"),
+            CaselessLiteral("www["),
+            CaselessLiteral("]www"),
+            CaselessLiteral("www]"),
+            # 'www' - enclosed with { and }
+            CaselessLiteral("{www{"),
+            CaselessLiteral("{www}"),
+            CaselessLiteral("}www{"),
+            CaselessLiteral("}www}"),
+            CaselessLiteral("{www"),
+            CaselessLiteral("www{"),
+            CaselessLiteral("}www"),
+            CaselessLiteral("www}"),
+        ]
+    )
+).addParseAction(replaceWith("www"))
+
 comma_fanging_patterns = Combine(
     Optional(White())
     + Or(

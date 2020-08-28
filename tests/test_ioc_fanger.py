@@ -148,7 +148,7 @@ def test_odd_misc():
     assert ioc_fanger.fang(s) == 'foo-bar.com'
 
     s = "[www].example.com"
-    assert ioc_fanger.fang(s) == '[www.example.com'
+    assert ioc_fanger.fang(s) == 'www.example.com'
 
     s = "(www).example.com"
     assert ioc_fanger.fang(s) == 'www.example.com'
@@ -363,7 +363,7 @@ def test_odd_hXXp_replacement():
 
     # this is based on the text of an incident found here: https://app.threatconnect.com/auth/incident/incident.xhtml?incident=2952580883&owner=Technical%20Blogs%20and%20Reports#/
     s = 'domain (www.example.com).'
-    assert ioc_fanger.fang(s) == 'domain (www.example.com).'
+    assert ioc_fanger.fang(s) == 'domain www.example.com).'
 
 
 def test_markdown_fanging():

@@ -46,6 +46,7 @@ def fang(text, debug=False):
     fanged_text = grammars.colon_fanging_patterns.transformString(fanged_text)
     fanged_text = grammars.odd_url_scheme_form.transformString(fanged_text)
     fanged_text = grammars.http_fanging_patterns.transformString(fanged_text)
+    fanged_text = grammars.www_fanging_patterns.transformString(fanged_text)
     fanged_text = grammars.comma_fanging_patterns.transformString(fanged_text)
 
     for mapping in fanging_mappings:
