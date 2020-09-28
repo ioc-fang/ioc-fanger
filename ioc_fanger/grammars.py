@@ -26,7 +26,7 @@ uppercase_word = Word("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 not_uppercase_word_regex = Regex("[^A-Z]")
 
 dot_fanging_patterns = Combine(
-    Optional(White())
+    Optional(White(ws=' \t'))
     + Or(
         [
             # '.' - enclosed with ( and )
@@ -146,11 +146,11 @@ dot_fanging_patterns = Combine(
             CaselessLiteral("-punto-"),
         ]
     )
-    + Optional(White())
+    + Optional(White(ws=' \t'))
 ).addParseAction(replaceWith("."))
 
 at_fanging_patterns = Combine(
-    Optional(White())
+    Optional(White(ws=' \t'))
     + Or(
         [
             # '@' - enclosed with ( and )
@@ -267,21 +267,21 @@ at_fanging_patterns = Combine(
             CaselessLiteral("-arroba-"),
         ]
     )
-    + Optional(White())
+    + Optional(White(ws=' \t'))
 ).addParseAction(replaceWith("@"))
 
 more_at_fanging_patterns = (
     not_uppercase_word_regex
     + Combine(
-        Optional(White())
+        Optional(White(ws=' \t'))
         + Or([Literal("AT"), Literal("ET"), Literal("ARROBA")])
-        + Optional(White())
+        + Optional(White(ws=' \t'))
     ).addParseAction(replaceWith("@"))
     + NotAny(uppercase_word)
 )
 
 colon_slash_slash_fanging_patterns = Combine(
-    Optional(White())
+    Optional(White(ws=' \t'))
     + Or(
         [
             # '://' - enclosed with ( and )
@@ -313,11 +313,11 @@ colon_slash_slash_fanging_patterns = Combine(
             CaselessLiteral("://}"),
         ]
     )
-    + Optional(White())
+    + Optional(White(ws=' \t'))
 ).addParseAction(replaceWith("://"))
 
 colon_fanging_patterns = Combine(
-    Optional(White())
+    Optional(White(ws=' \t'))
     + Or(
         [
             # ':' - enclosed with ( and )
@@ -349,11 +349,11 @@ colon_fanging_patterns = Combine(
             CaselessLiteral(":}"),
         ]
     )
-    + Optional(White())
+    + Optional(White(ws=' \t'))
 ).addParseAction(replaceWith(":"))
 
 http_fanging_patterns = Combine(
-    # Optional(White()) +
+    # Optional(White(ws=' \t')) +
     Or(
         [
             # 'http' - enclosed with ( and )
@@ -385,7 +385,7 @@ http_fanging_patterns = Combine(
             CaselessLiteral("http}"),
         ]
     )
-    # + Optional(White())
+    # + Optional(White(ws=' \t'))
 ).addParseAction(replaceWith("http"))
 
 www_fanging_patterns = Combine(
@@ -423,7 +423,7 @@ www_fanging_patterns = Combine(
 ).addParseAction(replaceWith("www"))
 
 comma_fanging_patterns = Combine(
-    Optional(White())
+    Optional(White(ws=' \t'))
     + Or(
         [
             # ',' - enclosed with ( and )
@@ -455,7 +455,7 @@ comma_fanging_patterns = Combine(
             CaselessLiteral(",}"),
         ]
     )
-    + Optional(White())
+    + Optional(White(ws=' \t'))
 ).addParseAction(replaceWith(","))
 
 odd_url_scheme_form = alphanum_word_start + Or(

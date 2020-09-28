@@ -378,3 +378,14 @@ def test_debug():
     # make sure using debug still works properly
     s = '192[.]168[.]4[.]2'
     assert ioc_fanger.fang(s, debug=True) == '192.168.4.2'
+
+
+def test_issue_34():
+    s = '''[Researcher email address].
+
+Best Regards,'''
+    result = ioc_fanger.fang(s)
+    print(result)
+    assert result == '''[Researcher email address.
+
+Best Regards,'''
