@@ -1,11 +1,19 @@
 # IOC Fanger
 
 [![PyPi](https://img.shields.io/pypi/v/ioc_fanger.svg)](https://pypi.python.org/pypi/ioc_fanger)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/ioc-fanger)
 [![Travis CI](https://img.shields.io/travis/ioc-fang/ioc_fanger.svg)](https://travis-ci.org/ioc-fang/ioc_fanger)
 [![Codecov](https://codecov.io/gh/ioc-fang/ioc_fanger/branch/master/graph/badge.svg)](https://codecov.io/gh/ioc-fang/ioc_fanger)
-[![Codacy](https://api.codacy.com/project/badge/Grade/d1762339ba454fba87c02a1b7ea69052)](https://www.codacy.com/app/fhightower/ioc_fanger)
+[![live demo](https://img.shields.io/badge/live%20demo-%E2%86%92-green)](http://ioc-fanger.hightower.space/)
 
-Python package to fang and defang [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text. You can test out this project here: [http://ioc-fanger.hightower.space](http://ioc-fanger.hightower.space).
+Python package to fang and defang [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text.
+
+```python
+import ioc_fanger
+
+ioc_fanger.defang("example.com http://bad.com/phishing.php")  # example[.]com hXXp://bad[.]com/phishing[.]php
+ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")  # example.com http://bad.com/phishing.php
+```
 
 **Defanging** - converting indicators of compromise from the normal form (which can become links) to a form which cannot accidentally become a link:
 
