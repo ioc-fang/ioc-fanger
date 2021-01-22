@@ -1,5 +1,6 @@
 black
 bumpversion
+codecov
 hypothesis
 pytest
 pytest-cov
