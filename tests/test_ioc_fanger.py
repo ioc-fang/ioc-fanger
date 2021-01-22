@@ -58,6 +58,10 @@ def test_email_addresses(defanged_email_address_text, fanged_email_address_text)
     fanged_data = ioc_fanger.fang(s)
     assert fanged_data == 'test@[192.168.0.1]'
 
+    s = 'john.smith(comment)@example.com'
+    fanged_data = ioc_fanger.fang(s)
+    assert fanged_data == 'john.smith(comment)@example.com'
+
 
 def test_spanish_defanging():
     s = 'me (arroba) example (punto) com'

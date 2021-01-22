@@ -158,7 +158,7 @@ at_fanging_patterns = Combine(
             CaselessLiteral(")@)"),
             CaselessLiteral("(@"),
             CaselessLiteral("@("),
-            CaselessLiteral(")@"),
+            # CaselessLiteral(")@"),   # this is commented and is NOT used to fang indicators b/c this format is valid for some email addresses (see the test_ioc_fanger::test_email_addresses function)
             CaselessLiteral("@)"),
             # 'at' - enclosed with ( and )
             CaselessLiteral("(at("),
@@ -193,7 +193,7 @@ at_fanging_patterns = Combine(
             CaselessLiteral("]@["),
             CaselessLiteral("]@]"),
             CaselessLiteral("[@"),
-            # CaselessLiteral("@["), # this is commented and is NOT used to fang indicators b/c this format is used 
+            # CaselessLiteral("@["), # this is commented and is NOT used to fang indicators b/c this format is valid for some email addresses (see the test_ioc_fanger::test_email_addresses function)
             CaselessLiteral("]@"),
             CaselessLiteral("@]"),
             # 'at' - enclosed with [ and ]
