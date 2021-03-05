@@ -1,4 +1,3 @@
-from pyparsing import alphas, alphanums
 from pyparsing import (
     CaselessLiteral,
     Combine,
@@ -7,14 +6,13 @@ from pyparsing import (
     Optional,
     Or,
     Regex,
-    replaceWith,
-    upcaseTokens,
+    White,
     Word,
     WordEnd,
     WordStart,
-    ZeroOrMore,
-    CaselessKeyword,
-    White,
+    alphanums,
+    alphas,
+    replaceWith,
 )
 
 alphanum_word_start = WordStart(wordChars=alphanums)
@@ -24,7 +22,7 @@ uppercase_word = Word("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 not_uppercase_word_regex = Regex("[^A-Z]")
 
 dot_fanging_patterns = Combine(
-    Optional(White(ws=' \t'))
+    Optional(White(ws=" \t"))
     + Or(
         [
             # '.' - enclosed with ( and )
@@ -34,7 +32,7 @@ dot_fanging_patterns = Combine(
             CaselessLiteral(").)"),
             CaselessLiteral("(."),
             CaselessLiteral(".("),
-            # CaselessLiteral(")."), # this is commented and is NOT used to fang indicators b/c this may appear in real text
+            # CaselessLiteral(")."), # this is NOT used to fang indicators b/c this may appear in real text
             CaselessLiteral(".)"),
             # 'dot' - enclosed with ( and )
             CaselessLiteral("(dot("),
@@ -144,11 +142,11 @@ dot_fanging_patterns = Combine(
             CaselessLiteral("-punto-"),
         ]
     )
-    + Optional(White(ws=' \t'))
+    + Optional(White(ws=" \t"))
 ).addParseAction(replaceWith("."))
 
 at_fanging_patterns = Combine(
-    Optional(White(ws=' \t'))
+    Optional(White(ws=" \t"))
     + Or(
         [
             # '@' - enclosed with ( and )
@@ -158,7 +156,8 @@ at_fanging_patterns = Combine(
             CaselessLiteral(")@)"),
             CaselessLiteral("(@"),
             CaselessLiteral("@("),
-            # CaselessLiteral(")@"),   # this is commented and is NOT used to fang indicators b/c this format is valid for some email addresses (see the test_ioc_fanger::test_email_addresses function)
+            # CaselessLiteral(")@"),   # this is NOT used to fang indicators b/c this format is valid...
+            # for some email addresses (see the test_ioc_fanger::test_email_addresses function)
             CaselessLiteral("@)"),
             # 'at' - enclosed with ( and )
             CaselessLiteral("(at("),
@@ -193,7 +192,8 @@ at_fanging_patterns = Combine(
             CaselessLiteral("]@["),
             CaselessLiteral("]@]"),
             CaselessLiteral("[@"),
-            # CaselessLiteral("@["), # this is commented and is NOT used to fang indicators b/c this format is valid for some email addresses (see the test_ioc_fanger::test_email_addresses function)
+            # CaselessLiteral("@["), # this is NOT used to fang indicators b/c this format is valid...
+            # for some email addresses (see the test_ioc_fanger::test_email_addresses function)
             CaselessLiteral("]@"),
             CaselessLiteral("@]"),
             # 'at' - enclosed with [ and ]
@@ -265,21 +265,19 @@ at_fanging_patterns = Combine(
             CaselessLiteral("-arroba-"),
         ]
     )
-    + Optional(White(ws=' \t'))
+    + Optional(White(ws=" \t"))
 ).addParseAction(replaceWith("@"))
 
 more_at_fanging_patterns = (
     not_uppercase_word_regex
     + Combine(
-        Optional(White(ws=' \t'))
-        + Or([Literal("AT"), Literal("ET"), Literal("ARROBA")])
-        + Optional(White(ws=' \t'))
+        Optional(White(ws=" \t")) + Or([Literal("AT"), Literal("ET"), Literal("ARROBA")]) + Optional(White(ws=" \t"))
     ).addParseAction(replaceWith("@"))
     + NotAny(uppercase_word)
 )
 
 colon_slash_slash_fanging_patterns = Combine(
-    Optional(White(ws=' \t'))
+    Optional(White(ws=" \t"))
     + Or(
         [
             # '://' - enclosed with ( and )
@@ -311,11 +309,11 @@ colon_slash_slash_fanging_patterns = Combine(
             CaselessLiteral("://}"),
         ]
     )
-    + Optional(White(ws=' \t'))
+    + Optional(White(ws=" \t"))
 ).addParseAction(replaceWith("://"))
 
 colon_fanging_patterns = Combine(
-    Optional(White(ws=' \t'))
+    Optional(White(ws=" \t"))
     + Or(
         [
             # ':' - enclosed with ( and )
@@ -325,7 +323,7 @@ colon_fanging_patterns = Combine(
             CaselessLiteral("):)"),
             CaselessLiteral("(:"),
             CaselessLiteral(":("),
-            # CaselessLiteral("):"), # this is commented and is NOT used to fang indicators b/c this may appear in real text
+            # CaselessLiteral("):"), # this is NOT used to fang indicators b/c this may appear in real text
             CaselessLiteral(":)"),
             # ':' - enclosed with [ and ]
             CaselessLiteral("[:["),
@@ -347,7 +345,7 @@ colon_fanging_patterns = Combine(
             CaselessLiteral(":}"),
         ]
     )
-    + Optional(White(ws=' \t'))
+    + Optional(White(ws=" \t"))
 ).addParseAction(replaceWith(":"))
 
 http_fanging_patterns = Combine(
@@ -421,7 +419,7 @@ www_fanging_patterns = Combine(
 ).addParseAction(replaceWith("www"))
 
 comma_fanging_patterns = Combine(
-    Optional(White(ws=' \t'))
+    Optional(White(ws=" \t"))
     + Or(
         [
             # ',' - enclosed with ( and )
@@ -431,7 +429,7 @@ comma_fanging_patterns = Combine(
             CaselessLiteral("),)"),
             CaselessLiteral("(,"),
             CaselessLiteral(",("),
-            # CaselessLiteral("),"), # this is commented and is NOT used to fang indicators b/c this may appear in real text
+            # CaselessLiteral("),"), # this is NOT used to fang indicators b/c this may appear in real text
             CaselessLiteral(",)"),
             # ',' - enclosed with [ and ]
             CaselessLiteral("[,["),
@@ -453,7 +451,7 @@ comma_fanging_patterns = Combine(
             CaselessLiteral(",}"),
         ]
     )
-    + Optional(White(ws=' \t'))
+    + Optional(White(ws=" \t"))
 ).addParseAction(replaceWith(","))
 
 odd_url_scheme_form = alphanum_word_start + Or(

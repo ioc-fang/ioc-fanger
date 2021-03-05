@@ -11,6 +11,7 @@ import pytest
 from click.testing import CliRunner
 
 from ioc_fanger import ioc_fanger
+
 from .test_ioc_fanger import defanged_text, fanged_text
 
 
@@ -25,7 +26,7 @@ def test_fang_cli_stdin(defanged_text, fanged_text):
     runner = CliRunner()
     result = runner.invoke(ioc_fanger.cli_fang, input=defanged_text)
     assert result.exit_code == 0
-    print('result.output.strip() {}'.format(result.output.strip()))
+    print("result.output.strip() {}".format(result.output.strip()))
     assert result.output.strip() == fanged_text
 
 
