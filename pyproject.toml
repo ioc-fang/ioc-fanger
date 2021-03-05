@@ -1,0 +1,20 @@
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+
+[tool.isort]
+line_length = 120
+include_trailing_comma = true
+
+[tool.pylint."MESSAGES CONTROL"]
+max-line-length = 120
+disable = "C0114, R1705, C0103"
+
+[tool.pytest.ini_options]
+addopts = "-v --cov=. --cov-report term-missing --cov-fail-under 90"
+python_files = "tests/test_*.py"
+
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
+
+[tool.setuptools_scm]
