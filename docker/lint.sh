@@ -8,9 +8,9 @@ isort ioc_fanger/ tests/
 
 black ioc_fanger/ tests/
 
-# mypy ioc_fanger/ tests/
+mypy ioc_fanger/ tests/
 
-pylint ioc_fanger/*.py
+pylint --fail-under 9 ioc_fanger/*.py
 
 flake8 ioc_fanger/ tests/
 
