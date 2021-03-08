@@ -10,3 +10,4 @@ mypy
 pylint
 pytest
 pytest-cov
+pytest-benchmark

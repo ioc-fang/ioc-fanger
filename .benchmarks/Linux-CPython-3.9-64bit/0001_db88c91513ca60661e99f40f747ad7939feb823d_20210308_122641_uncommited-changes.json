@@ -1,0 +1,104 @@
+{
+    "machine_info": {
+        "node": "cda83f8b49a0",
+        "processor": "",
+        "machine": "x86_64",
+        "python_compiler": "GCC 8.3.0",
+        "python_implementation": "CPython",
+        "python_implementation_version": "3.9.1",
+        "python_version": "3.9.1",
+        "python_build": [
+            "default",
+            "Feb  9 2021 07:42:03"
+        ],
+        "release": "4.19.121-linuxkit",
+        "system": "Linux",
+        "cpu": {
+            "vendor_id": "unknown",
+            "hardware": "unknown",
+            "brand": "unknown"
+        }
+    },
+    "commit_info": {
+        "id": "db88c91513ca60661e99f40f747ad7939feb823d",
+        "time": "2021-03-05T07:26:02-05:00",
+        "author_time": "2021-03-05T07:26:02-05:00",
+        "dirty": true,
+        "project": "ioc-fanger",
+        "branch": "main"
+    },
+    "benchmarks": [
+        {
+            "group": null,
+            "name": "test_fanging__benchmark",
+            "fullname": "tests/test_benchmarks.py::test_fanging__benchmark",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 0.027425700001913356,
+                "max": 0.09668569999848842,
+                "mean": 0.03504142413808511,
+                "stddev": 0.015238728804241125,
+                "rounds": 29,
+                "median": 0.029105500001605833,
+                "iqr": 0.004656449999856704,
+                "q1": 0.028221900000062305,
+                "q3": 0.03287834999991901,
+                "iqr_outliers": 4,
+                "stddev_outliers": 4,
+                "outliers": "4;4",
+                "ld15iqr": 0.027425700001913356,
+                "hd15iqr": 0.05122290000144858,
+                "ops": 28.537652923561986,
+                "total": 1.016201300004468,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_defanging__benchmark",
+            "fullname": "tests/test_benchmarks.py::test_defanging__benchmark",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 0.0015511000019614585,
+                "max": 0.005355500001314795,
+                "mean": 0.0019219106817631242,
+                "stddev": 0.000511102675746895,
+                "rounds": 440,
+                "median": 0.0017124999994848622,
+                "iqr": 0.0003039500006707385,
+                "q1": 0.001683200000115903,
+                "q3": 0.0019871500007866416,
+                "iqr_outliers": 55,
+                "stddev_outliers": 55,
+                "outliers": "55;55",
+                "ld15iqr": 0.0015511000019614585,
+                "hd15iqr": 0.0024527999994461425,
+                "ops": 520.3155430108849,
+                "total": 0.8456406999757746,
+                "iterations": 1
+            }
+        }
+    ],
+    "datetime": "2021-03-08T12:26:50.465020",
+    "version": "3.2.3"
+}
