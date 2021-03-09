@@ -14,6 +14,18 @@ services:
     <<: *base
     command: ipython
 
+  bump-patch:
+    <<: *base
+    command: bumpversion patch
+
+  bump-minor:
+    <<: *base
+    command: bumpversion minor
+
+  bump-major:
+    <<: *base
+    command: bumpversion major
+
   # run tests
   test:
     <<: *base
