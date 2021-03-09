@@ -34,6 +34,15 @@ setup(
     install_requires=requirements,
     license='MIT',
     zip_safe=True,
+    project_urls={
+        'Documentation': 'https://github.com/ioc-fang/ioc-fanger',
+        'Say Thanks!': 'https://saythanks.io/to/floyd.hightower27%40gmail.com',
+        'Source': 'https://github.com/ioc-fang/ioc-fanger',
+        'Tracker': 'https://github.com/ioc-fang/ioc-fanger/issues',
+        'PyPi': 'https://pypi.org/project/ioc-fanger/',
+        'CI': 'https://travis-ci.com/ioc-fang/ioc-fanger.svg?branch=main',
+        'Changelog': 'https://github.com/ioc-fang/ioc-fanger/blob/main/CHANGELOG.md',
+    },
     keywords='iocs,indicators of compromise,threat intelligence,malware,threat hunting,observables,fanging,defanging,fang,defang,refang',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
