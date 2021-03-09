@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Make sure data files are in proper json format."""
 
 import json

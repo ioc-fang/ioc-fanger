@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import ioc_fanger
 
 
