@@ -1,5 +1,6 @@
 bandit
 black; python_version > '3.5'
+bump2version
 codecov
 democritus_file_system
 democritus_strings
