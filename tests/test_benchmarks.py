@@ -23,6 +23,7 @@ def fang_benchmark():
 def test_fanging__benchmark(benchmark):
     """Test fanging."""
     test_fanged_text = benchmark(fang_benchmark)
+    print(test_fanged_text)
     assert test_fanged_text == SAMPLE_TEXT_FANGED
 
 
