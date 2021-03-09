@@ -6,15 +6,13 @@ import re
 
 import click
 
-from ioc_fanger import grammars
-
 FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
 DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
 
 
 def _get_data_from_file(file_path):
     """Get data from the given file path."""
-    with open(file_path, "r") as f:
+    with open(file_path, 'r') as f:
         return json.loads(f.read())
 
 
@@ -28,52 +26,42 @@ def fang(text, debug=False):
     fanged_text = text
 
     if debug:
-        print("Starting text: {}".format(fanged_text))
-        print("-----")
-
-    fanged_text = grammars.dot_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.at_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.more_at_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.colon_slash_slash_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.colon_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.odd_url_scheme_form.transformString(fanged_text)
-    fanged_text = grammars.http_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.www_fanging_patterns.transformString(fanged_text)
-    fanged_text = grammars.comma_fanging_patterns.transformString(fanged_text)
+        print('Starting text: {}'.format(fanged_text))
+        print('-----')
 
     for mapping in fanging_mappings:
         if debug:
-            print("Mapping: {}".format(mapping))
+            print('Mapping: {}'.format(mapping))
 
-        if mapping.get("regex"):
-            find_value = mapping["find"]
+        if mapping.get('regex'):
+            find_value = mapping['find']
         else:
-            find_value = re.escape(mapping["find"])
+            find_value = re.escape(mapping['find'])
 
-        if mapping.get("case_sensitive"):
-            fanged_text = re.sub(find_value, mapping["replace"], fanged_text)
+        if mapping.get('case_sensitive'):
+            fanged_text = re.sub(find_value, mapping['replace'], fanged_text)
         else:
-            fanged_text = re.sub(find_value, mapping["replace"], fanged_text, flags=re.IGNORECASE)
+            fanged_text = re.sub(find_value, mapping['replace'], fanged_text, flags=re.IGNORECASE)
 
         if debug:
-            print("Text after mapping: {}".format(fanged_text))
-            print("-----")
+            print('Text after mapping: {}'.format(fanged_text))
+            print('-----')
 
     return fanged_text
 
 
 @click.command()
-@click.argument("text", required=False)
+@click.argument('text', required=False)
 def cli_fang(text):
     """CLI interface for fanging indicators."""
-    stdin_text = click.get_text_stream("stdin")
+    stdin_text = click.get_text_stream('stdin')
 
     if text:
         fanged_text = fang(text)
         print(fanged_text)
     elif stdin_text:
         for line in stdin_text:
-            fanged_text = fang(line.rstrip("\n"))
+            fanged_text = fang(line.rstrip('\n'))
             print(fanged_text)
     else:
         # TODO: add some handling here
@@ -89,27 +77,27 @@ def defang(text):
         def _replace(matches):
             """Replace matches.groups(1) with mapping['replace']."""
             try:
-                return matches.group(0).replace(matches.group(1), mapping["replace"])
+                return matches.group(0).replace(matches.group(1), mapping['replace'])
             except IndexError:
-                return matches.group(0).replace(mapping["find"], mapping["replace"])
+                return matches.group(0).replace(mapping['find'], mapping['replace'])
 
-        defanged_text = re.sub(mapping["find"], _replace, defanged_text)
+        defanged_text = re.sub(mapping['find'], _replace, defanged_text)
 
     return defanged_text
 
 
 @click.command()
-@click.argument("text", required=False)
+@click.argument('text', required=False)
 def cli_defang(text):
     """CLI interface for defanging indicators."""
-    stdin_text = click.get_text_stream("stdin")
+    stdin_text = click.get_text_stream('stdin')
 
     if text:
         defanged_text = defang(text)
         print(defanged_text)
     elif stdin_text:
         for line in stdin_text:
-            defanged_text = defang(line.rstrip("\n"))
+            defanged_text = defang(line.rstrip('\n'))
             print(defanged_text)
     else:
         # TODO: add some handling here
