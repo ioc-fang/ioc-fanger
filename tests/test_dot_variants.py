@@ -82,3 +82,6 @@ def test_systematic_dot():
 
     s = "foo(dot)com"
     assert ioc_fanger.fang(s) == "foo.com"
+
+    s = "foo-dot-com"
+    assert ioc_fanger.fang(s) == "foo.com"
