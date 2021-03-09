@@ -8,6 +8,7 @@ services:
       context: .
     volumes:
       - ./:/code
+      - ~/.gitconfig:/root/.gitconfig
 
   # a fully loaded development environment to test new code
   dev:
