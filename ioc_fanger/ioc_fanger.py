@@ -10,7 +10,7 @@ FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang
 DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
 
 
-def _get_data_from_file(file_path):
+def _get_data_from_file(file_path: str):
     """Get data from the given file path."""
     with open(file_path, 'r') as f:
         return json.loads(f.read())
@@ -21,10 +21,24 @@ fanging_mappings = _get_data_from_file(FANG_DATA_PATH)
 defanging_mappings = _get_data_from_file(DEFANG_DATA_PATH)
 
 
-def fang(text, debug=False):
+def _fang_text(mapping, text: str) -> str:
+    find_value = mapping['find']
+    if not mapping.get('regex'):
+        find_value = re.escape(find_value)
+
+    flags = 0
+
+    if not mapping.get('case_sensitive'):
+        flags = re.IGNORECASE
+
+    fanged_text = re.sub(find_value, mapping['replace'], text, flags=flags)
+
+    return fanged_text
+
+
+def fang(text: str, debug=False):
     """Fang the indicators in the given text."""
     fanged_text = text
-
     if debug:
         print('Starting text: {}'.format(fanged_text))
         print('-----')
@@ -33,15 +47,7 @@ def fang(text, debug=False):
         if debug:
             print('Mapping: {}'.format(mapping))
 
-        if mapping.get('regex'):
-            find_value = mapping['find']
-        else:
-            find_value = re.escape(mapping['find'])
-
-        if mapping.get('case_sensitive'):
-            fanged_text = re.sub(find_value, mapping['replace'], fanged_text)
-        else:
-            fanged_text = re.sub(find_value, mapping['replace'], fanged_text, flags=re.IGNORECASE)
+        fanged_text = _fang_text(mapping, fanged_text)
 
         if debug:
             print('Text after mapping: {}'.format(fanged_text))
@@ -63,9 +69,6 @@ def cli_fang(text):
         for line in stdin_text:
             fanged_text = fang(line.rstrip('\n'))
             print(fanged_text)
-    else:
-        # TODO: add some handling here
-        pass
 
 
 def defang(text):
@@ -99,6 +102,3 @@ def cli_defang(text):
         for line in stdin_text:
             defanged_text = defang(line.rstrip('\n'))
             print(defanged_text)
-    else:
-        # TODO: add some handling here
-        pass

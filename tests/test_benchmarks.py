@@ -4,8 +4,6 @@ import os
 
 import ioc_fanger
 
-from .test_json import _read_file
-
 SAMPLE_TEXT_FANGED_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sample_text_fanged.txt'))
 SAMPLE_TEXT_DEFANGED_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sample_text_defanged.txt'))
 
