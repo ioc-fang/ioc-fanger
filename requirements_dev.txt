@@ -1,4 +1,3 @@
-bandit
 black; python_version > '3.5'
 bump2version
 codecov
