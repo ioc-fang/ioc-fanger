@@ -403,3 +403,9 @@ Best Regards,"""
 
 Best Regards,"""
     )
+
+
+def test_issue_46():
+    s = 'div><div><br></div><div>hxxp://zeplin[.]atwebpages[.]com/inter[.]php</div><'
+    result = ioc_fanger.fang(s)
+    assert result == 'div><div><br></div><div>http://zeplin.atwebpages.com/inter.php</div><'

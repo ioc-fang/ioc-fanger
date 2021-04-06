@@ -6,7 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.2.1] - 2021.04.06
+
+### Fixed
+
 - Fixing lint errors
+- Improving handling of "http" surrounded by angle brackets ([#48](https://github.com/ioc-fang/ioc-fanger/issues/48))
 
 ## [3.2.0] - 2021.03.09
 

@@ -140,12 +140,12 @@
         "regex": true
     },
     {
-        "find": "(\\b)\\S{5}:\\/\\/",
+        "find": "([^a-zA-Z]|\\b)[a-zA-Z0-9!@#$%^&*]{5}:\/\/",
         "replace": "\\1https://",
         "regex": true
     },
     {
-        "find": "(\\b)\\S{4}:\\/\\/",
+        "find": "([^a-zA-Z]|\\b)[a-zA-Z0-9!@#$%^&*]{4}:\/\/",
         "replace": "\\1http://",
         "regex": true
     },
