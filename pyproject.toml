@@ -11,7 +11,7 @@ max-line-length = 120
 disable = "C0114, R1705, C0103"
 
 [tool.pytest.ini_options]
-addopts = "-v --cov=. --cov-report term-missing --cov-fail-under 95 --benchmark-compare=0001 --benchmark-compare-fail=mean:30%"
+addopts = "-v --cov=. --cov-report term-missing --cov-fail-under 98 --benchmark-compare=0001 --benchmark-compare-fail=mean:30%"
 python_files = "tests/test_*.py"
 
 [build-system]
