@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.2.2] - 2021.04.07
+
+### Fixed
+
+- Reduced false positives by not fanging periods and commas with spaces after them ([#47](https://github.com/ioc-fang/ioc-fanger/issues/47)) (e.g. previously `a. [b]` was fanged as `a.b]` - we've updated this to prevent false positives so that `a. [b]` is not fanged)
+
 ## [3.2.1] - 2021.04.06
 
 ### Fixed

@@ -409,3 +409,13 @@ def test_issue_46():
     s = 'div><div><br></div><div>hxxp://zeplin[.]atwebpages[.]com/inter[.]php</div><'
     result = ioc_fanger.fang(s)
     assert result == 'div><div><br></div><div>http://zeplin.atwebpages.com/inter.php</div><'
+
+
+def test_issue_47():
+    s = 'a. [b'
+    result = ioc_fanger.fang(s)
+    assert result == 'a. [b'
+
+    s = 'a. (b'
+    result = ioc_fanger.fang(s)
+    assert result == 'a. (b'
