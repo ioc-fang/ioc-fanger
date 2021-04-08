@@ -23,8 +23,6 @@ ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")  # example.com 
 
 `example[.]com => example.com`
 
-<!-- TODO: list out the type of things which can be fanged -->
-
 **What can it fang?**
 
 Just about everything. Check out the [tests](https://github.com/ioc-fang/ioc_fanger/blob/master/tests/test_ioc_fanger.py) to see some examples of what this package can handle.
@@ -57,7 +55,7 @@ ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")  # example.com 
 
 ### Via Command Line
 
-Once the package is installed, there will be two commands available in the command line:
+Once you install the package, there will be two commands available in the command line:
 
 - `fang`
 - `defang`
@@ -72,14 +70,61 @@ fang "example[.]com"  # example.com
 defang "example.com"  # example[.]com
 ```
 
+## Development
+
+👋 &nbsp;If you want to contribute to this project, test it locally, or just explore it - we have some helpful instructions below.
+
+### Prerequisites
+
+If you want to test, lint, or explore a project, make sure you have [docker][docker] and [docker-compose][docker-compose] installed (if you don't see: [installing docker][docker-install]).
+
+Then you can use the **test**, **lint**, and **dev** docker compose services listed below!
+
+### Test a Project 🧪
+
+To test a project, run the following command from the root directory of the project:
+
+```shell
+docker-compose run --rm test
+```
+
+Typically, this command will run [pytest][pytest-link] on the project's test suite. To view the details of what this command does, take a look at the `test` service in the project's `docker-compose.yml` file.
+
+### Lint a Project 🧹
+
+To lint a project, run the following command from the root directory of the project:
+
+```shell
+docker-compose run --rm lint
+```
+
+Typically, this command will run linters on the project's code with the goal of improving code quality and catching bugs before we release them (you can read more about the benefits of linting [here][linting-intro]). To view the details of what this command does, take a look at the `lint` service in the project's `docker-compose.yml` file.
+
+### Explore a Project 🔭
+
+To explore a project, you can drop into a "dev" environment which is an [IPython][ipython] shell with the project and all its requirements loaded. To do this, run the following command from the root directory of the project:
+
+```shell
+docker-compose run --rm dev
+```
+
+To see what this command does, take a look at the `dev` service in the project's `docker-compose.yml` file.
+
 ## Feedback
 
 If you have any ideas to improve this package, please raise an issue!
 
 ## Other Helpful Projects
 
-If you are working with observables (a.k.a. indicators of compromise), you may find the [https://github.com/fhightower/ioc-finder](https://github.com/fhightower/ioc-finder) project helpful. It is a project designed to parse indicators of compromise from text (it uses grammars rather than regexes).
+If you are working with indicators of compromise (a.k.a. observables), you may find the [ioc-finder](https://github.com/fhightower/ioc-finder) project helpful. The ioc-finder project parses indicators of compromise from text (using grammars).
 
 ## Credits
 
-This package was created with [Cookiecutter](https://github.com/audreyr/cookiecutter) and the [fhightower/python-project-template](https://gitlab.com/fhightower/python-project-template) project template.
+We created this package using [Cookiecutter](https://github.com/audreyr/cookiecutter) and the [fhightower/python-project-template](https://github.com/fhightower/python-project-template) project template.
+
+[pytest-link]: https://docs.pytest.org/en/stable/
+[docker-compose]: https://docs.docker.com/compose/
+[docker-install]: https://docs.docker.com/get-docker/
+[docker]: https://www.docker.com/get-started
+[linting-intro]: https://dbader.org/blog/python-code-linting
+[ipython]: https://ipython.org/
