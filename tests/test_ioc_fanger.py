@@ -421,11 +421,24 @@ def test_issue_47():
     assert result == 'a. (b'
 
 
-def test_issue_53():
+def test_issue_53__percent_encoded_urls_fanged_properly():
     """Testing to make sure percent encoded URLs are properly fanged."""
     s = 'https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
-    result = ioc_fanger.fang(s, debug=True)
+    result = ioc_fanger.fang(s)
     assert (
         result
         == 'https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
     )
+
+
+def test_issue_53__urls_in_query_strings_fanged():
+    """Make sure URLs in query strings are properly fanged."""
+    # imagining s is part of a query string, make sure s is unchanged
+    s = '--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    result = ioc_fanger.fang(s)
+    assert result == '--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+
+    # imagining s is part of a query string, make sure s is unchanged
+    s = '--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    result = ioc_fanger.fang(s)
+    assert result == '--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
