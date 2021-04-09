@@ -419,3 +419,13 @@ def test_issue_47():
     s = 'a. (b'
     result = ioc_fanger.fang(s)
     assert result == 'a. (b'
+
+
+def test_issue_53():
+    """Testing to make sure percent encoded URLs are properly fanged."""
+    s = 'https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    result = ioc_fanger.fang(s, debug=True)
+    assert (
+        result
+        == 'https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    )

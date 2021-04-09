@@ -167,8 +167,8 @@
         "replace": "/"
     },
     {
-        "find": "(https?)(?!s)\\S*?:",
-        "replace": "\\1:",
+        "find": "(https?)\\S{0,2}?://",
+        "replace": "\\1://",
         "regex": true
     },
     {
