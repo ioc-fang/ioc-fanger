@@ -442,3 +442,9 @@ def test_issue_53__urls_in_query_strings_fanged():
     s = '--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
     result = ioc_fanger.fang(s)
     assert result == '--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+
+
+def test_issue_52__escaped_periods():
+    s = 'foo 1<.>1<.>1<.>1 bar.'
+    result = ioc_fanger.fang(s)
+    assert result == 'foo 1.1.1.1 bar.'

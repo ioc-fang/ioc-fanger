@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.3.0] - 2021.04.17
+
+### Added
+
+- Adding fanging for `<.>` ([#52](https://github.com/ioc-fang/ioc-fanger/issues/52))
+
+
 ## [3.2.3] - 2021.04.09
 
 ### Fixed
