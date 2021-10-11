@@ -1,6 +1,6 @@
 # IOC Fanger
 
-Welcome to the documentation for the `ioc-fanger` package!
+Welcome to the documentation for the **ioc-fanger** package!
 This documentation is interactive, so feel free to edit the code and try it out!
 
 <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
