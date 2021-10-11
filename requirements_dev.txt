@@ -1,11 +1,12 @@
 black; python_version > '3.5'
 bump2version
 codecov
-democritus_file_system
-democritus_strings
+d8s-file-system
+d8s-strings
 flake8
 flake8-cognitive-complexity
 ipython
+mkdocs-material
 mypy
 pylint
 pytest
