@@ -2,7 +2,7 @@ site_name: Indicator Fanger/Defanger Docs
 site_url: ""
 theme:
   name: material
-  # custom_dir: docs/overrides
+  custom_dir: docs/overrides
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
