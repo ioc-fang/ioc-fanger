@@ -17,7 +17,7 @@ theme:
         icon: material/lightbulb
         name: Switch to light mode
       primary: deep orange
-      accent: indigo
+      accent: deep orange
   font: false
   icon:
     logo: material/magnify

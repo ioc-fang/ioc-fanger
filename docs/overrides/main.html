@@ -118,6 +118,7 @@
             greetings: banner,
             prompt: ps1,
             completionEscape: false,
+            convertLinks: false,
             completion: function (command, callback) {
               callback(pyconsole.complete(command).toJs()[0]);
             },
@@ -131,8 +132,10 @@
               },
             },
           });
-          interpreter("import micropip\nmicropip.install('ioc-fanger')");
-          clear_console();
+
+          // startup commands
+          interpreter("print('')\nimport micropip\nmicropip.install('ioc-fanger')\nprint('ioc-fanger succesfully installed 🎉')");
+
           window.term = term;
           pyconsole.stdout_callback = (s) => term.echo(s, { newline: false });
           pyconsole.stderr_callback = (s) => {
