@@ -25,6 +25,7 @@ theme:
     - navigation.instant
     - navigation.top
     - header.autohide
+    - navigation.tabs
     - toc.integrate
 markdown_extensions:
   - pymdownx.highlight

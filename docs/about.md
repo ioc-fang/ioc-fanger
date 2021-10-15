@@ -2,13 +2,6 @@
 
 Python package to fang and defang [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text.
 
-```python
-import ioc_fanger
-
-ioc_fanger.defang("example.com http://bad.com/phishing.php")  # example[.]com hXXp://bad[.]com/phishing[.]php
-ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")  # example.com http://bad.com/phishing.php
-```
-
 **Defanging** - converting indicators of compromise from the normal form (which can become links) to a form which cannot accidentally become a link:
 
 `example.com => example[.]com`
