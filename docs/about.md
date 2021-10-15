@@ -1,10 +1,4 @@
-# IOC Fanger
-
-[![PyPi](https://img.shields.io/pypi/v/ioc_fanger.svg)](https://pypi.python.org/pypi/ioc_fanger)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/ioc-fanger)
-[![Travis CI](https://img.shields.io/travis/ioc-fang/ioc_fanger.svg)](https://travis-ci.org/ioc-fang/ioc_fanger)
-[![Codecov](https://codecov.io/gh/ioc-fang/ioc_fanger/branch/master/graph/badge.svg)](https://codecov.io/gh/ioc-fang/ioc_fanger)
-[![live demo](https://img.shields.io/badge/live%20demo-%E2%86%92-green)](http://ioc-fanger.hightower.space/)
+## About ioc-fanger
 
 Python package to fang and defang [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text.
 
@@ -26,3 +20,15 @@ ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")  # example.com 
 **What can it fang?**
 
 Just about everything. Check out the [tests](https://github.com/ioc-fang/ioc_fanger/blob/master/tests/test_ioc_fanger.py) to see some examples of what this package can handle.
+
+## Feedback
+
+If you have any ideas to improve this package, please [raise an issue](https://github.com/ioc-fang/ioc-fanger/issues)!
+
+## Other Helpful Projects
+
+If you are working with indicators of compromise (a.k.a. observables), you may find the [ioc-finder](https://github.com/fhightower/ioc-finder) project helpful. The ioc-finder project parses indicators of compromise from text (using grammars).
+
+## Credits
+
+We created this package using [Cookiecutter](https://github.com/audreyr/cookiecutter) and the [fhightower/python-project-template](https://github.com/fhightower/python-project-template) project template.

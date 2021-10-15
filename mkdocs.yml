@@ -25,7 +25,7 @@ theme:
     - navigation.instant
     - navigation.top
     - header.autohide
-    - navigation.tabs
+    - toc.integrate
 markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
@@ -37,3 +37,5 @@ markdown_extensions:
       permalink: true
 nav:
     - Home: index.md
+    - About: about.md
+    - Quick Start: quick-start.md
