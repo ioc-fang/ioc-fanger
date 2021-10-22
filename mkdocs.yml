@@ -1,5 +1,7 @@
 site_name: Indicator Fanger/Defanger Docs
 site_url: ""
+repo_url: https://github.com/ioc-fang/ioc-fanger
+repo_name: ioc-fanger
 theme:
   name: material
   custom_dir: docs/overrides
