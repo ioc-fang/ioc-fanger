@@ -1,2 +1,2 @@
-click
-pyparsing
+click>8,<9
+pyparsing>=2.4.7,<3.0
