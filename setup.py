@@ -8,7 +8,6 @@ with open('README.md') as readme_file:
 
 requirements = [
     'Click',
-    'pyparsing'
 ]
 
 test_requirements = []
