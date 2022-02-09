@@ -12,7 +12,7 @@ DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./de
 
 def _get_data_from_file(file_path: str):
     """Get data from the given file path."""
-    with open(file_path, 'r') as f:
+    with open(file_path) as f:
         return json.loads(f.read())
 
 
@@ -40,17 +40,17 @@ def fang(text: str, debug=False):
     """Fang the indicators in the given text."""
     fanged_text = text
     if debug:
-        print('Starting text: {}'.format(fanged_text))
+        print(f'Starting text: {fanged_text}')
         print('-----')
 
     for mapping in fanging_mappings:
         if debug:
-            print('Mapping: {}'.format(mapping))
+            print(f'Mapping: {mapping}')
 
         fanged_text = _fang_text(mapping, fanged_text)
 
         if debug:
-            print('Text after mapping: {}'.format(fanged_text))
+            print(f'Text after mapping: {fanged_text}')
             print('-----')
 
     return fanged_text
