@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## Unreleased
 
+## [3.4.1] - 2022.02.23
+
 ### Fixed
 
 - IP address fanging so that we fang only comma separated numbers bordered by whitespace or the start/end of a line ([#71](https://github.com/ioc-fang/ioc-fanger/issues/61))
