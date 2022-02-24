@@ -20,10 +20,10 @@ This project uses [pytest-benchmark](https://pypi.org/project/pytest-benchmark/)
 
 By default, every time you run tests it will compare the new results with the existing results.
 
-If you need to update the benchmarks, open the `pyproject.toml` and replace all flags starting with  `--benchmark` with:
+If you need to update the benchmarks, open the `pyproject.toml` and replace all flags starting with `--benchmark` with:
 
 ```
---benchmark-autosave
+--benchmark-save=benchmark
 ```
 
-This will save a file .
+This will save a file in the `.benchmarks/` dir.
