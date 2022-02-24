@@ -9,3 +9,21 @@
 Python package to fang (`example[.]com => example.com`) and defang (`example.com => example[.]com`) [indicators of compromise](https://digitalguardian.com/blog/what-are-indicators-compromise) in text.
 
 Read more in our [interactive documentation](http://ioc-fanger.hightower.space/)!
+
+## Developer Docs
+
+For those working on or testing this library, here's some helpful tips.
+
+### Updating Benchmarks
+
+This project uses [pytest-benchmark](https://pypi.org/project/pytest-benchmark/) to test the performance impact of changes.
+
+By default, every time you run tests it will compare the new results with the existing results.
+
+If you need to update the benchmarks, open the `pyproject.toml` and replace all flags starting with  `--benchmark` with:
+
+```
+--benchmark-autosave
+```
+
+This will save a file .
