@@ -11,4 +11,4 @@ mypy>=0.910,<1.0
 pylint>=2.9.6,<3.0
 pytest-benchmark>=3.4.1,<4.0
 pytest-cov>=2.12.1,<4.0
-pytest>=6.2.4,<7.0
+pytest>=7.0.1,<8.0
