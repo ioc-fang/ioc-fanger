@@ -4,8 +4,8 @@ import os
 
 import ioc_fanger
 
-SAMPLE_TEXT_FANGED_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sample_text_fanged.txt'))
-SAMPLE_TEXT_DEFANGED_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), 'sample_text_defanged.txt'))
+SAMPLE_TEXT_FANGED_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "sample_text_fanged.txt"))
+SAMPLE_TEXT_DEFANGED_FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "sample_text_defanged.txt"))
 
 with open(SAMPLE_TEXT_FANGED_FILE_PATH) as f:
     SAMPLE_TEXT_FANGED = f.read()
