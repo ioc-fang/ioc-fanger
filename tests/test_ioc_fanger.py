@@ -406,45 +406,45 @@ Best Regards,"""
 
 
 def test_issue_46():
-    s = 'div><div><br></div><div>hxxp://zeplin[.]atwebpages[.]com/inter[.]php</div><'
+    s = "div><div><br></div><div>hxxp://zeplin[.]atwebpages[.]com/inter[.]php</div><"
     result = ioc_fanger.fang(s)
-    assert result == 'div><div><br></div><div>http://zeplin.atwebpages.com/inter.php</div><'
+    assert result == "div><div><br></div><div>http://zeplin.atwebpages.com/inter.php</div><"
 
 
 def test_issue_47():
-    s = 'a. [b'
+    s = "a. [b"
     result = ioc_fanger.fang(s)
-    assert result == 'a. [b'
+    assert result == "a. [b"
 
-    s = 'a. (b'
+    s = "a. (b"
     result = ioc_fanger.fang(s)
-    assert result == 'a. (b'
+    assert result == "a. (b"
 
 
 def test_issue_53__percent_encoded_urls_fanged_properly():
     """Testing to make sure percent encoded URLs are properly fanged."""
-    s = 'https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    s = "https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip"
     result = ioc_fanger.fang(s)
     assert (
         result
-        == 'https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+        == "https://asf.goole.com/mail?url=http%3A%2F%2Ffreasdfuewriter.com%2Fcs%2Fimage%2FCommerciaE.jpg&t=1575955624&ymreqid=733bc9eb-e8f-34cb-1cb5-120010019e00&sig=x2Pa2oOYxanG52s4vyCEFg--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip"
     )
 
 
 def test_issue_53__urls_in_query_strings_fanged():
     """Make sure URLs in query strings are properly fanged."""
     # imagining s is part of a query string, make sure s is unchanged
-    s = '--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    s = "--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip"
     result = ioc_fanger.fang(s)
-    assert result == '--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    assert result == "--~Chttp://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip"
 
     # imagining s is part of a query string, make sure s is unchanged
-    s = '--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    s = "--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip"
     result = ioc_fanger.fang(s)
-    assert result == '--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip'
+    assert result == "--~Chttps://uniddloos.zddfdd.org/CBA0019_file_00002_pdf.zip"
 
 
 def test_issue_52__escaped_periods():
-    s = 'foo 1<.>1<.>1<.>1 bar.'
+    s = "foo 1<.>1<.>1<.>1 bar."
     result = ioc_fanger.fang(s)
-    assert result == 'foo 1.1.1.1 bar.'
+    assert result == "foo 1.1.1.1 bar."
