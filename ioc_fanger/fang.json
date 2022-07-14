@@ -140,13 +140,13 @@
         "regex": true
     },
     {
-        "find": "([^a-zA-Z]|\\b)[a-zA-Z0-9!@#$%^&*](?!http)[a-zA-Z0-9!@#$%^&*]{4}:\/\/",
-        "replace": "\\1https://",
+        "find": "\\bx{4}:\/\/",
+        "replace": "http://",
         "regex": true
     },
     {
-        "find": "([^a-zA-Z]|\\b)[a-zA-Z0-9!@#$%^&*]{4}:\/\/",
-        "replace": "\\1http://",
+        "find": "\\b(?:x{5}|x{4}s):\/\/",
+        "replace": "https://",
         "regex": true
     },
     {
@@ -165,11 +165,6 @@
     {
         "find": "\\/",
         "replace": "/"
-    },
-    {
-        "find": "(https?)\\S{0,2}?://",
-        "replace": "\\1://",
-        "regex": true
     },
     {
         "find": "^.",
