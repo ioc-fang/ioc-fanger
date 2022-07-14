@@ -4,7 +4,12 @@ We will document all notable changes to this project in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [4.0.0] - Unreleased
+## [4.0.0] - 2022.07.14
+
+### Fixed
+
+- Refined parsing so schemes like `ldap` are properly preserved
+  - We have dropped support for fanging certain, uncommon fanging strategies like `http!://example.com/test.php`; if you are regularly seeing this fanging strategy used and would like this to be readded, please raise an issue
 
 ### Removed
 

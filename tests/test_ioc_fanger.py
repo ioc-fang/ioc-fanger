@@ -241,23 +241,6 @@ def test_odd_schemes():
     s = "(https)://example.com/test.php"
     assert ioc_fanger.fang(s) == "https://example.com/test.php"
 
-    s = "http!://example.com/test.php"
-    assert ioc_fanger.fang(s) == "https://example.com/test.php"
-    s = "https!://example.com/test.php"
-    assert ioc_fanger.fang(s) == "https://example.com/test.php"
-    s = "https@://example.com/test.php"
-    assert ioc_fanger.fang(s) == "https://example.com/test.php"
-    s = "httpA://example.com/test.php"
-    assert ioc_fanger.fang(s) == "https://example.com/test.php"
-    s = "https&://example.com/test.php"
-    assert ioc_fanger.fang(s) == "https://example.com/test.php"
-
-    s = "https&://example.com/test.php https://example.com/test.php http&://example.com/test.php xxXpA://example.com/test.php"
-    assert (
-        ioc_fanger.fang(s)
-        == "https://example.com/test.php https://example.com/test.php https://example.com/test.php https://example.com/test.php"
-    )
-
     s = "hxxps[://]example[.]com/test[.]html"
     assert ioc_fanger.fang(s) == "https://example.com/test.html"
 
@@ -448,3 +431,10 @@ def test_issue_52__escaped_periods():
     s = "foo 1<.>1<.>1<.>1 bar."
     result = ioc_fanger.fang(s)
     assert result == "foo 1.1.1.1 bar."
+
+
+def test_alternative_schemes_preserved():
+    s = "ldap://example.com/a"
+    result = ioc_fanger.fang(s)
+    assert result == 'ldap://example.com/a'
+
