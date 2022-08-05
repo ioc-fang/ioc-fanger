@@ -10,16 +10,10 @@
         "comment": "Fang a period or comma preceeded and postceded by parenthesis or square brackets."
     },
     {
-        "find": "( *[\\[\\]\\(\\{\\}]+ *):( *[\\[\\]\\(\\)\\{\\}]* *)",
-        "replace": ":",
-        "regex": true,
-        "comment": "Fang a colon preceded by parenthesis or square brackets (and possibly postceded by the same). A colon preceded by a close parenthesis is ignored (not fanged) to avoid pulling in false positives (e.g. to avoid fanging something like: 'Buy some milk (and eggs).')."
-    },
-    {
         "find": "( *[\\[\\]\\(\\)\\{\\}]{1} *):( *[\\[\\]\\(\\)\\{\\}]{1} *)",
         "replace": ":",
         "regex": true,
-        "comment": "Fang a colon postceded by parenthesis or square brackets (and possibly preceded by the same)."
+        "comment": "Fang a colon preceeded and postceded by parenthesis or square brackets."
     },
     {
         "find": "( *[\\[\\]\\(\\)\\{\\}]* *)DOT( *[\\[\\]\\(\\)\\{\\}]* *)",
