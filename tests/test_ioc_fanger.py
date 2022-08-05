@@ -90,11 +90,6 @@ def test_german_defanging():
     assert ioc_fanger.fang(s) == "me@example.com"
 
 
-def test_issue_16():
-    s = "www[.example.com"
-    assert ioc_fanger.fang(s) == "www.example.com"
-
-
 def test_issue_24():
     s = "seasharpee"
     assert ioc_fanger.fang(s) == "seasharpee"
@@ -126,17 +121,23 @@ def test_odd_brackets():
     s = "www].[example].[com"
     assert ioc_fanger.fang(s) == "www.example.com"
 
+
+def test__punctuation_with_single_bracket__not_changed():
+    """These examples used to be fanged, but we removed support for fanging punctuation with a single bracket around it in #49."""
     s = "www.[example.[com"
-    assert ioc_fanger.fang(s) == "www.example.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "www.]example.]com"
-    assert ioc_fanger.fang(s) == "www.example.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "www[.example[.com"
-    assert ioc_fanger.fang(s) == "www.example.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "www].example].com"
-    assert ioc_fanger.fang(s) == "www.example.com"
+    assert ioc_fanger.fang(s) == s
+
+    s = "www],example),com"
+    assert ioc_fanger.fang(s) == s
 
 
 def test_odd_misc():
@@ -356,8 +357,9 @@ def test_odd_hXXp_replacement():
     )
 
     # this is based on the text of an incident found here: https://app.threatconnect.com/auth/incident/incident.xhtml?incident=2952580883&owner=Technical%20Blogs%20and%20Reports#/
+    # update (aug 2022): this used to be fanged, but we are no longer fanging this
     s = "domain (www.example.com)."
-    assert ioc_fanger.fang(s) == "domain www.example.com)."
+    assert ioc_fanger.fang(s) == s
 
 
 def test_markdown_fanging():
@@ -372,20 +374,6 @@ def test_debug():
     # make sure using debug still works properly
     s = "192[.]168[.]4[.]2"
     assert ioc_fanger.fang(s, debug=True) == "192.168.4.2"
-
-
-def test_issue_34():
-    s = """[Researcher email address].
-
-Best Regards,"""
-    result = ioc_fanger.fang(s)
-    print(result)
-    assert (
-        result
-        == """[Researcher email address.
-
-Best Regards,"""
-    )
 
 
 def test_issue_46():
@@ -436,5 +424,4 @@ def test_issue_52__escaped_periods():
 def test_alternative_schemes_preserved():
     s = "ldap://example.com/a"
     result = ioc_fanger.fang(s)
-    assert result == 'ldap://example.com/a'
-
+    assert result == "ldap://example.com/a"
