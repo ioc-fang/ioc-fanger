@@ -16,16 +16,16 @@ def test_systematic_period_square_brackets():
     assert ioc_fanger.fang(s) == "foo.com"
 
     s = "foo[.com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "foo.[com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "foo].com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "foo.]com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
 
 def test_systematic_period_curly_braces():
@@ -39,19 +39,19 @@ def test_systematic_period_curly_braces():
     assert ioc_fanger.fang(s) == "foo.com"
 
     s = "foo{.com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "foo.{com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "foo}.}com"
     assert ioc_fanger.fang(s) == "foo.com"
 
     s = "foo}.com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
     s = "foo.}com"
-    assert ioc_fanger.fang(s) == "foo.com"
+    assert ioc_fanger.fang(s) == s
 
 
 def test_systematic_dot():

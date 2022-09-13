@@ -4,6 +4,13 @@ We will document all notable changes to this project in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Simplifying regexes which find surrounding brackets to only fang characters surrounded by brackets on both sides ([#85](https://github.com/ioc-fang/ioc-fanger/pull/85))
+    - e.g. With previous versions of this library, this: `a.]b` was fanged as: `a.b`. Now, `a.]b` will not be changed when fanging.
+
 ## [4.0.0] - 2022.07.14
 
 ### Fixed
