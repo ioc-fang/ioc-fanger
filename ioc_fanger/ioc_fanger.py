@@ -6,6 +6,8 @@ import re
 
 import click
 
+from ioc_fanger.regexes_fang import fang_mappings
+
 FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
 DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
 
@@ -17,11 +19,21 @@ def _get_data_from_file(file_path: str):
 
 
 # get the mappings to fang/defang indicators of compromise
-fanging_mappings = _get_data_from_file(FANG_DATA_PATH)
+old_fanging_mappings = _get_data_from_file(FANG_DATA_PATH)
 defanging_mappings = _get_data_from_file(DEFANG_DATA_PATH)
 
 
 def _fang_text(mapping, text: str) -> str:
+    def _replace(matches):
+        """Replace matches.groups(1) with mapping['replace']."""
+        # we assume every regex will match a group and that group(1) is the one to be replaced
+        return matches.group(0).replace(matches.group(1), mapping["replace"])
+
+    fanged_text = re.sub(mapping["find"], _replace, text)
+    return fanged_text
+
+
+def _old_fang_text(mapping, text: str) -> str:
     find_value = mapping["find"]
     if not mapping.get("regex"):
         find_value = re.escape(find_value)
@@ -43,11 +55,21 @@ def fang(text: str, debug=False):
         print(f"Starting text: {fanged_text}")
         print("-----")
 
-    for mapping in fanging_mappings:
+    for mapping in fang_mappings:
         if debug:
             print(f"Mapping: {mapping}")
 
         fanged_text = _fang_text(mapping, fanged_text)
+
+        if debug:
+            print(f"Text after mapping: {fanged_text}")
+            print("-----")
+
+    for mapping in old_fanging_mappings:
+        if debug:
+            print(f"Mapping: {mapping}")
+
+        fanged_text = _old_fang_text(mapping, fanged_text)
 
         if debug:
             print(f"Text after mapping: {fanged_text}")

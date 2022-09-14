@@ -1,21 +1,5 @@
 [
     {
-        "find": "[://]",
-        "replace": "://"
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}\\\\]{1} *)[\\.\\,]([\\[\\]\\(\\)\\{\\}]{1} *)",
-        "replace": ".",
-        "regex": true,
-        "comment": "Fang a period or comma preceeded and postceded by parenthesis or square brackets."
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]{1} *):( *[\\[\\]\\(\\)\\{\\}]{1} *)",
-        "replace": ":",
-        "regex": true,
-        "comment": "Fang a colon preceeded and postceded by parenthesis or square brackets."
-    },
-    {
         "find": "( *[\\[\\]\\(\\)\\{\\}]* *)DOT( *[\\[\\]\\(\\)\\{\\}]* *)",
         "replace": ".",
         "regex": true,
@@ -44,12 +28,6 @@
     },
     {
         "find": "( *[\\[\\]\\(\\)\\{\\}]* *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]+ *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": " +@ +",
         "replace": "@",
         "regex": true,
         "case_sensitive": true
