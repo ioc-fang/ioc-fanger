@@ -6,6 +6,8 @@ import re
 
 import click
 
+from ioc_fanger.regexes_defang import defang_mappings
+
 FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
 DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
 
@@ -18,7 +20,6 @@ def _get_data_from_file(file_path: str):
 
 # get the mappings to fang/defang indicators of compromise
 fanging_mappings = _get_data_from_file(FANG_DATA_PATH)
-defanging_mappings = _get_data_from_file(DEFANG_DATA_PATH)
 
 
 def _fang_text(mapping, text: str) -> str:
@@ -75,14 +76,12 @@ def defang(text):
     """Defang the indicators in the given text."""
     defanged_text = text
 
-    for mapping in defanging_mappings:
+    for mapping in defang_mappings:
 
         def _replace(matches):
             """Replace matches.groups(1) with mapping['replace']."""
-            try:
-                return matches.group(0).replace(matches.group(1), mapping["replace"])
-            except IndexError:
-                return matches.group(0).replace(mapping["find"], mapping["replace"])
+            # we assume every regex will match a group and that group(1) is the one to be replaced
+            return matches.group(0).replace(matches.group(1), mapping["replace"])
 
         defanged_text = re.sub(mapping["find"], _replace, defanged_text)
 
