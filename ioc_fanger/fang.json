@@ -1,31 +1,5 @@
 [
     {
-        "find": "( *[\\[\\]\\(\\{\\}]+ *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]* *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]* *)(?:@|(?:at)|(?:et)|(?:arroba))( *[\\]\\(\\)\\{\\}]+ *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]+ *)(?:(?:AT)|(?:ET)|(?:ARROBA))( *[\\[\\]\\(\\)\\{\\}]* *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true,
-        "comment": "Fang 'AT', 'ET', or 'ARROBA' preceded by a parenthesis/square brackets and possibly postceded by the same."
-    },
-    {
-        "find": "( *[\\[\\]\\(\\)\\{\\}]* *)(?:(?:AT)|(?:ET)|(?:ARROBA))( *[\\[\\]\\(\\)\\{\\}]+ *)",
-        "replace": "@",
-        "regex": true,
-        "case_sensitive": true,
-        "comment": "Fang 'AT', 'ET', or 'ARROBA' postceded by a parenthesis/square brackets and possibly preceded by the same."
-    },
-    {
         "find": "([a-z]) *(?:AT|ET|ARROBA) *([a-z])",
         "replace": "\\1@\\2",
         "regex": true,

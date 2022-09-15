@@ -47,6 +47,30 @@ fang_patterns = [
         "replace": ".",
     },
     {
+        # Fang any of the words in the middle of the regex preceded (and perhaps postceded) by any kind of bracket
+        "find": r"((\ *[\[\]\(\{\}]+\ *)(?:@|(?:at)|(?:et)|(?:arroba))(\ *[\]\(\)\{\}]*\ *))",
+        "replace": "@",
+        "case_sensitive": True,
+    },
+    {
+        # Fang any of the words in the middle of the regex postceded (and perhaps preceded) by any kind of bracket
+        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:@|(?:at)|(?:et)|(?:arroba))(\ *[\]\(\)\{\}]+\ *))",
+        "replace": "@",
+        "case_sensitive": True,
+    },
+    {
+        # Fang 'AT', 'ET', or 'ARROBA' preceded by a parenthesis/square brackets and possibly postceded by the same.
+        "find": r"((\ *[\[\]\(\)\{\}]+\ *)(?:(?:AT)|(?:ET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]*\ *))",
+        "replace": "@",
+        "case_sensitive": True,
+    },
+    {
+        # Fang 'AT', 'ET', or 'ARROBA' postceded by a parenthesis/square brackets and possibly preceded by the same.
+        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:(?:AT)|(?:rET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]+\ *))",
+        "replace": "@",
+        "case_sensitive": True,
+    },
+    {
         # Fang "www" surrounded by any kind of bracket
         "find": r"(([\[\]\(\)\{\}]{1}\ *)www(\ *[\[\]\(\)\{\}]{1}\ *))",
         "replace": "www",
@@ -61,18 +85,9 @@ fang_patterns = [
         "find": r"(\ +@\ +)",
         "replace": "@",
     },
-    {
-        "find": r"(\\/)",
-        "replace": "/"
-    },
-    {
-        "find": r"(\^.)",
-        "replace": "."
-    },
-    {
-        "find": r"(\<\.\>)",
-        "replace": "."
-    }
+    {"find": r"(\\/)", "replace": "/"},
+    {"find": r"(\^.)", "replace": "."},
+    {"find": r"(\<\.\>)", "replace": "."},
 ]
 
 fang_mappings = []
@@ -86,4 +101,3 @@ for i in fang_patterns:
 
     mapping = {"find": compile(i["find"], flags), "replace": i["replace"]}
     fang_mappings.append(mapping)
-
