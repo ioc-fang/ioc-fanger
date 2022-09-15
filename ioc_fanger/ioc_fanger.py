@@ -9,7 +9,6 @@ import click
 from ioc_fanger.regexes_defang import defang_mappings
 
 FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
-DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
 
 
 def _get_data_from_file(file_path: str):
@@ -77,13 +76,7 @@ def defang(text):
     defanged_text = text
 
     for mapping in defang_mappings:
-
-        def _replace(matches):
-            """Replace matches.groups(1) with mapping['replace']."""
-            # we assume every regex will match a group and that group(1) is the one to be replaced
-            return matches.group(0).replace(matches.group(1), mapping["replace"])
-
-        defanged_text = re.sub(mapping["find"], _replace, defanged_text)
+        defanged_text = re.sub(mapping["find"], mapping["replace"], defanged_text)
 
     return defanged_text
 
