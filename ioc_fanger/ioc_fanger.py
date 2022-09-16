@@ -9,6 +9,7 @@ from ioc_fanger.regexes_fang import fang_mappings
 def fang(text: str, debug=False):
     """Fang the indicators in the given text."""
     fanged_text = text
+
     if debug:
         print(f"Starting text: {fanged_text}")
         print("-----")
@@ -17,7 +18,7 @@ def fang(text: str, debug=False):
         if debug:
             print(f"Mapping: {mapping}")
 
-        fanged_text = mapping["find"].sub(mapping["replace"], text)
+        fanged_text = mapping["find"].sub(mapping["replace"], fanged_text)
 
         if debug:
             print(f"Text after mapping: {fanged_text}")
