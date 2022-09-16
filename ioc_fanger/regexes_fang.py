@@ -1,4 +1,4 @@
-from re import IGNORECASE, VERBOSE, compile
+import re
 
 # NOTE: Throughout this file, any regex matching a space (e.g. ` *`) must be escaped (e.g. `\ *`) b/c...
 # we are compiling in verbose mode (which removes unescaped whitespace)
@@ -152,12 +152,11 @@ fang_patterns = [
 fang_mappings = []
 
 for i in fang_patterns:
-    flags = VERBOSE
+    flags = re.VERBOSE
 
     # set all regexes to IGNORECASE by default
     if "case_sensitive" not in i:
-        flags = flags | IGNORECASE
+        flags = flags | re.IGNORECASE
 
-    mapping = {"find": compile(i["find"], flags), "replace": i["replace"]}
+    mapping = {"find": re.compile(i["find"], flags), "replace": i["replace"]}
     fang_mappings.append(mapping)
-
