@@ -29,7 +29,7 @@ setup(
         ]
     },
     include_package_data=True,
-    package_data={'ioc_fanger': ['fang.json', 'defang.json']},
+    package_data={'ioc_fanger': ['fang.json']},
     install_requires=requirements,
     license='MIT',
     zip_safe=True,
