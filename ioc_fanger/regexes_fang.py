@@ -3,15 +3,6 @@ from re import IGNORECASE, VERBOSE, compile
 # NOTE: Throughout this file, any regex matching a space (e.g. ` *`) must be escaped (e.g. `\ *`) b/c...
 # we are compiling in verbose mode (which removes unescaped whitespace)
 
-# workflow: pull next regex out of fang.json and update it here
-# - make string raw
-# - escape whitespaces
-# - escape regex if it doesn't have the "regex" key
-# - replace \\ with \
-# - remove unneeded keys
-# - make sure regex returns a single match group
-# - make sure there's a comment
-
 fang_patterns = [
     {
         # "[://]" -> "://"
@@ -66,8 +57,14 @@ fang_patterns = [
     },
     {
         # Fang 'AT', 'ET', or 'ARROBA' postceded by a parenthesis/square brackets and possibly preceded by the same.
-        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:(?:AT)|(?:rET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]+\ *))",
+        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:(?:AT)|(?:ET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]+\ *))",
         "replace": "@",
+        "case_sensitive": True,
+    },
+    {
+        # Fang 'AT', 'ET', or 'ARROBA' preceded by a lower-cased character (and possibly spaces)
+        "find": r"([a-z])\ *(?:AT|ET|ARROBA)\ *([a-z])",
+        "replace": r"\1@\2",
         "case_sensitive": True,
     },
     {
@@ -76,22 +73,54 @@ fang_patterns = [
         "replace": "www",
     },
     {
-        "find": r"(:\/\/\/+)",
+        "find": r":\/\/\/+",
         "replace": "://",
     },
     {
-        "find": r"(:\/\/ *)",
+        "find": r":\/\/ *",
         "replace": "://",
     },
     {
-        "find": r"(: +\/\/)",
+        "find": r": +\/\/",
         "replace": "://",
     },
     {
+        # Fang "https?" preceded by a parenthesis/square brackets and possibly postceded by the same.
+        # We don't fang closing brackets before "https?" b/c this not properly handle markdown links...
+        # e.g. "[a](https://example.com)" would become "[ahttps://example.com" which is not ideal
+        "find": r"(?:[\[\(\{]+\ *)htt(ps?)(?:\ *[\[\]\(\)\{\}]*\ *)",
+        "replace": r"htt\1",
+    },
+    {
+        # Fang "https?" postceded by a parenthesis/square brackets and possibly preceded by the same.
+        "find": r"(?:[\[\]\(\)\{\}]*\ *)htt(ps?)(?:\ *[\[\]\(\)\{\}]+\ *)",
+        "replace": r"htt\1",
+    },
+    {
+        # The [^.] bit at the end of this regex makes sure that we are only replacing h\S\Sps? that are followed by something other than a period (so as not to change part of a domain name (see the `test_odd_hXXp_replacement` function in `test_ioc_fanger.py`))
+        "find": r"h[xA-Z]{2}(ps?[^.])",
+        "replace": r"htt\1",
+        "case_sensitive": True,
+    },
+    {
+        "find": r"htt(ps?)\/",
+        "replace": r"htt\1:/",
+    },
+    {
+        "find": r"(https?:\/\/)\ *",
+        "replace": r"\1",
+    },
+    {
+        "find": r"(https?)\ *:",
+        "replace": r"\1:",
+    },
+    {
+        # "xxxx://" -> "http://"
         "find": r"\b(x{4}:\/\/)",
         "replace": "http://",
     },
     {
+        # "xxxx[xs]://" -> "https://"
         "find": r"\b((?:x{5}|x{4}s):\/\/)",
         "replace": "https://",
     },
@@ -105,13 +134,19 @@ fang_patterns = [
         "find": r"(\ +@\ +)",
         "replace": "@",
     },
+    {
+        # Fang any ip address-esque item with commas between the numbers to have "." between the numbers
+        "find": r"(?:^|(?<=\s))([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})(?=\s|$)",
+        "replace": r"\1.\2.\3.\4",
+    },
     {"find": r"(\\/)", "replace": "/"},
     {"find": r"(\^.)", "replace": "."},
     {"find": r"(\<\.\>)", "replace": "."},
     {
+        # "\." -> "."
         "find": r"(\\.)",
-        "replace": "."
-    }
+        "replace": ".",
+    },
 ]
 
 fang_mappings = []
@@ -125,3 +160,4 @@ for i in fang_patterns:
 
     mapping = {"find": compile(i["find"], flags), "replace": i["replace"]}
     fang_mappings.append(mapping)
+
