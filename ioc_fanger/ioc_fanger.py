@@ -76,7 +76,7 @@ def defang(text):
     defanged_text = text
 
     for mapping in defang_mappings:
-        defanged_text = re.sub(mapping["find"], mapping["replace"], defanged_text)
+        defanged_text = mapping["find"].sub(mapping["replace"], defanged_text)
 
     return defanged_text
 
