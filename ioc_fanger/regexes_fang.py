@@ -76,6 +76,26 @@ fang_patterns = [
         "replace": "www",
     },
     {
+        "find": r"(:\/\/\/+)",
+        "replace": "://",
+    },
+    {
+        "find": r"(:\/\/ *)",
+        "replace": "://",
+    },
+    {
+        "find": r"(: +\/\/)",
+        "replace": "://",
+    },
+    {
+        "find": r"\b(x{4}:\/\/)",
+        "replace": "http://",
+    },
+    {
+        "find": r"\b((?:x{5}|x{4}s):\/\/)",
+        "replace": "https://",
+    },
+    {
         # Remove brackets around "-"
         "find": r"(\[-\])",
         "replace": "-",
@@ -88,6 +108,10 @@ fang_patterns = [
     {"find": r"(\\/)", "replace": "/"},
     {"find": r"(\^.)", "replace": "."},
     {"find": r"(\<\.\>)", "replace": "."},
+    {
+        "find": r"(\\.)",
+        "replace": "."
+    }
 ]
 
 fang_mappings = []
