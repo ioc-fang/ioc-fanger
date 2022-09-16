@@ -1,4 +1,4 @@
-from re import VERBOSE, compile
+import re
 
 defang_patterns = [
     {
@@ -18,4 +18,4 @@ defang_patterns = [
     {"find": r"(?<=\S)(@)(?=\S)", "replace": "(at)"},
 ]
 
-defang_mappings = [{"find": compile(i["find"], VERBOSE), "replace": i["replace"]} for i in defang_patterns]
+defang_mappings = [{"find": re.compile(i["find"], re.VERBOSE), "replace": i["replace"]} for i in defang_patterns]
