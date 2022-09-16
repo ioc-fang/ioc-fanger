@@ -1,9 +1,11 @@
 import re
+from typing import List
 
 # NOTE: Throughout this file, any regex matching a space (e.g. ` *`) must be escaped (e.g. `\ *`) b/c...
 # we are compiling in verbose mode (which removes unescaped whitespace)
 
-fang_patterns = [
+# The type hint for fang_patterns is required to make mypy happy (to prevent "Unsupported right operand type for in ("object")")
+fang_patterns: List = [
     {
         # "[://]" -> "://"
         "find": r"(\[:\/\/\])",
@@ -97,7 +99,9 @@ fang_patterns = [
         "replace": r"htt\1",
     },
     {
-        # The [^.] bit at the end of this regex makes sure that we are only replacing h\S\Sps? that are followed by something other than a period (so as not to change part of a domain name (see the `test_odd_hXXp_replacement` function in `test_ioc_fanger.py`))
+        # The [^.] bit at the end of this regex makes sure that we are only replacing h\S\Sps? that are...
+        # followed by something other than a period (so as not to change part of a domain name...
+        # (see the `test_odd_hXXp_replacement` function in `test_ioc_fanger.py`))
         "find": r"h[xA-Z]{2}(ps?[^.])",
         "replace": r"htt\1",
         "case_sensitive": True,
