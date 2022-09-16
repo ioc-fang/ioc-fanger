@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- (Internal) Moving regexes from json files to Python files for improved readability
+- (Internal) Moving regexes from json files to Python files for improved readability ([#50](https://github.com/ioc-fang/ioc-fanger/issues/50))
 
 ## [4.1.0] - 2022.09.13
 
