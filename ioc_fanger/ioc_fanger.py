@@ -1,24 +1,11 @@
 """Fang and defang indicators of compromise."""
 
-import json
-import os
 import re
 
 import click
 
+from ioc_fanger.regexes_defang import defang_mappings
 from ioc_fanger.regexes_fang import fang_mappings
-
-DEFANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./defang.json"))
-
-
-def _get_data_from_file(file_path: str):
-    """Get data from the given file path."""
-    with open(file_path) as f:
-        return json.loads(f.read())
-
-
-# get the mappings to fang/defang indicators of compromise
-defanging_mappings = _get_data_from_file(DEFANG_DATA_PATH)
 
 
 def _fang_text(mapping, text: str) -> str:
@@ -65,16 +52,8 @@ def defang(text):
     """Defang the indicators in the given text."""
     defanged_text = text
 
-    for mapping in defanging_mappings:
-
-        def _replace(matches):
-            """Replace matches.groups(1) with mapping['replace']."""
-            try:
-                return matches.group(0).replace(matches.group(1), mapping["replace"])
-            except IndexError:
-                return matches.group(0).replace(mapping["find"], mapping["replace"])
-
-        defanged_text = re.sub(mapping["find"], _replace, defanged_text)
+    for mapping in defang_mappings:
+        defanged_text = mapping["find"].sub(mapping["replace"], defanged_text)
 
     return defanged_text
 

@@ -28,8 +28,6 @@ setup(
             'defang=ioc_fanger.ioc_fanger:cli_defang'
         ]
     },
-    include_package_data=True,
-    package_data={'ioc_fanger': ['defang.json']},
     install_requires=requirements,
     license='MIT',
     zip_safe=True,
