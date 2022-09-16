@@ -1,53 +1,24 @@
 """Fang and defang indicators of compromise."""
 
-import json
-import os
-import re
-
 import click
 
 from ioc_fanger.regexes_defang import defang_mappings
-
-FANG_DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "./fang.json"))
-
-
-def _get_data_from_file(file_path: str):
-    """Get data from the given file path."""
-    with open(file_path) as f:
-        return json.loads(f.read())
-
-
-# get the mappings to fang/defang indicators of compromise
-fanging_mappings = _get_data_from_file(FANG_DATA_PATH)
-
-
-def _fang_text(mapping, text: str) -> str:
-    find_value = mapping["find"]
-    if not mapping.get("regex"):
-        find_value = re.escape(find_value)
-
-    flags = 0
-
-    if not mapping.get("case_sensitive"):
-        flags = re.IGNORECASE
-
-    fanged_text = re.sub(find_value, mapping["replace"], text, flags=flags)
-
-    return fanged_text
+from ioc_fanger.regexes_fang import fang_mappings
 
 
 def fang(text: str, debug=False):
     """Fang the indicators in the given text."""
     fanged_text = text
+
     if debug:
         print(f"Starting text: {fanged_text}")
         print("-----")
 
-    for mapping in fanging_mappings:
+    for mapping in fang_mappings:
         if debug:
             print(f"Mapping: {mapping}")
 
-        fanged_text = _fang_text(mapping, fanged_text)
+        fanged_text = mapping["find"].sub(mapping["replace"], fanged_text)
 
         if debug:
             print(f"Text after mapping: {fanged_text}")
