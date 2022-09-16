@@ -4,7 +4,8 @@ from typing import List
 # NOTE: Throughout this file, any regex matching a space (e.g. ` *`) must be escaped (e.g. `\ *`) b/c...
 # we are compiling in verbose mode (which removes unescaped whitespace)
 
-# The type hint for fang_patterns is required to make mypy happy (to prevent "Unsupported right operand type for in ("object")")
+# The type hint for fang_patterns is required to make mypy happy...
+# (to prevent "Unsupported right operand type for in ("object")")
 fang_patterns: List = [
     {
         # "[://]" -> "://"

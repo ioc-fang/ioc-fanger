@@ -1,16 +1,9 @@
 """Fang and defang indicators of compromise."""
 
-import re
-
 import click
 
 from ioc_fanger.regexes_defang import defang_mappings
 from ioc_fanger.regexes_fang import fang_mappings
-
-
-def _fang_text(mapping, text: str) -> str:
-    fanged_text = mapping["find"].sub(mapping["replace"], text)
-    return fanged_text
 
 
 def fang(text: str, debug=False):
@@ -24,7 +17,7 @@ def fang(text: str, debug=False):
         if debug:
             print(f"Mapping: {mapping}")
 
-        fanged_text = _fang_text(mapping, fanged_text)
+        fanged_text = mapping["find"].sub(mapping["replace"], text)
 
         if debug:
             print(f"Text after mapping: {fanged_text}")
