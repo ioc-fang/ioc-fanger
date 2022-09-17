@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [UNRELEASED]
 
+## [4.2.0] - 2022.09.17
+
 ### Changed
 
 - (Internal) Moving regexes from json files to Python files for improved readability ([#50](https://github.com/ioc-fang/ioc-fanger/issues/50))
