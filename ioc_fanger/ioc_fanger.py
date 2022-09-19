@@ -31,12 +31,13 @@ def fang(text: str, debug=False):
 @click.argument("text", required=False)
 def cli_fang(text):
     """CLI interface for fanging indicators."""
-    stdin_text = click.get_text_stream("stdin")
-
+    
     if text:
         fanged_text = fang(text)
         print(fanged_text)
-    elif stdin_text:
+        return
+    stdin_text = click.get_text_stream("stdin")
+    if stdin_text:
         for line in stdin_text:
             fanged_text = fang(line.rstrip("\n"))
             print(fanged_text)
@@ -56,12 +57,13 @@ def defang(text):
 @click.argument("text", required=False)
 def cli_defang(text):
     """CLI interface for defanging indicators."""
-    stdin_text = click.get_text_stream("stdin")
-
+    
     if text:
         defanged_text = defang(text)
         print(defanged_text)
-    elif stdin_text:
+        return
+    stdin_text = click.get_text_stream("stdin")
+    if stdin_text:
         for line in stdin_text:
             defanged_text = defang(line.rstrip("\n"))
             print(defanged_text)
