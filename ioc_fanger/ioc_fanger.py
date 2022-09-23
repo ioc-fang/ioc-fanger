@@ -60,6 +60,7 @@ def cli_defang(text):
         defanged_text = defang(text)
         print(defanged_text)
         return
+
     stdin_text = click.get_text_stream("stdin")
     if stdin_text:
         for line in stdin_text:
