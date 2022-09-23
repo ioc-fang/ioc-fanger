@@ -35,6 +35,7 @@ def cli_fang(text):
         fanged_text = fang(text)
         print(fanged_text)
         return
+
     stdin_text = click.get_text_stream("stdin")
     if stdin_text:
         for line in stdin_text:
