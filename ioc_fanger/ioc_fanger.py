@@ -31,7 +31,6 @@ def fang(text: str, debug=False):
 @click.argument("text", required=False)
 def cli_fang(text):
     """CLI interface for fanging indicators."""
-    
     if text:
         fanged_text = fang(text)
         print(fanged_text)
