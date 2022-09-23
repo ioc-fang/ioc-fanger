@@ -56,7 +56,6 @@ def defang(text):
 @click.argument("text", required=False)
 def cli_defang(text):
     """CLI interface for defanging indicators."""
-    
     if text:
         defanged_text = defang(text)
         print(defanged_text)
