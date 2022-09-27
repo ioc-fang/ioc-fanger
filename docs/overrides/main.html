@@ -2,8 +2,8 @@
 
 {% block libs %}
     {{ super() }}
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.asm.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.asm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
     <link
@@ -26,7 +26,7 @@
 
         async function main() {
           globalThis.pyodide = await loadPyodide({
-            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.21.3/full/",
+            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/",
           });
           let namespace = pyodide.globals.get("dict")();
           pyodide.runPython(
