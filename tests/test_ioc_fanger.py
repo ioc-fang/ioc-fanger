@@ -432,3 +432,7 @@ def test_pr_99__escaped_periods():
     result = ioc_fanger.fang(s)
     assert result == "HKLM\\SOFTWARE\\foo bar\\bing buzz boom\\b"
 
+    s = "foo$.bar foo\\.bar"
+    result = ioc_fanger.fang(s)
+    assert result == "foo$.bar foo.bar"
+
