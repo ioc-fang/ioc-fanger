@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [UNRELEASED]
 
+## [4.2.1] - 2022.09.27
+
+### Fixed
+
+- Fixed incorrect find regex producing overly broad fanging of any character preceeded with a `\` ([#99](https://github.com/ioc-fang/ioc-fanger/issues/99))
+
 ## [4.2.0] - 2022.09.17
 
 ### Changed

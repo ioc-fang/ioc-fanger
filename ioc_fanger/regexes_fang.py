@@ -149,7 +149,7 @@ fang_patterns: List = [
     {"find": r"(\<\.\>)", "replace": "."},
     {
         # "\." -> "."
-        "find": r"(\\.)",
+        "find": r"(\\\.)",
         "replace": ".",
     },
 ]

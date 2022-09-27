@@ -425,3 +425,14 @@ def test_alternative_schemes_preserved():
     s = "ldap://example.com/a"
     result = ioc_fanger.fang(s)
     assert result == "ldap://example.com/a"
+
+
+def test_pr_99__escaped_periods():
+    s = "HKLM\\SOFTWARE\\foo bar\\bing buzz boom\\b"
+    result = ioc_fanger.fang(s)
+    assert result == "HKLM\\SOFTWARE\\foo bar\\bing buzz boom\\b"
+
+    s = "foo$.bar foo\\.bar"
+    result = ioc_fanger.fang(s)
+    assert result == "foo$.bar foo.bar"
+
