@@ -2,8 +2,8 @@
 
 {% block libs %}
     {{ super() }}
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.asm.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.21.3/full/pyodide.asm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
     <link
@@ -23,10 +23,10 @@
         function sleep(s) {
           return new Promise((resolve) => setTimeout(resolve, s));
         }
-  
+
         async function main() {
           globalThis.pyodide = await loadPyodide({
-            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/",
+            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.21.3/full/",
           });
           let namespace = pyodide.globals.get("dict")();
           pyodide.runPython(
@@ -61,7 +61,7 @@
             await ready;
             return resolve;
           }
-  
+
           async function interpreter(command) {
             let unlock = await lock();
             term.pause();
@@ -113,7 +113,7 @@
             await sleep(10);
             unlock();
           }
-  
+
           let term = $("#terminal").terminal(interpreter, {
             greetings: banner,
             prompt: ps1,

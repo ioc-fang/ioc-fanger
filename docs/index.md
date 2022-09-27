@@ -26,7 +26,7 @@ ioc_fanger.defang("example.com http://bad.com/phishing.php")
 
 <div id="terminal"></div>
 
-This terminal uses [Pyodide](https://pyodide.org/en/stable/index.html) to provide a Python3.9 runtime in the browser using [WebAssembly](https://webassembly.org/). Enjoy!
+This terminal uses [Pyodide](https://pyodide.org/en/stable/index.html) to provide a Python3.10 runtime in the browser using [WebAssembly](https://webassembly.org/). Enjoy!
 
 ## Feedback
 
