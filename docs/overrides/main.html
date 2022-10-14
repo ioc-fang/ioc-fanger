@@ -23,7 +23,7 @@
         function sleep(s) {
           return new Promise((resolve) => setTimeout(resolve, s));
         }
-  
+
         async function main() {
           globalThis.pyodide = await loadPyodide({
             indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/",
@@ -61,7 +61,7 @@
             await ready;
             return resolve;
           }
-  
+
           async function interpreter(command) {
             let unlock = await lock();
             term.pause();
@@ -113,7 +113,7 @@
             await sleep(10);
             unlock();
           }
-  
+
           let term = $("#terminal").terminal(interpreter, {
             greetings: banner,
             prompt: ps1,
