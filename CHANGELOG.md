@@ -8,7 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 
-- Python 3.10 support
+- Python 3.10, 3.11, 3.12, 3.13, and 3.14 support
+- Python 3.14 is now the default for local development (Dockerfile, benchmark storage)
+
+### Removed
+
+- Support for Python 3.7, 3.8, and 3.9 (minimum is now 3.10)
 
 ## [4.2.1] - 2022.09.27
 
