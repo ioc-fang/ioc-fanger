@@ -1,4 +1,4 @@
-FROM python:3.10.7-buster
+FROM python:3.14-bookworm
 
 ENV PIP_NO_CACHE_DIR "true"
 
