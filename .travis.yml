@@ -1,8 +1,0 @@
-install:
-- pip install -r requirements_dev.txt
-- pip install -r requirements.txt
-language: python
-python: 3.7
-script:
-- pytest --cov=. --cov-report term-missing
-- codecov
