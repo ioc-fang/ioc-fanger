@@ -435,4 +435,3 @@ def test_pr_99__escaped_periods():
     s = "foo$.bar foo\\.bar"
     result = ioc_fanger.fang(s)
     assert result == "foo$.bar foo.bar"
-

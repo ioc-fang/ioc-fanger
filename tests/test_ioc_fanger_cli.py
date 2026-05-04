@@ -5,12 +5,9 @@ test_ioc_fanger
 Tests for `ioc_fanger` module.
 """
 
-import pytest
 from click.testing import CliRunner
 
 from ioc_fanger import ioc_fanger
-
-from .test_ioc_fanger import defanged_text, fanged_text
 
 
 def test_fang_cli(defanged_text, fanged_text):
