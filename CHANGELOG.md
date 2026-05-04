@@ -9,11 +9,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Python 3.10, 3.11, 3.12, 3.13, and 3.14 support
-- Python 3.14 is now the default for local development (Dockerfile, benchmark storage)
+- Python 3.14 is now the default for local development (benchmark storage)
+- macOS (`Darwin-CPython-3.14-64bit`) and Linux (`Linux-CPython-3.14-64bit`) benchmark baselines under `.benchmarks/`
+
+### Changed
+
+- Migrated from pip/setuptools to uv for dependency management and packaging
+- Switched build backend from setuptools to hatchling
+- Replaced flake8, black, isort, and pylint with ruff for linting and formatting
+- Switched PyPI publishing to trusted publishing (OIDC) — no more username/password secrets
+- Updated CI and docs to use uv throughout
 
 ### Removed
 
 - Support for Python 3.7, 3.8, and 3.9 (minimum is now 3.10)
+- `setup.py`, `setup.cfg`, and `mypy.ini` (configuration consolidated into `pyproject.toml`)
+- `bump2version` (versions are managed directly in `pyproject.toml` and `ioc_fanger/__init__.py`)
+- Docker-based local development; `uv` is now the supported way to test/lint/develop. Docker is retained only to generate and compare a Linux benchmark baseline that matches CI.
+- `requirements.txt` and `requirements_dev.txt` (use `uv sync --locked --group dev` to set up a dev environment)
 
 ## [4.2.1] - 2022.09.27
 

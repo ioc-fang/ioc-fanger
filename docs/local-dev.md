@@ -4,43 +4,51 @@
 
 ### Prerequisites
 
-If you want to test, lint, or explore ioc-fanger, make sure you have [docker][docker] and [docker-compose][docker-compose] installed (if you don't see: [installing docker][docker-install]).
+Install [uv](https://docs.astral.sh/uv/) and then set up your local environment with:
 
-Then you can use the **test**, **lint**, and **dev** docker compose services listed below!
+```shell
+uv sync --locked --group dev
+```
+
+`pyproject.toml` declares the dependency ranges and `uv.lock` pins resolved versions. Both files are kept in sync by `uv` and updated together by Dependabot.
 
 ### Test ioc-fanger 🧪
 
 To test ioc-fanger, run the following command from the root directory of the project:
 
 ```shell
-docker-compose run --rm test
+uv run pytest
 ```
 
-Typically, this command will run [pytest][pytest-link] on the project's test suite. To view the details of what this command does, take a look at the `test` service in the project's `docker-compose.yml` file.
+This runs [pytest][pytest-link] on the project's test suite.
 
 ### Lint ioc-fanger 🧹
 
-To lint ioc-fanger, run the following command from the root directory of the project:
+To lint ioc-fanger, run:
 
 ```shell
-docker-compose run --rm lint
+uv run ruff check ioc_fanger tests
+uv run ruff format --check ioc_fanger tests
+uv run mypy ioc_fanger tests
 ```
 
-Typically, this command will run linters on the project's code with the goal of improving code quality and catching bugs before we release them (you can read more about the benefits of linting [here][linting-intro]). To view the details of what this command does, take a look at the `lint` service in the project's `docker-compose.yml` file.
+To auto-fix lint issues and apply formatting, run:
+
+```shell
+uv run ruff check --fix ioc_fanger tests
+uv run ruff format ioc_fanger tests
+```
+
+You can read more about the benefits of linting [here][linting-intro].
 
 ### Explore ioc-fanger 🔭
 
-To explore ioc-fanger, you can drop into a "dev" environment which is an [IPython][ipython] shell with the project and all its requirements loaded. To do this, run the following command from the root directory of the project:
+To explore ioc-fanger interactively, drop into an [IPython][ipython] shell with the project and all its requirements loaded:
 
 ```shell
-docker-compose run --rm dev
+uv run ipython
 ```
 
-To see what this command does, take a look at the `dev` service in the project's `docker-compose.yml` file.
-
 [pytest-link]: https://docs.pytest.org/en/stable/
-[docker-compose]: https://docs.docker.com/compose/
-[docker-install]: https://docs.docker.com/get-docker/
-[docker]: https://www.docker.com/get-started
 [linting-intro]: https://dbader.org/blog/python-code-linting
 [ipython]: https://ipython.org/

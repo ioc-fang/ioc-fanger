@@ -4,11 +4,11 @@ The recommended means of installation is using [pip](https://pypi.python.org/pyp
 
 `pip install ioc-fanger`
 
-Alternatively, you can install ioc-fanger as follows:
+Alternatively, you can work with a local checkout as follows:
 
 ```shell
 git clone https://github.com/ioc-fang/ioc_fanger.git && cd ioc_fanger;
-python setup.py install --user;
+uv sync --locked --group dev
 ```
 
 ## Usage

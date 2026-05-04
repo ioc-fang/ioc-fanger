@@ -1,19 +1,90 @@
-[tool.black]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ioc_fanger"
+version = "4.2.1"
+description = "Python package to defang and fang indicators of compromise from text."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Floyd Hightower" }]
+keywords = [
+    "iocs",
+    "indicators of compromise",
+    "threat intelligence",
+    "malware",
+    "threat hunting",
+    "observables",
+    "fanging",
+    "defanging",
+    "fang",
+    "defang",
+    "refang",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "click>8,<9",
+]
+
+[project.scripts]
+fang = "ioc_fanger.ioc_fanger:cli_fang"
+defang = "ioc_fanger.ioc_fanger:cli_defang"
+
+[project.urls]
+Documentation = "https://github.com/ioc-fang/ioc-fanger"
+Source = "https://github.com/ioc-fang/ioc-fanger"
+Tracker = "https://github.com/ioc-fang/ioc-fanger/issues"
+PyPi = "https://pypi.org/project/ioc-fanger/"
+Changelog = "https://github.com/ioc-fang/ioc-fanger/blob/main/CHANGELOG.md"
+
+[dependency-groups]
+dev = [
+    "codecov>=2.1.11,<3.0",
+    "d8s-file-system>=0.10.0,<1.0",
+    "d8s-strings>=0.5.0,<1.0",
+    "hypothesis>=6.14.1,<7.0",
+    "ipython>=8.18.0,<10.0",
+    "mkdocs-material>=8.0.1,<10.0",
+    "mypy>=1.8.0,<2.0",
+    "pytest>=8.0.0,<9.0",
+    "pytest-benchmark>=4.0.0,<6.0",
+    "pytest-cov>=4.1.0,<7.0",
+    "ruff>=0.11.0,<0.12.0",
+]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["venv", ".venv"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["ioc_fanger"]
+
+[tool.ruff]
 line-length = 120
+target-version = "py310"
 
-[tool.isort]
-line_length = 120
-include_trailing_comma = true
+[tool.ruff.lint]
+select = ["E", "F", "I"]
 
-[tool.pylint."MESSAGES CONTROL"]
-max-line-length = 120
-disable = "C0114, R1705, C0103"
+[tool.ruff.lint.per-file-ignores]
+"ioc_fanger/__init__.py" = ["F401", "F403"]
+"tests/*" = ["E501"]
+
+[tool.mypy]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-addopts = "-vv --cov=. --cov-report term-missing --cov-fail-under 98 --benchmark-storage=.benchmarks/Linux-CPython-3.14-64bit/ --benchmark-compare=0001 --benchmark-compare-fail=mean:30% --benchmark-columns='mean,stddev,median,iqr,outliers'"
+addopts = "-vv --cov=. --cov-report term-missing --cov-fail-under 100"
 python_files = "tests/test_*.py"
-
-[build-system]
-requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4"]
-
-[tool.setuptools_scm]

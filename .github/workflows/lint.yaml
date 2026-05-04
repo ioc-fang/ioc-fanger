@@ -18,9 +18,12 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.13'
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
     - name: Install dependencies
-      run: |
-        python -m pip install -r requirements.txt
-        python -m pip install -r requirements_dev.txt
+      run: uv sync --locked --group dev
     - name: Lint
-      run: ./docker/lint.sh
+      run: |
+        uv run ruff check ioc_fanger tests
+        uv run ruff format --check ioc_fanger tests
+        uv run mypy ioc_fanger tests
