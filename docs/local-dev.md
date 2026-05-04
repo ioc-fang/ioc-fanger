@@ -41,12 +41,46 @@ uv run ruff format ioc_fanger tests
 
 You can read more about the benefits of linting [here][linting-intro].
 
+### Run the docs 📖
+
+To preview the documentation site locally with live reload, run:
+
+```shell
+uv run mkdocs serve
+```
+
+Then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
+
 ### Explore ioc-fanger 🔭
 
 To explore ioc-fanger interactively, drop into an [IPython][ipython] shell with the project and all its requirements loaded:
 
 ```shell
 uv run ipython
+```
+
+### Benchmarks 📈
+
+Benchmarks live in `tests/benchmarks.py` and are kept out of the default `pytest` run. Saved baselines for each platform live under `.benchmarks/` (e.g. `Darwin-CPython-3.14-64bit/0001_benchmark.json`, `Linux-CPython-3.14-64bit/0001_benchmark.json`).
+
+To **compare** against the macOS baseline locally:
+
+```shell
+uv run pytest -c "." --benchmark-storage=.benchmarks/Darwin-CPython-3.14-64bit/ --benchmark-compare=0001 --benchmark-compare-fail=mean:30% --benchmark-columns='mean,stddev,median,iqr,outliers' tests/benchmarks.py
+```
+
+To **regenerate** the macOS baseline:
+
+```shell
+uv run pytest -c "." --benchmark-storage=.benchmarks/ --benchmark-save=benchmark tests/benchmarks.py
+# then move the resulting file to .benchmarks/Darwin-CPython-3.14-64bit/0001_benchmark.json
+```
+
+Linux benchmarks must be generated/compared inside Docker so the environment matches CI. From the repo root:
+
+```shell
+docker compose run --rm test-benchmarks    # compare against the saved Linux baseline
+docker compose run --rm update-benchmarks  # regenerate the Linux baseline at .benchmarks/Linux-CPython-3.14-64bit/0001_benchmark.json
 ```
 
 [pytest-link]: https://docs.pytest.org/en/stable/
