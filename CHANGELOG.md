@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [UNRELEASED]
 
+### Fixed
+
+- Tightened the comma-separated IPv4 fanging regex to only match valid octets (0-255), reducing false positives such as `256,256,256,256` ([#93](https://github.com/ioc-fang/ioc-fanger/issues/93))
+
 ### Added
 
 - Python 3.10, 3.11, 3.12, 3.13, and 3.14 support
