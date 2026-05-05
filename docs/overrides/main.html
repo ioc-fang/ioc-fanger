@@ -2,9 +2,9 @@
 
 {% block libs %}
     {{ super() }}
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
-    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.asm.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.asm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/js/jquery.terminal.min.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.23.0/css/jquery.terminal.min.css"
@@ -26,13 +26,13 @@
 
         async function main() {
           globalThis.pyodide = await loadPyodide({
-            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/",
+            indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.0/full/",
           });
           let namespace = pyodide.globals.get("dict")();
           pyodide.runPython(
             `
               import sys
-              from pyodide import to_js
+              from pyodide.ffi import to_js
               from pyodide.console import PyodideConsole, repr_shorten, BANNER
               import __main__
               BANNER = "Welcome to the Pyodide terminal emulator 🐍\\n" + BANNER
@@ -42,7 +42,7 @@
               def clear_console():
                 pyconsole.buffer = []
           `,
-            namespace
+            { globals: namespace }
           );
           let repr_shorten = namespace.get("repr_shorten");
           let banner = namespace.get("BANNER");
@@ -95,7 +95,7 @@
                     })
                   );
                 }
-                if (pyodide.isPyProxy(value)) {
+                if (value instanceof pyodide.ffi.PyProxy) {
                   value.destroy();
                 }
               } catch (e) {
@@ -134,7 +134,7 @@
           });
 
           // startup commands
-          interpreter("print('')\nimport micropip\nmicropip.install('ioc-fanger')\nprint('ioc-fanger succesfully installed 🎉')");
+          interpreter("print('')\nimport micropip\nawait micropip.install('ioc-fanger')\nprint('ioc-fanger succesfully installed 🎉')");
 
           window.term = term;
           pyconsole.stdout_callback = (s) => term.echo(s, { newline: false });

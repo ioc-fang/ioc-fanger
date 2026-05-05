@@ -1,5 +1,9 @@
 version: '3.4'
 
+# Docker is intentionally minimal here: it exists to generate and compare a
+# Linux benchmark baseline in an environment that matches CI. For everyday
+# development (test/lint/dev shell), use uv directly — see docs/local-dev.md.
+
 services:
   _base:
     &base
@@ -8,38 +12,15 @@ services:
       context: .
     volumes:
       - ./:/code
-      - ~/.gitconfig:/root/.gitconfig
 
-  # a fully loaded development environment to test new code
-  dev:
+  test-benchmarks:
     <<: *base
-    command: ipython
+    # the `-c "."` prevents pytest from using the config specified in the pyproject.toml (which we don't want to use for benchmarks)
+    command: uv run pytest -c "." --benchmark-storage=.benchmarks/Linux-CPython-3.14-64bit/ --benchmark-compare=0001 --benchmark-compare-fail=mean:30% --benchmark-columns='mean,stddev,median,iqr,outliers' tests/benchmarks.py
 
-  mkdocs:
+  update-benchmarks:
     <<: *base
-    entrypoint: "mkdocs"
-    ports:
-      - "8000:8000"
-    command: ["serve", "--dev-addr=0.0.0.0:8000"]
-
-  bump-patch:
-    <<: *base
-    command: bumpversion patch
-
-  bump-minor:
-    <<: *base
-    command: bumpversion minor
-
-  bump-major:
-    <<: *base
-    command: bumpversion major
-
-  # run tests
-  test:
-    <<: *base
-    command: pytest
-
-  # run linters
-  lint:
-    <<: *base
-    entrypoint: ./docker/lint.sh
+    command: >
+      bash -c "
+        uv run pytest -c '.' --benchmark-storage=.benchmarks/ --benchmark-save=benchmark tests/benchmarks.py &&
+        mv .benchmarks/Linux-CPython-3.14-64bit/0002_benchmark.json .benchmarks/Linux-CPython-3.14-64bit/0001_benchmark.json"

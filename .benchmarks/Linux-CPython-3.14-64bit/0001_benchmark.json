@@ -1,26 +1,26 @@
 {
     "machine_info": {
-        "node": "e413bbdf30da",
+        "node": "b11ad92e8a56",
         "processor": "",
         "machine": "x86_64",
-        "python_compiler": "GCC 8.3.0",
+        "python_compiler": "GCC 12.2.0",
         "python_implementation": "CPython",
-        "python_implementation_version": "3.10.7",
-        "python_version": "3.10.7",
+        "python_implementation_version": "3.14.4",
+        "python_version": "3.14.4",
         "python_build": [
             "main",
-            "Sep 13 2022 14:42:12"
+            "Apr 22 2026 02:07:37"
         ],
         "release": "5.10.104-linuxkit",
         "system": "Linux",
         "cpu": {
-            "python_version": "3.10.7.final.0 (64 bit)",
+            "python_version": "3.14.4.final.0 (64 bit)",
             "cpuinfo_version": [
-                8,
+                9,
                 0,
                 0
             ],
-            "cpuinfo_version_string": "8.0.0",
+            "cpuinfo_version_string": "9.0.0",
             "arch": "X86_64",
             "bits": 64,
             "count": 2,
@@ -28,13 +28,13 @@
             "vendor_id_raw": "GenuineIntel",
             "brand_raw": "Intel(R) Core(TM) i7-5650U CPU @ 2.20GHz",
             "hz_advertised_friendly": "2.2000 GHz",
-            "hz_actual_friendly": "2.1984 GHz",
+            "hz_actual_friendly": "2.1976 GHz",
             "hz_advertised": [
                 2200000000,
                 0
             ],
             "hz_actual": [
-                2198358000,
+                2197566000,
                 0
             ],
             "stepping": 4,
@@ -112,26 +112,27 @@
                 "xtpr"
             ],
             "l3_cache_size": 4194304,
-            "l2_cache_size": 262144,
-            "l1_data_cache_size": 32768,
-            "l1_instruction_cache_size": 32768,
+            "l2_cache_size": 524288,
+            "l1_data_cache_size": 65536,
+            "l1_instruction_cache_size": 65536,
             "l2_cache_line_size": 256,
             "l2_cache_associativity": 6
         }
     },
     "commit_info": {
-        "id": "e29817b86a1a65f867d47d55a14e14323692b514",
-        "time": "2022-09-27T05:21:41-04:00",
-        "author_time": "2022-09-27T05:21:41-04:00",
-        "dirty": true,
-        "project": "ioc-fanger",
-        "branch": "66-update-py-version-support"
+        "id": "unknown",
+        "time": null,
+        "author_time": null,
+        "dirty": false,
+        "error": "FileNotFoundError(2, 'No such file or directory')",
+        "project": "code",
+        "branch": "(unknown)"
     },
     "benchmarks": [
         {
             "group": null,
             "name": "test_fanging__benchmark",
-            "fullname": "tests/test_benchmarks.py::test_fanging__benchmark",
+            "fullname": "code/tests/benchmarks.py::test_fanging__benchmark",
             "params": null,
             "param": null,
             "extra_info": {},
@@ -144,29 +145,29 @@
                 "warmup": false
             },
             "stats": {
-                "min": 0.04091784998308867,
-                "max": 0.04904508701292798,
-                "mean": 0.04457161265789815,
-                "stddev": 0.002203233724952647,
-                "rounds": 23,
-                "median": 0.04461559496121481,
-                "iqr": 0.0035297267459100112,
-                "q1": 0.0425575240078615,
-                "q3": 0.046087250753771514,
-                "iqr_outliers": 0,
-                "stddev_outliers": 9,
-                "outliers": "9;0",
-                "ld15iqr": 0.04091784998308867,
-                "hd15iqr": 0.04904508701292798,
-                "ops": 22.435804772767153,
-                "total": 1.0251470911316574,
+                "min": 0.030998078174889088,
+                "max": 0.03841246571391821,
+                "mean": 0.03270144495763816,
+                "stddev": 0.0017095783650058103,
+                "rounds": 32,
+                "median": 0.03255996946245432,
+                "iqr": 0.001172706251963973,
+                "q1": 0.03156860382296145,
+                "q3": 0.03274131007492542,
+                "iqr_outliers": 3,
+                "stddev_outliers": 3,
+                "outliers": "3;3",
+                "ld15iqr": 0.030998078174889088,
+                "hd15iqr": 0.03503405302762985,
+                "ops": 30.579688490689385,
+                "total": 1.046446238644421,
                 "iterations": 1
             }
         },
         {
             "group": null,
             "name": "test_defanging__benchmark",
-            "fullname": "tests/test_benchmarks.py::test_defanging__benchmark",
+            "fullname": "code/tests/benchmarks.py::test_defanging__benchmark",
             "params": null,
             "param": null,
             "extra_info": {},
@@ -179,26 +180,26 @@
                 "warmup": false
             },
             "stats": {
-                "min": 0.004402307036798447,
-                "max": 0.00857651699334383,
-                "mean": 0.005194336127412195,
-                "stddev": 0.0005549056565025102,
-                "rounds": 174,
-                "median": 0.005096632492495701,
-                "iqr": 0.000608645030297339,
-                "q1": 0.0048313059960491955,
-                "q3": 0.0054399510263465345,
-                "iqr_outliers": 5,
-                "stddev_outliers": 35,
-                "outliers": "35;5",
-                "ld15iqr": 0.004402307036798447,
-                "hd15iqr": 0.006451366993132979,
-                "ops": 192.51738344822854,
-                "total": 0.9038144861697219,
+                "min": 0.002306296955794096,
+                "max": 0.0066632977686822414,
+                "mean": 0.0026656036906392943,
+                "stddev": 0.0004553733145309724,
+                "rounds": 382,
+                "median": 0.0025331529323011637,
+                "iqr": 0.0002447799779474735,
+                "q1": 0.0024317698553204536,
+                "q3": 0.002676549833267927,
+                "iqr_outliers": 40,
+                "stddev_outliers": 38,
+                "outliers": "38;40",
+                "ld15iqr": 0.002306296955794096,
+                "hd15iqr": 0.003051463980227709,
+                "ops": 375.1495406131318,
+                "total": 1.0182606098242104,
                 "iterations": 1
             }
         }
     ],
-    "datetime": "2022-09-27T09:26:19.237706",
-    "version": "3.4.1"
+    "datetime": "2026-05-04T10:39:42.454259+00:00",
+    "version": "5.2.3"
 }

@@ -1,0 +1,93 @@
+{
+    "machine_info": {
+        "processor": "i386",
+        "machine": "x86_64",
+        "python_compiler": "Clang 14.0.0 (clang-1400.0.29.202)",
+        "python_implementation": "CPython",
+        "python_implementation_version": "3.14.2",
+        "python_version": "3.14.2",
+        "python_build": [
+            "main",
+            "Jan 30 2026 00:20:31"
+        ],
+        "release": "21.6.0",
+        "system": "Darwin"
+    },
+    "commit_info": {
+        "project": "ioc-fanger"
+    },
+    "benchmarks": [
+        {
+            "group": null,
+            "name": "test_fanging__benchmark",
+            "fullname": "ioc-fanger/tests/benchmarks.py::test_fanging__benchmark",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 0.018124441034160554,
+                "max": 0.15440403996035457,
+                "mean": 0.03534456810797565,
+                "stddev": 0.02746233410908133,
+                "rounds": 50,
+                "median": 0.02751545252976939,
+                "iqr": 0.01260832097614184,
+                "q1": 0.021683606028091162,
+                "q3": 0.034291927004233,
+                "iqr_outliers": 6,
+                "stddev_outliers": 4,
+                "outliers": "4;6",
+                "ld15iqr": 0.018124441034160554,
+                "hd15iqr": 0.05330720898928121,
+                "ops": 28.292890634426676,
+                "total": 1.7672284053987823,
+                "iterations": 1
+            }
+        },
+        {
+            "group": null,
+            "name": "test_defanging__benchmark",
+            "fullname": "ioc-fanger/tests/benchmarks.py::test_defanging__benchmark",
+            "params": null,
+            "param": null,
+            "extra_info": {},
+            "options": {
+                "disable_gc": false,
+                "timer": "perf_counter",
+                "min_rounds": 5,
+                "max_time": 1.0,
+                "min_time": 5e-06,
+                "warmup": false
+            },
+            "stats": {
+                "min": 0.0018859559786505997,
+                "max": 0.020803000952582806,
+                "mean": 0.0021912099547889523,
+                "stddev": 0.0009613974504102752,
+                "rounds": 508,
+                "median": 0.0019812029495369643,
+                "iqr": 0.00023556550149805844,
+                "q1": 0.0019147394923493266,
+                "q3": 0.002150304993847385,
+                "iqr_outliers": 68,
+                "stddev_outliers": 20,
+                "outliers": "20;68",
+                "ld15iqr": 0.0018859559786505997,
+                "hd15iqr": 0.0025167459971271455,
+                "ops": 456.3688649800405,
+                "total": 1.1131346570327878,
+                "iterations": 1
+            }
+        }
+    ],
+    "datetime": "2026-05-04T10:31:00.397788+00:00",
+    "version": "5.2.3"
+}

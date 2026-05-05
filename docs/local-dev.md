@@ -4,43 +4,85 @@
 
 ### Prerequisites
 
-If you want to test, lint, or explore ioc-fanger, make sure you have [docker][docker] and [docker-compose][docker-compose] installed (if you don't see: [installing docker][docker-install]).
+Install [uv](https://docs.astral.sh/uv/) and then set up your local environment with:
 
-Then you can use the **test**, **lint**, and **dev** docker compose services listed below!
+```shell
+uv sync --locked --group dev
+```
+
+`pyproject.toml` declares the dependency ranges and `uv.lock` pins resolved versions. Both files are kept in sync by `uv` and updated together by Dependabot.
 
 ### Test ioc-fanger 🧪
 
 To test ioc-fanger, run the following command from the root directory of the project:
 
 ```shell
-docker-compose run --rm test
+uv run pytest
 ```
 
-Typically, this command will run [pytest][pytest-link] on the project's test suite. To view the details of what this command does, take a look at the `test` service in the project's `docker-compose.yml` file.
+This runs [pytest][pytest-link] on the project's test suite.
 
 ### Lint ioc-fanger 🧹
 
-To lint ioc-fanger, run the following command from the root directory of the project:
+To lint ioc-fanger, run:
 
 ```shell
-docker-compose run --rm lint
+uv run ruff check ioc_fanger tests
+uv run ruff format --check ioc_fanger tests
+uv run mypy ioc_fanger tests
 ```
 
-Typically, this command will run linters on the project's code with the goal of improving code quality and catching bugs before we release them (you can read more about the benefits of linting [here][linting-intro]). To view the details of what this command does, take a look at the `lint` service in the project's `docker-compose.yml` file.
+To auto-fix lint issues and apply formatting, run:
+
+```shell
+uv run ruff check --fix ioc_fanger tests
+uv run ruff format ioc_fanger tests
+```
+
+You can read more about the benefits of linting [here][linting-intro].
+
+### Run the docs 📖
+
+To preview the documentation site locally with live reload, run:
+
+```shell
+uv run mkdocs serve
+```
+
+Then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
 ### Explore ioc-fanger 🔭
 
-To explore ioc-fanger, you can drop into a "dev" environment which is an [IPython][ipython] shell with the project and all its requirements loaded. To do this, run the following command from the root directory of the project:
+To explore ioc-fanger interactively, drop into an [IPython][ipython] shell with the project and all its requirements loaded:
 
 ```shell
-docker-compose run --rm dev
+uv run ipython
 ```
 
-To see what this command does, take a look at the `dev` service in the project's `docker-compose.yml` file.
+### Benchmarks 📈
+
+Benchmarks live in `tests/benchmarks.py` and are kept out of the default `pytest` run. Saved baselines for each platform live under `.benchmarks/` (e.g. `Darwin-CPython-3.14-64bit/0001_benchmark.json`, `Linux-CPython-3.14-64bit/0001_benchmark.json`).
+
+To **compare** against the macOS baseline locally:
+
+```shell
+uv run pytest -c "." --benchmark-storage=.benchmarks/Darwin-CPython-3.14-64bit/ --benchmark-compare=0001 --benchmark-compare-fail=mean:30% --benchmark-columns='mean,stddev,median,iqr,outliers' tests/benchmarks.py
+```
+
+To **regenerate** the macOS baseline:
+
+```shell
+uv run pytest -c "." --benchmark-storage=.benchmarks/ --benchmark-save=benchmark tests/benchmarks.py
+# then move the resulting file to .benchmarks/Darwin-CPython-3.14-64bit/0001_benchmark.json
+```
+
+Linux benchmarks must be generated/compared inside Docker so the environment matches CI. From the repo root:
+
+```shell
+docker compose run --rm test-benchmarks    # compare against the saved Linux baseline
+docker compose run --rm update-benchmarks  # regenerate the Linux baseline at .benchmarks/Linux-CPython-3.14-64bit/0001_benchmark.json
+```
 
 [pytest-link]: https://docs.pytest.org/en/stable/
-[docker-compose]: https://docs.docker.com/compose/
-[docker-install]: https://docs.docker.com/get-docker/
-[docker]: https://www.docker.com/get-started
 [linting-intro]: https://dbader.org/blog/python-code-linting
 [ipython]: https://ipython.org/

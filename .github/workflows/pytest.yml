@@ -10,12 +10,25 @@ on:
     branches: [ main ]
 
 jobs:
-  # run tests in Python3.14 on multiple OSes
-  build_multi_os:
+  build_smoke:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.14
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
+    - name: Build package
+      run: uv build
+
+  # run tests + benchmarks on macOS and Linux (Python 3.14)
+  build_bench_os:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest]
         python-version: ['3.14']
     steps:
     - uses: actions/checkout@v4
@@ -23,14 +36,37 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
     - name: Install dependencies
-      run: |
-        python -m pip install -r requirements.txt
-        python -m pip install -r requirements_dev.txt
+      run: uv sync --locked --group dev
     - name: Run pytest
       run: |
-        pytest
-        codecov
+        uv run pytest
+        uv run codecov
+        # run benchmark tests
+        uv run pytest -c "." --benchmark-storage=.benchmarks/${{ runner.os == 'macOS' && 'Darwin' || runner.os }}-CPython-${{ matrix.python-version }}-64bit/ --benchmark-compare=0001 --benchmark-compare-fail=mean:30% --benchmark-columns='mean,stddev,median,iqr,outliers' tests/benchmarks.py
+
+  # run tests on Windows to make sure the lib works (no benchmarks)
+  build_windows:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: ['3.14']
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
+    - name: Install dependencies
+      run: uv sync --locked --group dev
+    - name: Run pytest
+      run: |
+        uv run pytest
+        uv run codecov
 
   # run tests in linux on multiple versions of Python
   build_multi_py_versions:
@@ -45,11 +81,11 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
     - name: Install dependencies
-      run: |
-        python -m pip install -r requirements.txt
-        python -m pip install -r requirements_dev.txt
+      run: uv sync --locked --group dev
     - name: Run pytest
       run: |
-        pytest
-        codecov
+        uv run pytest
+        uv run codecov
