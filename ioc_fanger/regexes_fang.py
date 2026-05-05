@@ -11,6 +11,7 @@ fang_patterns: List = [
         # "[://]" -> "://"
         "find": r"(\[:\/\/\])",
         "replace": "://",
+        "requires_brackets": True,
     },
     {
         # Fang a period or comma surrounded by any kind of bracket
@@ -18,11 +19,13 @@ fang_patterns: List = [
         # (e.g. we don't want to fang something like: "an example). [B]")
         "find": r"((\ *[\[\]\(\)\{\}]{1}\ *)[.,]([\[\]\(\)\{\}]{1}\ *))",
         "replace": ".",
+        "requires_brackets": True,
     },
     {
         # Fang a colon surrounded by any kind of bracket
         "find": r"((\ *[\[\]\(\)\{\}]{1}\ *):(\ *[\[\]\(\)\{\}]{1}\ *))",
         "replace": ":",
+        "requires_brackets": True,
     },
     {
         # Fang "DOT" surrounded by any kind of bracket
@@ -45,24 +48,28 @@ fang_patterns: List = [
         "find": r"((\ *[\[\]\(\{\}]+\ *)(?:@|(?:at)|(?:et)|(?:arroba))(\ *[\]\(\)\{\}]*\ *))",
         "replace": "@",
         "case_sensitive": True,
+        "requires_brackets": True,
     },
     {
         # Fang any of the words in the middle of the regex postceded (and perhaps preceded) by any kind of bracket
         "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:@|(?:at)|(?:et)|(?:arroba))(\ *[\]\(\)\{\}]+\ *))",
         "replace": "@",
         "case_sensitive": True,
+        "requires_brackets": True,
     },
     {
         # Fang 'AT', 'ET', or 'ARROBA' preceded by a parenthesis/square brackets and possibly postceded by the same.
         "find": r"((\ *[\[\]\(\)\{\}]+\ *)(?:(?:AT)|(?:ET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]*\ *))",
         "replace": "@",
         "case_sensitive": True,
+        "requires_brackets": True,
     },
     {
         # Fang 'AT', 'ET', or 'ARROBA' postceded by a parenthesis/square brackets and possibly preceded by the same.
         "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:(?:AT)|(?:ET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]+\ *))",
         "replace": "@",
         "case_sensitive": True,
+        "requires_brackets": True,
     },
     {
         # Fang 'AT', 'ET', or 'ARROBA' preceded by a lower-cased character (and possibly spaces)
@@ -74,6 +81,7 @@ fang_patterns: List = [
         # Fang "www" surrounded by any kind of bracket
         "find": r"(([\[\]\(\)\{\}]{1}\ *)www(\ *[\[\]\(\)\{\}]{1}\ *))",
         "replace": "www",
+        "requires_brackets": True,
     },
     {
         "find": r":\/\/\/+",
@@ -93,11 +101,13 @@ fang_patterns: List = [
         # e.g. "[a](https://example.com)" would become "[ahttps://example.com" which is not ideal
         "find": r"(?:[\[\(\{]+\ *)htt(ps?)(?:\ *[\[\]\(\)\{\}]*\ *)",
         "replace": r"htt\1",
+        "requires_brackets": True,
     },
     {
         # Fang "https?" postceded by a parenthesis/square brackets and possibly preceded by the same.
         "find": r"(?:[\[\]\(\)\{\}]*\ *)htt(ps?)(?:\ *[\[\]\(\)\{\}]+\ *)",
         "replace": r"htt\1",
+        "requires_brackets": True,
     },
     {
         # The [^.] bit at the end of this regex makes sure that we are only replacing h\S\Sps? that are...
@@ -133,6 +143,7 @@ fang_patterns: List = [
         # Remove brackets around "-"
         "find": r"(\[-\])",
         "replace": "-",
+        "requires_brackets": True,
     },
     {
         # Remove whitespace around an @ symbol
@@ -164,4 +175,6 @@ for i in fang_patterns:
         flags = flags | re.IGNORECASE
 
     mapping = {"find": re.compile(i["find"], flags), "replace": i["replace"]}
+    if i.get("requires_brackets"):
+        mapping["requires_brackets"] = True
     fang_mappings.append(mapping)

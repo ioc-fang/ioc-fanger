@@ -2,19 +2,25 @@
 
 import click
 
-from ioc_fanger.regexes_defang import defang_mappings
+from ioc_fanger.regexes_defang import _at_re, _dot_re
 from ioc_fanger.regexes_fang import fang_mappings
+
+_BRACKET_CHARS = "[](){}"
 
 
 def fang(text: str, debug=False):
     """Fang the indicators in the given text."""
     fanged_text = text
+    has_brackets = any(c in fanged_text for c in _BRACKET_CHARS)
 
     if debug:
         print(f"Starting text: {fanged_text}")
         print("-----")
 
     for mapping in fang_mappings:
+        if mapping.get("requires_brackets") and not has_brackets:
+            continue
+
         if debug:
             print(f"Mapping: {mapping}")
 
@@ -45,11 +51,9 @@ def cli_fang(text):
 
 def defang(text):
     """Defang the indicators in the given text."""
-    defanged_text = text
-
-    for mapping in defang_mappings:
-        defanged_text = mapping["find"].sub(mapping["replace"], defanged_text)
-
+    defanged_text = _dot_re.sub("[.]", text)
+    defanged_text = defanged_text.replace("https:", "hXXps:").replace("http:", "hXXp:")
+    defanged_text = _at_re.sub("(at)", defanged_text)
     return defanged_text
 
 
