@@ -6,7 +6,7 @@ from ioc_fanger.regexes_defang import defang_mappings
 from ioc_fanger.regexes_fang import fang_mappings
 
 
-def fang(text: str, debug=False):
+def fang(text: str, debug: bool = False) -> str:
     """Fang the indicators in the given text."""
     fanged_text = text
 
@@ -29,7 +29,7 @@ def fang(text: str, debug=False):
 
 @click.command()
 @click.argument("text", required=False)
-def cli_fang(text):
+def cli_fang(text: str | None) -> None:
     """CLI interface for fanging indicators."""
     if text:
         fanged_text = fang(text)
@@ -43,7 +43,7 @@ def cli_fang(text):
             print(fanged_text)
 
 
-def defang(text):
+def defang(text: str) -> str:
     """Defang the indicators in the given text."""
     defanged_text = text
 
@@ -55,7 +55,7 @@ def defang(text):
 
 @click.command()
 @click.argument("text", required=False)
-def cli_defang(text):
+def cli_defang(text: str | None) -> None:
     """CLI interface for defanging indicators."""
     if text:
         defanged_text = defang(text)
