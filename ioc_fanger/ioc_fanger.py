@@ -1,9 +1,13 @@
 """Fang and defang indicators of compromise."""
 
+import logging
+
 import click
 
 from ioc_fanger.regexes_defang import defang_mappings
 from ioc_fanger.regexes_fang import fang_mappings
+
+logger = logging.getLogger(__name__)
 
 
 def fang(text: str, debug=False):
@@ -11,18 +15,20 @@ def fang(text: str, debug=False):
     fanged_text = text
 
     if debug:
-        print(f"Starting text: {fanged_text}")
-        print("-----")
+        logger.setLevel(logging.DEBUG)
+        if not logger.handlers:
+            logger.addHandler(logging.StreamHandler())
+
+    logger.debug("Starting text: %s", fanged_text)
+    logger.debug("-----")
 
     for mapping in fang_mappings:
-        if debug:
-            print(f"Mapping: {mapping}")
+        logger.debug("Mapping: %s", mapping)
 
         fanged_text = mapping["find"].sub(mapping["replace"], fanged_text)
 
-        if debug:
-            print(f"Text after mapping: {fanged_text}")
-            print("-----")
+        logger.debug("Text after mapping: %s", fanged_text)
+        logger.debug("-----")
 
     return fanged_text
 
