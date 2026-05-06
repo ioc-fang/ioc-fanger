@@ -1,6 +1,7 @@
 import re
+from typing import List
 
-defang_patterns = [
+defang_patterns: List = [
     {
         # "example.com" -> "example[.]com"
         "find": r"""
