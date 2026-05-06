@@ -28,6 +28,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Docker-based local development; `uv` is now the supported way to test/lint/develop. Docker is retained only to generate and compare a Linux benchmark baseline that matches CI.
 - `requirements.txt` and `requirements_dev.txt` (use `uv sync --locked --group dev` to set up a dev environment)
 
+### Fixed
+
+- Constrained the comma-separated IP fang regex (`a,b,c,d`) to require each octet to be in the valid IPv4 range `0-255`, so strings like `999,999,999,999` no longer match the IPv4 fang pattern ([#121](https://github.com/ioc-fang/ioc-fanger/pull/121))
+
 ## [4.2.1] - 2022.09.27
 
 ### Fixed
