@@ -5,7 +5,7 @@ from ioc_fanger.regexes_fang import fang_mappings
 
 # Module-level sets recording which regex patterns produced at least one
 # substitution during the test session. Populated by the tracking proxies
-# installed below; consumed by tests/test_zz_regex_coverage.py.
+# installed below; consumed by tests/test_regex_coverage.py.
 FANG_HITS: set[int] = set()
 DEFANG_HITS: set[str] = set()
 
