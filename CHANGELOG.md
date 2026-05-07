@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Switched PyPI publishing to trusted publishing (OIDC) — no more username/password secrets
 - Updated CI and docs to use uv throughout
 - Python 3.14 is now the default for local development (Dockerfile, benchmark storage)
+- Faster `fang()` by skipping bracket-related regex passes when the input contains no brackets
+- Faster `defang()` by replacing the regex-mapping loop with direct `str.replace` calls for `http`/`https` and two precompiled regexes for `.` and `@`
 
 ### Removed
 
@@ -27,6 +29,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - `bump2version` (versions are managed directly in `pyproject.toml` and `ioc_fanger/__init__.py`)
 - Docker-based local development; `uv` is now the supported way to test/lint/develop. Docker is retained only to generate and compare a Linux benchmark baseline that matches CI.
 - `requirements.txt` and `requirements_dev.txt` (use `uv sync --locked --group dev` to set up a dev environment)
+
+### Fixed
+
+- Constrained the comma-separated IP fang regex (`a,b,c,d`) to require each octet to be in the valid IPv4 range `0-255`, so strings like `999,999,999,999` no longer match the IPv4 fang pattern ([#121](https://github.com/ioc-fang/ioc-fanger/pull/121))
 
 ## [4.2.1] - 2022.09.27
 

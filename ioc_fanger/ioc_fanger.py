@@ -4,15 +4,18 @@ import logging
 
 import click
 
-from ioc_fanger.regexes_defang import defang_mappings
+from ioc_fanger.regexes_defang import _at_re, _dot_re
 from ioc_fanger.regexes_fang import fang_mappings
 
 logger = logging.getLogger(__name__)
 
+_BRACKET_CHARS = "[](){}"
 
-def fang(text: str, debug=False):
+
+def fang(text: str, debug: bool = False) -> str:
     """Fang the indicators in the given text."""
     fanged_text = text
+    has_brackets = any(c in fanged_text for c in _BRACKET_CHARS)
 
     if debug:
         logger.setLevel(logging.DEBUG)
@@ -25,6 +28,10 @@ def fang(text: str, debug=False):
     for mapping in fang_mappings:
         logger.debug("Mapping: %s", mapping)
 
+        if mapping.get("requires_brackets") and not has_brackets:
+            logger.debug("No brackets found - skipping")
+            continue
+
         fanged_text = mapping["find"].sub(mapping["replace"], fanged_text)
 
         logger.debug("Text after mapping: %s", fanged_text)
@@ -35,7 +42,7 @@ def fang(text: str, debug=False):
 
 @click.command()
 @click.argument("text", required=False)
-def cli_fang(text):
+def cli_fang(text: str | None) -> None:
     """CLI interface for fanging indicators."""
     if text:
         fanged_text = fang(text)
@@ -49,19 +56,17 @@ def cli_fang(text):
             print(fanged_text)
 
 
-def defang(text):
+def defang(text: str) -> str:
     """Defang the indicators in the given text."""
-    defanged_text = text
-
-    for mapping in defang_mappings:
-        defanged_text = mapping["find"].sub(mapping["replace"], defanged_text)
-
+    defanged_text = _dot_re.sub("[.]", text)
+    defanged_text = defanged_text.replace("https:", "hXXps:").replace("http:", "hXXp:")
+    defanged_text = _at_re.sub("(at)", defanged_text)
     return defanged_text
 
 
 @click.command()
 @click.argument("text", required=False)
-def cli_defang(text):
+def cli_defang(text: str | None) -> None:
     """CLI interface for defanging indicators."""
     if text:
         defanged_text = defang(text)
