@@ -1,6 +1,5 @@
 import pytest
 
-<<<<<<< ioc-fang-ioc-fanger-92-make-sure-all-regexes-are-tested-claude
 from ioc_fanger import ioc_fanger as ioc_fanger_module
 from ioc_fanger.regexes_fang import fang_mappings
 
@@ -9,6 +8,34 @@ from ioc_fanger.regexes_fang import fang_mappings
 # installed below; consumed by tests/test_zz_regex_coverage.py.
 FANG_HITS: set[int] = set()
 DEFANG_HITS: set[str] = set()
+
+# (defanged_input, expected_fanged_output) — strings that fang() should transform
+DEFANG_TO_FANG_PAIRS = [
+    ("example[.]com", "example.com"),
+    ("hxxp://example[.]com", "http://example.com"),
+    ("hXXp://example[.]com", "http://example.com"),
+    ("example\\.com", "example.com"),
+    ("example^.com", "example.com"),
+    ("hxxp://example[.]com", "http://example.com"),
+    ("1[.]2[.]3[.]4", "1.2.3.4"),
+    ("bob[@]example[.]com", "bob@example.com"),
+    ("mary[@]example.com", "mary@example.com"),
+    ("carlos[at]example.com", "carlos@example.com"),
+    ("juanita(at)example.com", "juanita@example.com"),
+    ("http[:]//example.org", "http://example.org"),
+    ("https[:]//example.org", "https://example.org"),
+    ("hXxps[:]//example.org/test?target=bad[@]test.com", "https://example.org/test?target=bad@test.com"),
+    ("bad-dot-com", "bad.com"),
+    ("example-dot-ru", "example.ru"),
+    ("5[,]6[,]7(,)8", "5.6.7.8"),
+    ("9,10,11,12", "9.10.11.12"),
+]
+
+# strings that are already fanged and should pass through fang() unchanged
+ALREADY_FANGED_STRINGS = [
+    "example.com",
+    "http://example.com",
+]
 
 
 class _TrackedFangPattern:
@@ -53,35 +80,6 @@ def pytest_collection_modifyitems(config, items):
     coverage_items = [item for item in items if "test_regex_coverage" in item.nodeid]
     other_items = [item for item in items if "test_regex_coverage" not in item.nodeid]
     items[:] = other_items + coverage_items
-=======
-# (defanged_input, expected_fanged_output) — strings that fang() should transform
-DEFANG_TO_FANG_PAIRS = [
-    ("example[.]com", "example.com"),
-    ("hxxp://example[.]com", "http://example.com"),
-    ("hXXp://example[.]com", "http://example.com"),
-    ("example\\.com", "example.com"),
-    ("example^.com", "example.com"),
-    ("hxxp://example[.]com", "http://example.com"),
-    ("1[.]2[.]3[.]4", "1.2.3.4"),
-    ("bob[@]example[.]com", "bob@example.com"),
-    ("mary[@]example.com", "mary@example.com"),
-    ("carlos[at]example.com", "carlos@example.com"),
-    ("juanita(at)example.com", "juanita@example.com"),
-    ("http[:]//example.org", "http://example.org"),
-    ("https[:]//example.org", "https://example.org"),
-    ("hXxps[:]//example.org/test?target=bad[@]test.com", "https://example.org/test?target=bad@test.com"),
-    ("bad-dot-com", "bad.com"),
-    ("example-dot-ru", "example.ru"),
-    ("5[,]6[,]7(,)8", "5.6.7.8"),
-    ("9,10,11,12", "9.10.11.12"),
-]
-
-# strings that are already fanged and should pass through fang() unchanged
-ALREADY_FANGED_STRINGS = [
-    "example.com",
-    "http://example.com",
-]
->>>>>>> main
 
 
 @pytest.fixture
