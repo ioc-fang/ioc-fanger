@@ -12,6 +12,8 @@ import pytest
 import ioc_fanger
 from ioc_fanger import ioc_fanger as ioc_fanger_module
 
+from .conftest import ALREADY_FANGED_STRINGS, DEFANG_TO_FANG_PAIRS
+
 
 @pytest.fixture
 def defanged_email_address_text():
@@ -23,10 +25,16 @@ def fanged_email_address_text():
     return ("bob@example.com " * 10).strip()
 
 
-def test_fanging(defanged_text, fanged_text):
-    """Test fanging."""
-    test_fanged_text = ioc_fanger.fang(defanged_text)
-    assert test_fanged_text == fanged_text
+@pytest.mark.parametrize("defanged_input,expected_fanged", DEFANG_TO_FANG_PAIRS)
+def test_fanging(defanged_input, expected_fanged):
+    """Each defanged string is fanged to its expected form."""
+    assert ioc_fanger.fang(defanged_input) == expected_fanged
+
+
+@pytest.mark.parametrize("already_fanged", ALREADY_FANGED_STRINGS)
+def test_fang_passes_through_already_fanged(already_fanged):
+    """Strings that are already fanged should be returned unchanged by fang()."""
+    assert ioc_fanger.fang(already_fanged) == already_fanged
 
 
 def test_defanging(fanged_text):
