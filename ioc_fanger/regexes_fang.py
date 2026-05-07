@@ -140,8 +140,16 @@ fang_patterns: List = [
         "replace": "@",
     },
     {
-        # Fang any ip address-esque item with commas between the numbers to have "." between the numbers
-        "find": r"(?:^|(?<=\s))([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3}),([0-9]{1,3})(?=\s|$)",
+        # Fang any ip address-esque item with commas between the numbers to have "." between the numbers.
+        # Each octet is constrained to 0-255 so we don't match obvious non-IPs like "999,999,999,999".
+        "find": (
+            r"(?:^|(?<=\s))"
+            r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?),"
+            r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?),"
+            r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?),"
+            r"(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"
+            r"(?=\s|$)"
+        ),
         "replace": r"\1.\2.\3.\4",
     },
     {"find": r"(\\/)", "replace": "/"},
