@@ -2,8 +2,8 @@
 
 The conftest installs tracking proxies around each compiled pattern that record
 a hit whenever a substitution actually occurs. This module asserts that every
-pattern was hit by the rest of the test suite. It is forced to run last via
-``pytest_collection_modifyitems`` in conftest.py.
+pattern was hit by the rest of the test suite. The tests in this module are
+forced to run last via ``pytest_collection_modifyitems`` in conftest.py.
 """
 
 from ioc_fanger.regexes_fang import fang_patterns

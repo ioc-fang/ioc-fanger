@@ -49,8 +49,8 @@ ioc_fanger_module._at_re = _TrackedDefangPattern(ioc_fanger_module._at_re, "_at_
 
 def pytest_collection_modifyitems(config, items):
     """Run the regex-coverage tests after everything else has had a chance to hit patterns."""
-    coverage_items = [item for item in items if "test_zz_regex_coverage" in item.nodeid]
-    other_items = [item for item in items if "test_zz_regex_coverage" not in item.nodeid]
+    coverage_items = [item for item in items if "test_regex_coverage" in item.nodeid]
+    other_items = [item for item in items if "test_regex_coverage" not in item.nodeid]
     items[:] = other_items + coverage_items
 
 
