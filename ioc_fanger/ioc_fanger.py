@@ -1,9 +1,13 @@
 """Fang and defang indicators of compromise."""
 
+import logging
+
 import click
 
 from ioc_fanger.regexes_defang import _at_re, _dot_re
 from ioc_fanger.regexes_fang import fang_mappings
+
+logger = logging.getLogger(__name__)
 
 _BRACKET_CHARS = "[](){}"
 
@@ -14,21 +18,24 @@ def fang(text: str, debug: bool = False) -> str:
     has_brackets = any(c in fanged_text for c in _BRACKET_CHARS)
 
     if debug:
-        print(f"Starting text: {fanged_text}")
-        print("-----")
+        logger.setLevel(logging.DEBUG)
+        if not logger.handlers:
+            logger.addHandler(logging.StreamHandler())
+
+    logger.debug("Starting text: %s", fanged_text)
+    logger.debug("-----")
 
     for mapping in fang_mappings:
-        if mapping.get("requires_brackets") and not has_brackets:
-            continue
+        logger.debug("Mapping: %s", mapping)
 
-        if debug:
-            print(f"Mapping: {mapping}")
+        if mapping.get("requires_brackets") and not has_brackets:
+            logger.debug("No brackets found - skipping")
+            continue
 
         fanged_text = mapping["find"].sub(mapping["replace"], fanged_text)
 
-        if debug:
-            print(f"Text after mapping: {fanged_text}")
-            print("-----")
+        logger.debug("Text after mapping: %s", fanged_text)
+        logger.debug("-----")
 
     return fanged_text
 

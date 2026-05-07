@@ -5,9 +5,12 @@ test_ioc_fanger
 Tests for `ioc_fanger` module.
 """
 
+import logging
+
 import pytest
 
 import ioc_fanger
+from ioc_fanger import ioc_fanger as ioc_fanger_module
 
 
 @pytest.fixture
@@ -425,3 +428,42 @@ def test_pr_99__escaped_periods():
     s = "foo$.bar foo\\.bar"
     result = ioc_fanger.fang(s)
     assert result == "foo$.bar foo.bar"
+
+
+@pytest.fixture
+def reset_fang_logger():
+    logger = ioc_fanger_module.logger
+    original_level = logger.level
+    original_handlers = logger.handlers[:]
+    logger.handlers = []
+    logger.setLevel(logging.NOTSET)
+    yield logger
+    logger.handlers = original_handlers
+    logger.setLevel(original_level)
+
+
+def test_fang_debug_emits_log_records(reset_fang_logger, caplog):
+    """When debug=True, fang emits DEBUG-level log records via the module logger."""
+    with caplog.at_level(logging.DEBUG, logger=reset_fang_logger.name):
+        ioc_fanger.fang("hxxp://example[.]com", debug=True)
+
+    debug_messages = [r.getMessage() for r in caplog.records if r.levelno == logging.DEBUG]
+    assert any("Starting text: hxxp://example[.]com" in m for m in debug_messages)
+    assert any(m.startswith("Mapping: ") for m in debug_messages)
+    assert any(m.startswith("Text after mapping: ") for m in debug_messages)
+
+
+def test_fang_debug_sets_logger_level_and_handler(reset_fang_logger):
+    """debug=True sets the logger to DEBUG and attaches a handler so output is visible."""
+    ioc_fanger.fang("hxxp://example[.]com", debug=True)
+
+    assert reset_fang_logger.level == logging.DEBUG
+    assert any(isinstance(h, logging.StreamHandler) for h in reset_fang_logger.handlers)
+
+
+def test_fang_default_does_not_emit_debug_records(reset_fang_logger, caplog):
+    """Without debug=True, no DEBUG-level records are surfaced through the root config."""
+    with caplog.at_level(logging.WARNING, logger=reset_fang_logger.name):
+        ioc_fanger.fang("hxxp://example[.]com")
+
+    assert [r for r in caplog.records if r.levelno == logging.DEBUG] == []
