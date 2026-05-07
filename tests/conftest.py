@@ -43,8 +43,8 @@ class _TrackedDefangPattern:
 for _i, _mapping in enumerate(fang_mappings):
     _mapping["find"] = _TrackedFangPattern(_mapping["find"], _i)
 
-ioc_fanger_module._dot_re = _TrackedDefangPattern(ioc_fanger_module._dot_re, "_dot_re")
-ioc_fanger_module._at_re = _TrackedDefangPattern(ioc_fanger_module._at_re, "_at_re")
+ioc_fanger_module._dot_re = _TrackedDefangPattern(ioc_fanger_module._dot_re, "_dot_re")  # type: ignore[assignment]
+ioc_fanger_module._at_re = _TrackedDefangPattern(ioc_fanger_module._at_re, "_at_re")  # type: ignore[assignment]
 
 
 def pytest_collection_modifyitems(config, items):

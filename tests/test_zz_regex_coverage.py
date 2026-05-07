@@ -7,7 +7,6 @@ pattern was hit by the rest of the test suite. It is forced to run last via
 """
 
 from ioc_fanger.regexes_fang import fang_patterns
-
 from tests.conftest import DEFANG_HITS, FANG_HITS
 
 
