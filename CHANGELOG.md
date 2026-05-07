@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Switched PyPI publishing to trusted publishing (OIDC) — no more username/password secrets
 - Updated CI and docs to use uv throughout
 - Python 3.14 is now the default for local development (Dockerfile, benchmark storage)
+- Faster `fang()` by skipping bracket-related regex passes when the input contains no brackets
+- Faster `defang()` by replacing the regex-mapping loop with direct `str.replace` calls for `http`/`https` and two precompiled regexes for `.` and `@`
 
 ### Removed
 
