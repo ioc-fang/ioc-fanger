@@ -24,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 
-- `fang()` no longer mistakes literal `dot`/`DOT` text inside URL hostnames for a defanged separator (#112). Lowercase `dot` is now only fanged when bordered by brackets or by hyphens on **both** sides (so `accounts.dot-star.online` is preserved). Bare uppercase `DOT` is only fanged when it sits inside a token with no real `.` and is not adjacent to other uppercase letters (so `WWW.MDOT.JXCSF.VIP/pay` is preserved while `fooDOTcom` still fangs to `foo.com`).
+- `fang()` no longer mistakes literal `dot`/`DOT` text inside URL hostnames for a defanged separator (#112). Lowercase `dot` is now only fanged when bordered by brackets or by hyphens on **both** sides (so `accounts.dot-example.online` is preserved). Bare uppercase `DOT` is only fanged when it sits inside a token with no real `.` and is not adjacent to other uppercase letters (so `WWW.MDOT.EXAMPLE.VIP/pay` is preserved while `fooDOTcom` still fangs to `foo.com`).
 
 ### Removed
 

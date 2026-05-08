@@ -91,13 +91,13 @@ def test_issue_112_literal_dot_in_hostname_not_fanged():
     See https://github.com/ioc-fang/ioc-fanger/issues/112
     """
     # `dot-` with a hyphen on only one side is not a defang marker
-    s = "http://accounts.dot-star.online"
+    s = "http://accounts.dot-example.online"
     assert ioc_fanger.fang(s) == s
 
     # bare uppercase `DOT` inside a hostname containing real periods is preserved
-    s = "WWW.MDOT.JXCSF.VIP/pay"
+    s = "WWW.MDOT.EXAMPLE.VIP/pay"
     assert ioc_fanger.fang(s) == s
 
     # lowercase variant is already preserved; keep a regression test for it too
-    s = "www.mdot.jxcsf.vip/pay"
+    s = "www.mdot.example.vip/pay"
     assert ioc_fanger.fang(s) == s
