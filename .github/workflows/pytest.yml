@@ -43,7 +43,6 @@ jobs:
     - name: Run pytest
       run: |
         uv run pytest
-        uv run codecov
         # run benchmark tests
         uv run pytest -c "." --benchmark-storage=.benchmarks/${{ runner.os == 'macOS' && 'Darwin' || runner.os }}-CPython-${{ matrix.python-version }}-64bit/ --benchmark-compare=0001 --benchmark-compare-fail=mean:30% --benchmark-columns='mean,stddev,median,iqr,outliers' tests/benchmarks.py
 
@@ -64,9 +63,7 @@ jobs:
     - name: Install dependencies
       run: uv sync --locked --group dev
     - name: Run pytest
-      run: |
-        uv run pytest
-        uv run codecov
+      run: uv run pytest
 
   # run tests in linux on multiple versions of Python
   build_multi_py_versions:
@@ -86,6 +83,25 @@ jobs:
     - name: Install dependencies
       run: uv sync --locked --group dev
     - name: Run pytest
-      run: |
-        uv run pytest
-        uv run codecov
+      run: uv run pytest
+
+  # check diff coverage on PRs
+  diff_cover:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.14
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+    - name: Set up uv
+      uses: astral-sh/setup-uv@v6
+    - name: Install dependencies
+      run: uv sync --locked --group dev
+    - name: Run pytest with XML coverage report
+      run: uv run pytest --cov-report=xml
+    - name: Check diff coverage
+      run: uv run diff-cover coverage.xml --compare-branch=origin/${{ github.base_ref }} --fail-under=100
