@@ -24,6 +24,10 @@ ioc_fanger.fang("example[.]com hXXp://bad[.]com/phishing[.]php")
 ioc_fanger.defang("example.com http://bad.com/phishing.php")
 ```
 
+<div id="terminal-loading" class="terminal-loading">
+  <div class="terminal-loading__spinner" aria-hidden="true"></div>
+  <div class="terminal-loading__text">Loading Python runtime…</div>
+</div>
 <div id="terminal"></div>
 
 This terminal uses [Pyodide](https://pyodide.org/en/stable/index.html) to provide a Python 3.12 runtime in the browser using [WebAssembly](https://webassembly.org/). Enjoy!
