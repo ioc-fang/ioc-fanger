@@ -377,6 +377,14 @@ def test_debug():
     assert ioc_fanger.fang(s, debug=True) == "192.168.4.2"
 
 
+def test_idns():
+    # https://github.com/ioc-fang/ioc-fanger/issues/33
+    assert ioc_fanger.defang("вирус.рф") == "вирус[.]рф"
+    assert ioc_fanger.fang("вирус[.]рф") == "вирус.рф"
+    assert ioc_fanger.defang("名がドメイン.中国") == "名がドメイン[.]中国"
+    assert ioc_fanger.fang("名がドメイン[.]中国") == "名がドメイン.中国"
+
+
 def test_issue_46():
     s = "div><div><br></div><div>hxxp://zeplin[.]atwebpages[.]com/inter[.]php</div><"
     result = ioc_fanger.fang(s)
@@ -474,6 +482,33 @@ def test_postceded_only_uppercase_DOT_variants():
     assert ioc_fanger.fang("fooDOT]com") == "foo.com"
     assert ioc_fanger.fang("fooDOT)com") == "foo.com"
     assert ioc_fanger.fang("fooDOT}com") == "foo.com"
+
+    
+def test_postceded_only_dot_word_variants():
+    """Bracket only on the trailing side of dot/punto/punkt — exercises the postceded-only fang pattern."""
+    assert ioc_fanger.fang("foodot]com") == "foo.com"
+    assert ioc_fanger.fang("foopunto)com") == "foo.com"
+    assert ioc_fanger.fang("foopunkt}com") == "foo.com"
+
+
+def test_postceded_only_lowercase_at_variants():
+    """Bracket only on the trailing side of lowercase at/et/arroba — exercises the postceded-only fang pattern."""
+    assert ioc_fanger.fang("fooat]bar.com") == "foo@bar.com"
+    assert ioc_fanger.fang("fooet)bar.com") == "foo@bar.com"
+    assert ioc_fanger.fang("fooarroba}bar.com") == "foo@bar.com"
+
+
+def test_postceded_only_uppercase_AT_variants():
+    """Bracket only on the trailing side of uppercase AT/ET/ARROBA — exercises the postceded-only fang pattern."""
+    assert ioc_fanger.fang("fooAT]bar.com") == "foo@bar.com"
+    assert ioc_fanger.fang("fooET)bar.com") == "foo@bar.com"
+    assert ioc_fanger.fang("fooARROBA}bar.com") == "foo@bar.com"
+
+
+def test_postceded_only_http_brackets():
+    """Bracket only on the trailing side of http(s) — exercises the postceded-only fang pattern."""
+    assert ioc_fanger.fang("http]://example.com") == "http://example.com"
+    assert ioc_fanger.fang("https]://example.com") == "https://example.com"
 
 
 def test_fang_default_does_not_emit_debug_records(reset_fang_logger, caplog):
