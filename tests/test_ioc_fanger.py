@@ -469,6 +469,13 @@ def test_fang_debug_sets_logger_level_and_handler(reset_fang_logger):
     assert any(isinstance(h, logging.StreamHandler) for h in reset_fang_logger.handlers)
 
 
+def test_postceded_only_uppercase_DOT_variants():
+    """Bracket only on the trailing side of uppercase DOT — exercises the postceded-only fang pattern."""
+    assert ioc_fanger.fang("fooDOT]com") == "foo.com"
+    assert ioc_fanger.fang("fooDOT)com") == "foo.com"
+    assert ioc_fanger.fang("fooDOT}com") == "foo.com"
+
+
 def test_fang_default_does_not_emit_debug_records(reset_fang_logger, caplog):
     """Without debug=True, no DEBUG-level records are surfaced through the root config."""
     with caplog.at_level(logging.WARNING, logger=reset_fang_logger.name):
