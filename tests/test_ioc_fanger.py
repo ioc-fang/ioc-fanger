@@ -377,6 +377,14 @@ def test_debug():
     assert ioc_fanger.fang(s, debug=True) == "192.168.4.2"
 
 
+def test_idns():
+    # https://github.com/ioc-fang/ioc-fanger/issues/33
+    assert ioc_fanger.defang("вирус.рф") == "вирус[.]рф"
+    assert ioc_fanger.fang("вирус[.]рф") == "вирус.рф"
+    assert ioc_fanger.defang("名がドメイン.中国") == "名がドメイン[.]中国"
+    assert ioc_fanger.fang("名がドメイン[.]中国") == "名がドメイン.中国"
+
+
 def test_issue_46():
     s = "div><div><br></div><div>hxxp://zeplin[.]atwebpages[.]com/inter[.]php</div><"
     result = ioc_fanger.fang(s)
