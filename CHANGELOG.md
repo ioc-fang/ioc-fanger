@@ -22,6 +22,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Faster `fang()` by skipping bracket-related regex passes when the input contains no brackets
 - Faster `defang()` by replacing the regex-mapping loop with direct `str.replace` calls for `http`/`https` and two precompiled regexes for `.` and `@`
 
+### Fixed
+
+- `fang()` no longer mistakes literal `dot`/`DOT` text inside URL hostnames for a defanged separator (#112). Lowercase `dot` is now only fanged when bordered by brackets or by hyphens on **both** sides (so `accounts.dot-example.online` is preserved). Bare uppercase `DOT` is only fanged when it sits inside a token with no real `.` and is not adjacent to other uppercase letters (so `WWW.MDOT.EXAMPLE.VIP/pay` is preserved while `fooDOTcom` still fangs to `foo.com`).
+
 ### Removed
 
 - Support for Python 3.7, 3.8, and 3.9 (minimum is now 3.10)

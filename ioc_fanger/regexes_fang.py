@@ -28,19 +28,41 @@ fang_patterns: List = [
         "requires_brackets": True,
     },
     {
-        # Fang "DOT" surrounded by any kind of bracket
-        "find": r"((\ *[\[\]\(\)\{\}]*\ *)DOT(\ *[\[\]\(\)\{\}]*\ *))",
+        # Fang "DOT" surrounded by brackets/hyphens (1+ on the left)
+        "find": r"((\ *[\[\]\(\)\{\}-]+\ *)DOT(\ *[\[\]\(\)\{\}-]*\ *))",
         "replace": ".",
         "case_sensitive": True,
     },
     {
-        # Fang any of the words in the middle of the regex preceded (and perhaps postceded) by any kind of bracket
-        "find": r"((\ *[\[\]\(\)\{\}-]+\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}-]*\ *))",
+        # Fang "DOT" surrounded by brackets/hyphens (1+ on the right)
+        "find": r"((\ *[\[\]\(\)\{\}-]*\ *)DOT(\ *[\[\]\(\)\{\}-]+\ *))",
+        "replace": ".",
+        "case_sensitive": True,
+    },
+    {
+        # Fang bare "DOT" only when it sits inside a token that has no real `.`...
+        # and is not adjacent to other uppercase letters. This keeps `fooDOTcom` and...
+        # `foo@barDOTcom` working while preserving real-world tokens like `MDOT` in...
+        # `WWW.MDOT.JXCSF.VIP` (see ioc-fang/ioc-fanger#112).
+        "find": r"(?<!\S)([^\s.]*?)\ *(?<![A-Z])DOT(?![A-Z])\ *([^\s.]*?)(?!\S)",
+        "replace": r"\1.\2",
+        "case_sensitive": True,
+    },
+    {
+        # Fang dot/punto/punkt preceded by 1+ bracket (and perhaps postceded by brackets)
+        "find": r"((\ *[\[\]\(\)\{\}]+\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}]*\ *))",
         "replace": ".",
     },
     {
-        # Fang any of the words in the middle of the regex postceded (and perhaps preceded) by any kind of bracket
-        "find": r"((\ *[\[\]\(\)\{\}-]*\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}-]+\ *))",
+        # Fang dot/punto/punkt postceded by 1+ bracket (and perhaps preceded by brackets)
+        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}]+\ *))",
+        "replace": ".",
+    },
+    {
+        # Fang dot/punto/punkt with hyphens on BOTH sides (e.g. `foo-dot-com`).
+        # Hyphens on only one side are not treated as defang markers, so strings...
+        # like `accounts.dot-star.online` are preserved (ioc-fang/ioc-fanger#112).
+        "find": r"-+(?:dot|punto|punkt)-+",
         "replace": ".",
     },
     {
