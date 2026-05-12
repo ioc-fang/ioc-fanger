@@ -483,7 +483,7 @@ def test_postceded_only_uppercase_DOT_variants():
     assert ioc_fanger.fang("fooDOT)com") == "foo.com"
     assert ioc_fanger.fang("fooDOT}com") == "foo.com"
 
-    
+
 def test_postceded_only_dot_word_variants():
     """Bracket only on the trailing side of dot/punto/punkt — exercises the postceded-only fang pattern."""
     assert ioc_fanger.fang("foodot]com") == "foo.com"
