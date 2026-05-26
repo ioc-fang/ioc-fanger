@@ -37,7 +37,7 @@ jobs:
     env:
       SOAK_DAYS: 3
     steps:
-      - name: Approve and enable auto-merge on soaked PRs
+      - name: Enable auto-merge on soaked PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -47,17 +47,12 @@ jobs:
             --author "app/dependabot" \
             --label auto-merge-candidate \
             --state open \
-            --json number,createdAt,autoMergeRequest,reviewDecision \
+            --json number,createdAt,autoMergeRequest \
             --jq ".[] | select(.createdAt < \"$cutoff\") | .number" \
           | while read -r pr; do
-              decision=$(gh pr view "$pr" --repo "$GITHUB_REPOSITORY" --json reviewDecision --jq .reviewDecision)
-              if [ "$decision" != "APPROVED" ]; then
-                echo "Approving PR #$pr"
-                gh pr review "$pr" --approve --repo "$GITHUB_REPOSITORY" --body "Auto-approved after ${SOAK_DAYS}d soak."
-              fi
               auto=$(gh pr view "$pr" --repo "$GITHUB_REPOSITORY" --json autoMergeRequest --jq .autoMergeRequest)
               if [ "$auto" = "null" ] || [ -z "$auto" ]; then
                 echo "Enabling auto-merge on PR #$pr"
-                gh pr merge "$pr" --auto --squash --repo "$GITHUB_REPOSITORY"
+                gh pr merge "$pr" --auto --squash --repo "$GITHUB_REPOSITORY" || echo "Failed to enable auto-merge on PR #$pr"
               fi
             done
