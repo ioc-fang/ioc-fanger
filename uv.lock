@@ -509,7 +509,7 @@ wheels = [
 
 [[package]]
 name = "diff-cover"
-version = "10.2.0"
+version = "10.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "chardet" },
@@ -517,9 +517,9 @@ dependencies = [
     { name = "pluggy" },
     { name = "pygments" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/99/b4/eee71d1e338bc1f9bd3539b46b70e303dac061324b759c9a80fa3c96d90d/diff_cover-10.2.0.tar.gz", hash = "sha256:61bf83025f10510c76ef6a5820680cf61b9b974e8f81de70c57ac926fa63872a", size = 102473, upload-time = "2026-01-09T01:59:07.605Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/35/21/057e816125c162662d2a2cc2ebcd72dd333e78e51678298d07dd3146011a/diff_cover-10.3.0.tar.gz", hash = "sha256:474dbc63e815fbb7567d7b7ca5b104123e96129f25426ebdbc9a1bdbb935b2c6", size = 106546, upload-time = "2026-05-30T14:17:14.32Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/2c/61eeb887055a37150db824b6bf830e821a736580769ac2fea4eadb0d613f/diff_cover-10.2.0-py3-none-any.whl", hash = "sha256:59c328595e0b8948617cc5269af9e484c86462e2844bfcafa3fb37f8fca0af87", size = 56748, upload-time = "2026-01-09T01:59:06.028Z" },
+    { url = "https://files.pythonhosted.org/packages/83/0a/a96e57a7a3fca419cd5ceff0d13dee2166520fa67103fb82624ad64700fb/diff_cover-10.3.0-py3-none-any.whl", hash = "sha256:2e47d5ab3868d1e92131c11f364f3f4a8583c97123d3bbc6b6cc8ce0a4cc2202", size = 58989, upload-time = "2026-05-30T14:17:12.858Z" },
 ]
 
 [[package]]
