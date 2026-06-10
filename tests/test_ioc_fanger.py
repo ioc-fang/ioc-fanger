@@ -517,3 +517,29 @@ def test_fang_default_does_not_emit_debug_records(reset_fang_logger, caplog):
         ioc_fanger.fang("hxxp://example[.]com")
 
     assert [r for r in caplog.records if r.levelno == logging.DEBUG] == []
+
+
+def test_requires_any_gate_skips_without_changing_output():
+    """The `requires_any` literal gate only skips guaranteed no-op passes, so
+    fanging text that lacks every trigger literal yields the same output as the
+    text itself (nothing to fang) while still fanging text that contains one."""
+    # No DOT / dot / AT / ET / ARROBA / xxxx anywhere: every gated mapping is
+    # skipped, and the clean prose passes through untouched.
+    clean = "the quick brown fox jumps over the lazy dog, swiftly and quietly"
+    assert ioc_fanger.fang(clean) == clean
+
+    # Each gated literal still fangs when actually present.
+    assert ioc_fanger.fang("fooDOTcom") == "foo.com"
+    assert ioc_fanger.fang("foo[dot]com") == "foo.com"
+    assert ioc_fanger.fang("bob AT example.com") == "bob@example.com"
+    assert ioc_fanger.fang("xxxx://example.com") == "http://example.com"
+    assert ioc_fanger.fang("xxxxs://example.com") == "https://example.com"
+
+
+def test_requires_any_gate_handles_post_substitution_literals():
+    """A literal can appear only after an earlier pass rewrites the text; the
+    lazily-recomputed lower-cased copy must reflect that so a later
+    case-insensitive gate still fires."""
+    # `xxxxs://` -> `https://` happens before the dot pass; the bracketed dot is
+    # independent, but this exercises multiple gated passes in one call.
+    assert ioc_fanger.fang("xxxxs://example[dot]com") == "https://example.com"

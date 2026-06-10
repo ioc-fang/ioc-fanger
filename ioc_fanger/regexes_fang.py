@@ -32,12 +32,14 @@ fang_patterns: List = [
         "find": r"((\ *[\[\]\(\)\{\}-]+\ *)DOT(\ *[\[\]\(\)\{\}-]*\ *))",
         "replace": ".",
         "case_sensitive": True,
+        "requires_any": ["DOT"],
     },
     {
         # Fang "DOT" surrounded by brackets/hyphens (1+ on the right)
         "find": r"((\ *[\[\]\(\)\{\}-]*\ *)DOT(\ *[\[\]\(\)\{\}-]+\ *))",
         "replace": ".",
         "case_sensitive": True,
+        "requires_any": ["DOT"],
     },
     {
         # Fang bare "DOT" only when it sits inside a token that has no real `.`...
@@ -47,16 +49,19 @@ fang_patterns: List = [
         "find": r"(?<!\S)([^\s.]*?)\ *(?<![A-Z])DOT(?![A-Z])\ *([^\s.]*?)(?!\S)",
         "replace": r"\1.\2",
         "case_sensitive": True,
+        "requires_any": ["DOT"],
     },
     {
         # Fang dot/punto/punkt preceded by 1+ bracket (and perhaps postceded by brackets)
         "find": r"((\ *[\[\]\(\)\{\}]+\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}]*\ *))",
         "replace": ".",
+        "requires_any": ["dot", "punto", "punkt"],
     },
     {
         # Fang dot/punto/punkt postceded by 1+ bracket (and perhaps preceded by brackets)
         "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}]+\ *))",
         "replace": ".",
+        "requires_any": ["dot", "punto", "punkt"],
     },
     {
         # Fang dot/punto/punkt with hyphens on BOTH sides (e.g. `foo-dot-com`).
@@ -64,6 +69,7 @@ fang_patterns: List = [
         # like `accounts.dot-star.online` are preserved (ioc-fang/ioc-fanger#112).
         "find": r"-+(?:dot|punto|punkt)-+",
         "replace": ".",
+        "requires_any": ["dot", "punto", "punkt"],
     },
     {
         # Fang any of the words in the middle of the regex preceded (and perhaps postceded) by any kind of bracket
@@ -98,6 +104,7 @@ fang_patterns: List = [
         "find": r"([a-z])\ *(?:AT|ET|ARROBA)\ *([a-z])",
         "replace": r"\1@\2",
         "case_sensitive": True,
+        "requires_any": ["AT", "ET", "ARROBA"],
     },
     {
         # Fang "www" surrounded by any kind of bracket
@@ -155,11 +162,13 @@ fang_patterns: List = [
         # "xxxx://" -> "http://"
         "find": r"\b(x{4}:\/\/)",
         "replace": "http://",
+        "requires_any": ["xxxx"],
     },
     {
         # "xxxx[xs]://" -> "https://"
         "find": r"\b((?:x{5}|x{4}s):\/\/)",
         "replace": "https://",
+        "requires_any": ["xxxx"],
     },
     {
         # Remove brackets around "-"
@@ -201,10 +210,20 @@ for i in fang_patterns:
     flags = re.VERBOSE
 
     # set all regexes to IGNORECASE by default
-    if "case_sensitive" not in i:
+    case_sensitive = "case_sensitive" in i
+    if not case_sensitive:
         flags = flags | re.IGNORECASE
 
     mapping = {"find": re.compile(i["find"], flags), "replace": i["replace"]}
     if i.get("requires_brackets"):
         mapping["requires_brackets"] = True
+    # `requires_any` lists literal substrings, at least one of which must be
+    # present in the text for this mapping to possibly match. When none are
+    # present the substitution is a guaranteed no-op, so `fang()` skips it (the
+    # same optimization as `requires_brackets`). For case-insensitive mappings
+    # the literals are matched against a lower-cased copy of the text, so the
+    # literals here must be lower-case; case-sensitive mappings match verbatim.
+    if "requires_any" in i:
+        mapping["requires_any"] = i["requires_any"]
+        mapping["case_sensitive"] = case_sensitive
     fang_mappings.append(mapping)
