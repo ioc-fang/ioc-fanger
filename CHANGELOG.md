@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [UNRELEASED]
 
+### Changed
+
+- Faster `fang()` on text without defang markers by skipping literal-keyed regex passes (`DOT`, `dot`/`punto`/`punkt`, `AT`/`ET`/`ARROBA`, `xxxx://`) when none of the trigger substrings are present — the same idea as the existing bracket short-circuit, generalized to a per-mapping `requires_any` literal gate. Output is unchanged. Roughly 1.8x faster on bracket-free input and ~4x faster on plain prose; bracket-heavy input also benefits when it defangs with brackets rather than the literal words.
+
 ## [5.0.0] - 2026.05.13
 
 ### Added

@@ -517,3 +517,39 @@ def test_fang_default_does_not_emit_debug_records(reset_fang_logger, caplog):
         ioc_fanger.fang("hxxp://example[.]com")
 
     assert [r for r in caplog.records if r.levelno == logging.DEBUG] == []
+
+
+def test_requires_any_gate_skips_without_changing_output():
+    """The `requires_any` literal gate only skips guaranteed no-op passes, so
+    fanging text that lacks every trigger literal yields the same output as the
+    text itself (nothing to fang) while still fanging text that contains one."""
+    # No DOT / dot / AT / ET / ARROBA / xxxx anywhere: every gated mapping is
+    # skipped, and the clean prose passes through untouched.
+    clean = "the quick brown fox jumps over the lazy dog, swiftly and quietly"
+    assert ioc_fanger.fang(clean) == clean
+
+    # Each gated literal still fangs when actually present.
+    assert ioc_fanger.fang("fooDOTcom") == "foo.com"
+    assert ioc_fanger.fang("foo[dot]com") == "foo.com"
+    assert ioc_fanger.fang("bob AT example.com") == "bob@example.com"
+    assert ioc_fanger.fang("xxxx://example.com") == "http://example.com"
+    assert ioc_fanger.fang("xxxxs://example.com") == "https://example.com"
+
+
+def test_requires_any_gate_across_multiple_passes_in_one_call():
+    """Several gated mappings fire within a single fang() call, with a
+    text-changing substitution (`xxxxs://` -> `https://`) between them that
+    invalidates the cached lower-cased copy used by the later case-insensitive
+    `dot` gate. Both gated passes must still apply."""
+    assert ioc_fanger.fang("xxxxs://example[dot]com") == "https://example.com"
+
+
+def test_requires_any_caseless_gate_matches_uppercase_literals():
+    """Case-insensitive gates match their lower-cased literals against a
+    lower-cased copy of the text, so upper- and mixed-case spellings of the
+    trigger word must still fang. Guards the Unicode/case-fold assumption that
+    `str.lower()` normalizes every case variant the IGNORECASE regex can match."""
+    assert ioc_fanger.fang("foo[DOT]com") == "foo.com"
+    assert ioc_fanger.fang("foo[Dot]com") == "foo.com"
+    assert ioc_fanger.fang("foo[PUNKT]com") == "foo.com"
+    assert ioc_fanger.fang("XXXX://example.com") == "http://example.com"
