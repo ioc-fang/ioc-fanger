@@ -536,10 +536,20 @@ def test_requires_any_gate_skips_without_changing_output():
     assert ioc_fanger.fang("xxxxs://example.com") == "https://example.com"
 
 
-def test_requires_any_gate_handles_post_substitution_literals():
-    """A literal can appear only after an earlier pass rewrites the text; the
-    lazily-recomputed lower-cased copy must reflect that so a later
-    case-insensitive gate still fires."""
-    # `xxxxs://` -> `https://` happens before the dot pass; the bracketed dot is
-    # independent, but this exercises multiple gated passes in one call.
+def test_requires_any_gate_across_multiple_passes_in_one_call():
+    """Several gated mappings fire within a single fang() call, with a
+    text-changing substitution (`xxxxs://` -> `https://`) between them that
+    invalidates the cached lower-cased copy used by the later case-insensitive
+    `dot` gate. Both gated passes must still apply."""
     assert ioc_fanger.fang("xxxxs://example[dot]com") == "https://example.com"
+
+
+def test_requires_any_caseless_gate_matches_uppercase_literals():
+    """Case-insensitive gates match their lower-cased literals against a
+    lower-cased copy of the text, so upper- and mixed-case spellings of the
+    trigger word must still fang. Guards the Unicode/case-fold assumption that
+    `str.lower()` normalizes every case variant the IGNORECASE regex can match."""
+    assert ioc_fanger.fang("foo[DOT]com") == "foo.com"
+    assert ioc_fanger.fang("foo[Dot]com") == "foo.com"
+    assert ioc_fanger.fang("foo[PUNKT]com") == "foo.com"
+    assert ioc_fanger.fang("XXXX://example.com") == "http://example.com"

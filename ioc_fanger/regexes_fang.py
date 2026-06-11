@@ -220,10 +220,13 @@ for i in fang_patterns:
     # `requires_any` lists literal substrings, at least one of which must be
     # present in the text for this mapping to possibly match. When none are
     # present the substitution is a guaranteed no-op, so `fang()` skips it (the
-    # same optimization as `requires_brackets`). For case-insensitive mappings
-    # the literals are matched against a lower-cased copy of the text, so the
-    # literals here must be lower-case; case-sensitive mappings match verbatim.
+    # same optimization as `requires_brackets`). `gate_case_sensitive` tells
+    # `fang()` how to look for those literals: case-sensitive mappings are
+    # matched verbatim, case-insensitive ones against a lower-cased copy of the
+    # text (so the literals here must be lower-case). It is named distinctly
+    # from the pattern dict's `case_sensitive` key — which controls IGNORECASE
+    # at compile time above — because it only routes the literal gate.
     if "requires_any" in i:
         mapping["requires_any"] = i["requires_any"]
-        mapping["case_sensitive"] = case_sensitive
+        mapping["gate_case_sensitive"] = case_sensitive
     fang_mappings.append(mapping)

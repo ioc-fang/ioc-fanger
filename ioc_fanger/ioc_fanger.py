@@ -42,7 +42,7 @@ def fang(text: str, debug: bool = False) -> str:
         # verbatim; case-insensitive gates match a lower-cased copy.
         requires_any = mapping.get("requires_any")
         if requires_any is not None:
-            if mapping.get("case_sensitive"):
+            if mapping.get("gate_case_sensitive"):
                 haystack = fanged_text
             else:
                 if lowered_text is None:
