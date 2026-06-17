@@ -17,26 +17,26 @@ fang_patterns: List = [
         # Fang a period or comma surrounded by any kind of bracket
         # We don't allow spaces after the "." so we don't inadvertently fang valid sentences...
         # (e.g. we don't want to fang something like: "an example). [B]")
-        "find": r"((\ *[\[\]\(\)\{\}]{1}\ *)[.,]([\[\]\(\)\{\}]{1}\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]{1}\ {0,3})[.,]([\[\]\(\)\{\}]{1}\ {0,3}))",
         "replace": ".",
         "requires_brackets": True,
     },
     {
         # Fang a colon surrounded by any kind of bracket
-        "find": r"((\ *[\[\]\(\)\{\}]{1}\ *):(\ *[\[\]\(\)\{\}]{1}\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]{1}\ {0,3}):(\ {0,3}[\[\]\(\)\{\}]{1}\ {0,3}))",
         "replace": ":",
         "requires_brackets": True,
     },
     {
         # Fang "DOT" surrounded by brackets/hyphens (1+ on the left)
-        "find": r"((\ *[\[\]\(\)\{\}-]+\ *)DOT(\ *[\[\]\(\)\{\}-]*\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}-]+\ {0,3})DOT(\ {0,3}[\[\]\(\)\{\}-]*\ {0,3}))",
         "replace": ".",
         "case_sensitive": True,
         "requires_any": ["DOT"],
     },
     {
         # Fang "DOT" surrounded by brackets/hyphens (1+ on the right)
-        "find": r"((\ *[\[\]\(\)\{\}-]*\ *)DOT(\ *[\[\]\(\)\{\}-]+\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}-]*\ {0,3})DOT(\ {0,3}[\[\]\(\)\{\}-]+\ {0,3}))",
         "replace": ".",
         "case_sensitive": True,
         "requires_any": ["DOT"],
@@ -53,13 +53,13 @@ fang_patterns: List = [
     },
     {
         # Fang dot/punto/punkt preceded by 1+ bracket (and perhaps postceded by brackets)
-        "find": r"((\ *[\[\]\(\)\{\}]+\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}]*\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]+\ {0,3})(?:dot|punto|punkt)(\ {0,3}[\[\]\(\)\{\}]*\ {0,3}))",
         "replace": ".",
         "requires_any": ["dot", "punto", "punkt"],
     },
     {
         # Fang dot/punto/punkt postceded by 1+ bracket (and perhaps preceded by brackets)
-        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:dot|punto|punkt)(\ *[\[\]\(\)\{\}]+\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]*\ {0,3})(?:dot|punto|punkt)(\ {0,3}[\[\]\(\)\{\}]+\ {0,3}))",
         "replace": ".",
         "requires_any": ["dot", "punto", "punkt"],
     },
@@ -73,28 +73,28 @@ fang_patterns: List = [
     },
     {
         # Fang any of the words in the middle of the regex preceded (and perhaps postceded) by any kind of bracket
-        "find": r"((\ *[\[\]\(\{\}]+\ *)(?:@|(?:at)|(?:et)|(?:arroba))(\ *[\]\(\)\{\}]*\ *))",
+        "find": r"((\ {0,3}[\[\]\(\{\}]+\ {0,3})(?:@|(?:at)|(?:et)|(?:arroba))(\ {0,3}[\]\(\)\{\}]*\ {0,3}))",
         "replace": "@",
         "case_sensitive": True,
         "requires_brackets": True,
     },
     {
         # Fang any of the words in the middle of the regex postceded (and perhaps preceded) by any kind of bracket
-        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:@|(?:at)|(?:et)|(?:arroba))(\ *[\]\(\)\{\}]+\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]*\ {0,3})(?:@|(?:at)|(?:et)|(?:arroba))(\ {0,3}[\]\(\)\{\}]+\ {0,3}))",
         "replace": "@",
         "case_sensitive": True,
         "requires_brackets": True,
     },
     {
         # Fang 'AT', 'ET', or 'ARROBA' preceded by a parenthesis/square brackets and possibly postceded by the same.
-        "find": r"((\ *[\[\]\(\)\{\}]+\ *)(?:(?:AT)|(?:ET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]*\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]+\ {0,3})(?:(?:AT)|(?:ET)|(?:ARROBA))(\ {0,3}[\[\]\(\)\{\}]*\ {0,3}))",
         "replace": "@",
         "case_sensitive": True,
         "requires_brackets": True,
     },
     {
         # Fang 'AT', 'ET', or 'ARROBA' postceded by a parenthesis/square brackets and possibly preceded by the same.
-        "find": r"((\ *[\[\]\(\)\{\}]*\ *)(?:(?:AT)|(?:ET)|(?:ARROBA))(\ *[\[\]\(\)\{\}]+\ *))",
+        "find": r"((\ {0,3}[\[\]\(\)\{\}]*\ {0,3})(?:(?:AT)|(?:ET)|(?:ARROBA))(\ {0,3}[\[\]\(\)\{\}]+\ {0,3}))",
         "replace": "@",
         "case_sensitive": True,
         "requires_brackets": True,
@@ -108,7 +108,7 @@ fang_patterns: List = [
     },
     {
         # Fang "www" surrounded by any kind of bracket
-        "find": r"(([\[\]\(\)\{\}]{1}\ *)www(\ *[\[\]\(\)\{\}]{1}\ *))",
+        "find": r"(([\[\]\(\)\{\}]{1}\ {0,3})www(\ {0,3}[\[\]\(\)\{\}]{1}\ {0,3}))",
         "replace": "www",
         "requires_brackets": True,
     },
@@ -128,13 +128,13 @@ fang_patterns: List = [
         # Fang "https?" preceded by a parenthesis/square brackets and possibly postceded by the same.
         # We don't fang closing brackets before "https?" b/c this not properly handle markdown links...
         # e.g. "[a](https://example.com)" would become "[ahttps://example.com" which is not ideal
-        "find": r"(?:[\[\(\{]+\ *)htt(ps?)(?:\ *[\[\]\(\)\{\}]*\ *)",
+        "find": r"(?:[\[\(\{]+\ {0,3})htt(ps?)(?:\ {0,3}[\[\]\(\)\{\}]*\ {0,3})",
         "replace": r"htt\1",
         "requires_brackets": True,
     },
     {
         # Fang "https?" postceded by a parenthesis/square brackets and possibly preceded by the same.
-        "find": r"(?:[\[\]\(\)\{\}]*\ *)htt(ps?)(?:\ *[\[\]\(\)\{\}]+\ *)",
+        "find": r"(?:[\[\]\(\)\{\}]*\ {0,3})htt(ps?)(?:\ {0,3}[\[\]\(\)\{\}]+\ {0,3})",
         "replace": r"htt\1",
         "requires_brackets": True,
     },
