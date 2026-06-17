@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [UNRELEASED]
 
+## [5.1.1] - 2026.06.17
+
+### Fixed
+
+- Fixed ReDoS catastrophic backtracking in `fang()` ([#149](https://github.com/ioc-fang/ioc-fanger/pull/149)). Thirteen patterns used `\ *[brackets]\ *` — two unbounded space quantifiers around a bracket class — which an adversarial run of spaces could force into super-polynomial backtracking (a ~400-byte input pinned a CPU core for seconds), reachable through the public `fang()` API on untrusted text. The flanking spaces are now bounded to `\ {0,3}`, keeping matching linear while preserving capture-group numbering and match semantics.
+
+## [5.1.0] - 2026.06.10
+
 ### Changed
 
 - Faster `fang()` on text without defang markers by skipping literal-keyed regex passes (`DOT`, `dot`/`punto`/`punkt`, `AT`/`ET`/`ARROBA`, `xxxx://`) when none of the trigger substrings are present — the same idea as the existing bracket short-circuit, generalized to a per-mapping `requires_any` literal gate. Output is unchanged. Roughly 1.8x faster on bracket-free input and ~4x faster on plain prose; bracket-heavy input also benefits when it defangs with brackets rather than the literal words.
