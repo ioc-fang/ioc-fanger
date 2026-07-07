@@ -459,7 +459,7 @@ wheels = [
 
 [[package]]
 name = "d8s-strings"
-version = "0.5.0"
+version = "0.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "d8s-dicts" },
@@ -471,9 +471,9 @@ dependencies = [
     { name = "inflect" },
     { name = "more-itertools" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9f/d4/57949627e245ad733cbf7f753cad9f8bd43d79b91c9720fa279dcb2690d4/d8s_strings-0.5.0.tar.gz", hash = "sha256:5271d08f49d73228801a29a70cad53661b063effb50a7abd42aacf781ded5de9", size = 49181, upload-time = "2021-05-26T18:22:53.685Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/44/0c/a40ca4a180194907f7f020293dd7a650c3f399450be9da572d4ec7f709e6/d8s_strings-0.6.0.tar.gz", hash = "sha256:910d58310919624688a8604283663d512f06a51274039dc8f5bf229fb9e4569b", size = 112343, upload-time = "2026-07-01T12:06:31.115Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/1f/6c6a9c1de2e16551d8ae56d87b5c53520017b3d2fd44a3bab8745bb6942a/d8s_strings-0.5.0-py2.py3-none-any.whl", hash = "sha256:4fc926120ce027d7ada5af225d9557b9c6923675f148817fb1b49bbd1f721116", size = 37665, upload-time = "2021-05-26T18:22:52.221Z" },
+    { url = "https://files.pythonhosted.org/packages/9a/cb/d13fa6bcf1bf9f3efc53e9d2cddd8757a058c5e86d6085d7f07cda1ac43a/d8s_strings-0.6.0-py3-none-any.whl", hash = "sha256:be437feb476738bfdb44063f659ce89a3f1bdc6469cc898249ddb85811799119", size = 29321, upload-time = "2026-07-01T12:06:29.965Z" },
 ]
 
 [[package]]
@@ -1000,11 +1000,11 @@ wheels = [
 
 [[package]]
 name = "more-itertools"
-version = "11.0.2"
+version = "11.1.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/a2/f7/139d22fef48ac78127d18e01d80cf1be40236ae489769d17f35c3d425293/more_itertools-11.0.2.tar.gz", hash = "sha256:392a9e1e362cbc106a2457d37cabf9b36e5e12efd4ebff1654630e76597df804", size = 144659, upload-time = "2026-04-09T15:01:33.297Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/de/1d/f4da6f02cdffe04d6362210b807146a26044c88d839208aec273bb0d9184/more_itertools-11.1.0.tar.gz", hash = "sha256:48e8f4d9e7e5878571ecf6f2b4e57634f93cd474cc8cfbd2376f2d11b396e30d", size = 145772, upload-time = "2026-05-22T14:14:29.909Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/98/6af411189d9413534c3eb691182bff1f5c6d44ed2f93f2edfe52a1bbceb8/more_itertools-11.0.2-py3-none-any.whl", hash = "sha256:6e35b35f818b01f691643c6c611bc0902f2e92b46c18fffa77ae1e7c46e912e4", size = 71939, upload-time = "2026-04-09T15:01:32.21Z" },
+    { url = "https://files.pythonhosted.org/packages/e8/3d/1087453384dbde46a8c7f9356eead2c58be8a7bf156bca40243377c85715/more_itertools-11.1.0-py3-none-any.whl", hash = "sha256:4b65538ae22f6fed0ce4874efd317463a7489796a0939fa66824dd542125a192", size = 72226, upload-time = "2026-05-22T14:14:28.824Z" },
 ]
 
 [[package]]
